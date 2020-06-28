@@ -9,31 +9,29 @@ namespace Jagapippi.UnityAsReadOnly
 {
     public class CodeGenerator : ScriptableObject
     {
-        private static readonly string Template = @"
-using UnityEngine;
-
+        private static readonly string Template = @"{0}
 namespace Jagapippi.UnityAsReadOnly
 {{
-    public class ReadOnly{0} : ReadOnly{1}<{0}>
+    public class ReadOnly{1} : ReadOnly{2}<{1}>
     {{
-        public ReadOnly{0}({0} obj) : base(obj)
+        public ReadOnly{1}({1} obj) : base(obj)
         {{
         }}
 
         #region Properties
 
-{2}
+{3}
         #endregion
 
         #region Public Methods
 
-{3}
+{4}
         #endregion
     }}
 
-    public static class {0}Extensions
+    public static class {1}Extensions
     {{
-        public static ReadOnly{0} AsReadOnly(this {0} self) => new ReadOnly{0}(self);
+        public static ReadOnly{1} AsReadOnly(this {1} self) => new ReadOnly{1}(self);
     }}
 }}
 ";
@@ -60,6 +58,15 @@ namespace Jagapippi.UnityAsReadOnly
         private static string Nicify(Type type) => TypeAlias.ContainsKey(type) ? TypeAlias[type] : type.Name;
 
         public string type = "UnityEngine.Transform";
+
+        public static string GetUsingSection(Type type)
+        {
+            var builder = new StringBuilder();
+            builder.AppendLine("using UnityEngine;");
+            if (type.Namespace != "UnityEngine") builder.AppendLine($"using {type.Namespace};");
+
+            return builder.ToString();
+        }
 
         public static string GetPropertiesSection(Type type)
         {
@@ -134,7 +141,14 @@ namespace Jagapippi.UnityAsReadOnly
 
         public static void Generate(Type type, string baseClass)
         {
-            Debug.Log(string.Format(Template, type.Name, baseClass, GetPropertiesSection(type), GetMethodsSection(type)));
+            Debug.Log(string.Format(
+                Template,
+                GetUsingSection(type),
+                type.Name,
+                baseClass,
+                GetPropertiesSection(type),
+                GetMethodsSection(type))
+            );
         }
     }
 }
