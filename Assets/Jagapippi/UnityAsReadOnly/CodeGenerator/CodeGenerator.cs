@@ -139,15 +139,15 @@ namespace Jagapippi.UnityAsReadOnly
             return resultBuilder.ToString();
         }
 
-        public static void Generate(Type type, string baseClass)
+        public static string Generate(Type type, string baseClass)
         {
-            Debug.Log(string.Format(
+            return string.Format(
                 Template,
                 GetUsingSection(type),
                 type.Name,
                 baseClass,
                 GetPropertiesSection(type),
-                GetMethodsSection(type))
+                GetMethodsSection(type)
             );
         }
     }

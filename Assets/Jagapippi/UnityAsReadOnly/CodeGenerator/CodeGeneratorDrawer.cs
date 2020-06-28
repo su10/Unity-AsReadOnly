@@ -1,6 +1,8 @@
 ﻿using System;
+using System.IO;
 using UnityEditor;
 using UnityEngine;
+using Object = UnityEngine.Object;
 
 namespace Jagapippi.UnityAsReadOnly
 {
@@ -19,13 +21,37 @@ namespace Jagapippi.UnityAsReadOnly
 
                 if (type != null)
                 {
-                    CodeGenerator.Generate(type, type.BaseType.Name);
+                    if (Type.GetType($"Jagapippi.UnityAsReadOnly.ReadOnly{type.Name},UnityAsReadOnly") == null)
+                    {
+                        var dirPath = CreateDirectoryIfNecessary(type);
+                        var path = $"{dirPath}/ReadOnly{type.Name}.cs";
+                        var code = CodeGenerator.Generate(type, type.BaseType.Name);
+
+                        File.WriteAllText(path, code);
+                        AssetDatabase.ImportAsset(path);
+                        EditorGUIUtility.PingObject(AssetDatabase.LoadAssetAtPath(path, typeof(Object)));
+                    }
+                    else
+                    {
+                        Debug.LogError($"Type already exists: \"{target.type}\"");
+                    }
                 }
                 else
                 {
                     Debug.LogError($"Type not found: \"{target.type}\"");
                 }
             }
+        }
+
+        private static string CreateDirectoryIfNecessary(Type type)
+        {
+            var path = $"Assets/Jagapippi/UnityAsReadonly/{type.Namespace}";
+            if (Directory.Exists(path) == false)
+            {
+                Directory.CreateDirectory(path);
+            }
+
+            return path;
         }
 
         private static Type FindType(string typeName)
