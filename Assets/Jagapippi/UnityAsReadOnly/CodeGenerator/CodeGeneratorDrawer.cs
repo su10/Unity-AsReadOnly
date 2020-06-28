@@ -17,7 +17,7 @@ public class CodeGeneratorDrawer : Editor
 
             if (type != null)
             {
-                CodeGenerator.Generate(type, target.baseClass);
+                CodeGenerator.Generate(type, type.BaseType.Name);
             }
             else
             {

@@ -12,7 +12,7 @@ using UnityEngine;
 
 namespace Jagapippi.UnityAsReadOnly
 {{
-    public class ReadOnly{0} : {1}
+    public class ReadOnly{0} : ReadOnly{1}<{0}>
     {{
         public ReadOnly{0}({0} obj) : base(obj)
         {{
@@ -58,7 +58,6 @@ namespace Jagapippi.UnityAsReadOnly
     private static string Nicify(Type type) => TypeAlias.ContainsKey(type) ? TypeAlias[type] : type.Name;
 
     public string type = "UnityEngine.Transform";
-    public string baseClass = "ReadOnlyComponent<Transform>";
 
     public static string GetPropertiesSection(Type type)
     {
