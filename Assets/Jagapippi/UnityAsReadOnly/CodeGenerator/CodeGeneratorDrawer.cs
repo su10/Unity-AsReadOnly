@@ -2,39 +2,42 @@
 using UnityEditor;
 using UnityEngine;
 
-[CustomEditor(typeof(CodeGenerator))]
-public class CodeGeneratorDrawer : Editor
+namespace Jagapippi.UnityAsReadOnly
 {
-    public override void OnInspectorGUI()
+    [CustomEditor(typeof(CodeGenerator))]
+    public class CodeGeneratorDrawer : Editor
     {
-        base.OnInspectorGUI();
-
-        var target = (CodeGenerator) this.target;
-
-        if (GUILayout.Button("Generate"))
+        public override void OnInspectorGUI()
         {
-            var type = FindType(target.type);
+            base.OnInspectorGUI();
 
-            if (type != null)
+            var target = (CodeGenerator) this.target;
+
+            if (GUILayout.Button("Generate"))
             {
-                CodeGenerator.Generate(type, type.BaseType.Name);
-            }
-            else
-            {
-                Debug.LogError($"Type not found: \"{target.type}\"");
+                var type = FindType(target.type);
+
+                if (type != null)
+                {
+                    CodeGenerator.Generate(type, type.BaseType.Name);
+                }
+                else
+                {
+                    Debug.LogError($"Type not found: \"{target.type}\"");
+                }
             }
         }
-    }
 
-    private static Type FindType(string typeName)
-    {
-        foreach (var assembly in AppDomain.CurrentDomain.GetAssemblies())
+        private static Type FindType(string typeName)
         {
-            if (assembly.GetName().Name.StartsWith("Unity") == false) continue;
-            var type = assembly.GetType(typeName);
-            if (type != null) return type;
-        }
+            foreach (var assembly in AppDomain.CurrentDomain.GetAssemblies())
+            {
+                if (assembly.GetName().Name.StartsWith("Unity") == false) continue;
+                var type = assembly.GetType(typeName);
+                if (type != null) return type;
+            }
 
-        return null;
+            return null;
+        }
     }
 }
