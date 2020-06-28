@@ -13,8 +13,7 @@ public class CodeGeneratorDrawer : Editor
 
         if (GUILayout.Button("Generate"))
         {
-            var typeString = $"{target.type},{target.assembly}";
-            var type = Type.GetType(typeString);
+            var type = FindType(target.type);
 
             if (type != null)
             {
@@ -22,8 +21,20 @@ public class CodeGeneratorDrawer : Editor
             }
             else
             {
-                Debug.LogError($"Type not found: {typeString}");
+                Debug.LogError($"Type not found: \"{target.type}\"");
             }
         }
+    }
+
+    private static Type FindType(string typeName)
+    {
+        foreach (var assembly in AppDomain.CurrentDomain.GetAssemblies())
+        {
+            if (assembly.GetName().Name.StartsWith("Unity") == false) continue;
+            var type = assembly.GetType(typeName);
+            if (type != null) return type;
+        }
+
+        return null;
     }
 }

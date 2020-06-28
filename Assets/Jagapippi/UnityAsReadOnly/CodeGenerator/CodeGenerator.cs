@@ -58,7 +58,6 @@ namespace Jagapippi.UnityAsReadOnly
     private static string Nicify(Type type) => TypeAlias.ContainsKey(type) ? TypeAlias[type] : type.Name;
 
     public string type = "UnityEngine.Transform";
-    public string assembly = "UnityEngine";
     public string baseClass = "ReadOnlyComponent<Transform>";
 
     public static string GetPropertiesSection(Type type)
