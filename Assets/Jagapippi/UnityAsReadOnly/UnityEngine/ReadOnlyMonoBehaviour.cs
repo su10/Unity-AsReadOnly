@@ -10,9 +10,9 @@ namespace Jagapippi.UnityAsReadOnly
         bool useGUILayout { get; }
     }
 
-    public class ReadOnlyMonoBehaviour : ReadOnlyBehaviour<MonoBehaviour>, IReadOnlyMonoBehaviour
+    public class ReadOnlyMonoBehaviour<T> : ReadOnlyBehaviour<T>, IReadOnlyMonoBehaviour where T : MonoBehaviour
     {
-        public ReadOnlyMonoBehaviour(MonoBehaviour obj) : base(obj)
+        protected ReadOnlyMonoBehaviour(T obj) : base(obj)
         {
         }
 
@@ -36,6 +36,13 @@ namespace Jagapippi.UnityAsReadOnly
         // StopCoroutine
 
         #endregion
+    }
+
+    public class ReadOnlyMonoBehaviour : ReadOnlyMonoBehaviour<MonoBehaviour>
+    {
+        public ReadOnlyMonoBehaviour(MonoBehaviour obj) : base(obj)
+        {
+        }
     }
 
     public static class MonoBehaviourExtensions
