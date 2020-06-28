@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using UnityEngine.SceneManagement;
 
 namespace Jagapippi.UnityAsReadOnly
 {
@@ -15,7 +14,7 @@ namespace Jagapippi.UnityAsReadOnly
         public bool activeSelf => _obj.activeSelf;
         public bool isStatic => _obj.isStatic;
         public int layer => _obj.layer;
-        public Scene scene => _obj.scene;
+        public ReadOnlyScene scene => _obj.scene.AsReadOnly();
         public string tag => _obj.tag;
         public ReadOnlyTransform transform => _obj.transform.AsReadOnly();
 
