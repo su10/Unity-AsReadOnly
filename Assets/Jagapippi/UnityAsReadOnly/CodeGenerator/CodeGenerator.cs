@@ -9,59 +9,13 @@ namespace Jagapippi.UnityAsReadOnly
 {
     public class CodeGenerator : ScriptableObject
     {
-        private static readonly string Template = @"{0}
-namespace Jagapippi.UnityAsReadOnly
-{{
-    public class ReadOnly{1} : ReadOnly{2}<{1}>
-    {{
-        public ReadOnly{1}({1} obj) : base(obj)
-        {{
-        }}
-
-        #region Properties
-
-{3}
-        #endregion
-
-        #region Public Methods
-
-{4}
-        #endregion
-    }}
-
-    public static class {1}Extensions
-    {{
-        public static ReadOnly{1} AsReadOnly(this {1} self) => new ReadOnly{1}(self);
-    }}
-}}
-";
-
-        private static readonly Dictionary<Type, string> TypeAlias = new Dictionary<Type, string>
-        {
-            {typeof(bool), "bool"},
-            {typeof(byte), "byte"},
-            {typeof(char), "char"},
-            {typeof(decimal), "decimal"},
-            {typeof(double), "double"},
-            {typeof(float), "float"},
-            {typeof(int), "int"},
-            {typeof(long), "long"},
-            {typeof(object), "object"},
-            {typeof(sbyte), "sbyte"},
-            {typeof(short), "short"},
-            {typeof(string), "string"},
-            {typeof(uint), "uint"},
-            {typeof(ulong), "ulong"},
-            {typeof(void), "void"}
-        };
-
-        private static string Nicify(Type type) => TypeAlias.ContainsKey(type) ? TypeAlias[type] : type.Name;
-
         public string type = "UnityEngine.Transform";
 
         public static string GetUsingSection(Type type)
         {
             var builder = new StringBuilder();
+            builder.AppendLine("using System.Collections;");
+            builder.AppendLine("using System.Collections.Generic;");
             builder.AppendLine("using UnityEngine;");
             if (type.Namespace != "UnityEngine") builder.AppendLine($"using {type.Namespace};");
 
@@ -76,7 +30,7 @@ namespace Jagapippi.UnityAsReadOnly
             foreach (var p in properties)
             {
                 if (p.IsDefined(typeof(ObsoleteAttribute))) continue;
-                list.Add(new KeyValuePair<string, string>(Nicify(p.PropertyType), p.Name));
+                list.Add(new KeyValuePair<string, string>(TypeHelper.ToString(p.PropertyType), p.Name));
             }
 
             var builder = new StringBuilder();
@@ -99,7 +53,7 @@ namespace Jagapippi.UnityAsReadOnly
                 if (m.IsDefined(typeof(ObsoleteAttribute))) continue;
                 if (m.Name.StartsWith("get_") || m.Name.StartsWith("set_")) continue;
 
-                list.Add(new KeyValuePair<string, MethodInfo>(Nicify(m.ReturnType), m));
+                list.Add(new KeyValuePair<string, MethodInfo>(TypeHelper.ToString(m.ReturnType), m));
             }
 
             var parameters = new StringBuilder();
@@ -120,7 +74,7 @@ namespace Jagapippi.UnityAsReadOnly
                 for (var i = 0; i < parameterInfoArray.Length; i++)
                 {
                     var p = parameterInfoArray[i];
-                    parameters.Append($"{Nicify(p.ParameterType)} {p.Name}");
+                    parameters.Append($"{TypeHelper.ToString(p.ParameterType)} {p.Name}");
                     invokes.Append($"{p.Name}");
 
                     if (i < parameterInfoArray.Length - 1)
@@ -141,8 +95,7 @@ namespace Jagapippi.UnityAsReadOnly
 
         public static string Generate(Type type, string baseClass)
         {
-            return string.Format(
-                Template,
+            return CodeTemplate.FormatSimpleClass(
                 GetUsingSection(type),
                 type.Name,
                 baseClass,
