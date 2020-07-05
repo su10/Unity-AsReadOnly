@@ -9,15 +9,52 @@ namespace Jagapippi.UnityAsReadOnly
     [CustomEditor(typeof(CodeGenerator))]
     public class CodeGeneratorDrawer : Editor
     {
+        [Serializable]
+        public class Settings : ScriptableSingleton<Settings>
+        {
+            public new static Settings instance
+            {
+                get
+                {
+                    // NOTE: To make this editable in inspector.
+                    ScriptableSingleton<Settings>.instance.hideFlags = HideFlags.DontSave;
+                    return ScriptableSingleton<Settings>.instance;
+                }
+            }
+
+            public string typeName = "UnityEngine.Transform";
+        }
+
+        private SerializedObject settings;
+
+        void OnEnable()
+        {
+            settings = new SerializedObject(Settings.instance);
+        }
+
         public override void OnInspectorGUI()
         {
-            base.OnInspectorGUI();
+            {
+                EditorGUI.BeginChangeCheck();
+                settings.UpdateIfRequiredOrScript();
+                var iterator = settings.GetIterator();
+                while (iterator.NextVisible(true))
+                {
+                    using (new EditorGUI.DisabledScope("m_Script" == iterator.propertyPath))
+                    {
+                        EditorGUILayout.PropertyField(iterator, true);
+                    }
+                }
 
-            var target = (CodeGenerator) this.target;
+                settings.ApplyModifiedProperties();
+                EditorGUI.EndChangeCheck();
+            }
+
+            var target = (Settings) settings.targetObject;
 
             if (GUILayout.Button("Generate"))
             {
-                var type = FindType(target.type);
+                var type = FindType(target.typeName);
 
                 if (type != null)
                 {
@@ -33,12 +70,12 @@ namespace Jagapippi.UnityAsReadOnly
                     }
                     else
                     {
-                        Debug.LogError($"Type already exists: \"{target.type}\"");
+                        Debug.LogError($"Type already exists: \"{target.typeName}\"");
                     }
                 }
                 else
                 {
-                    Debug.LogError($"Type not found: \"{target.type}\"");
+                    Debug.LogError($"Type not found: \"{target.typeName}\"");
                 }
             }
         }

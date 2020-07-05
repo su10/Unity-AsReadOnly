@@ -9,8 +9,6 @@ namespace Jagapippi.UnityAsReadOnly
 {
     public class CodeGenerator : ScriptableObject
     {
-        public string type = "UnityEngine.Transform";
-
         public static string GetUsingSection(Type type)
         {
             var builder = new StringBuilder();
