@@ -14,10 +14,11 @@ namespace Jagapippi.UnityAsReadOnly
         public static string GetUsingSection(Type type)
         {
             var builder = new StringBuilder();
-            builder.AppendLine("using System.Collections;");
-            builder.AppendLine("using System.Collections.Generic;");
-            builder.AppendLine("using UnityEngine;");
-            if (type.Namespace != "UnityEngine") builder.AppendLine($"using {type.Namespace};");
+
+            foreach (var @namespace in type.GetRelatedNamespaces())
+            {
+                builder.AppendLine($"using {@namespace};");
+            }
 
             return builder.ToString();
         }
