@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Text;
 
 namespace Jagapippi.UnityAsReadOnly
@@ -11,7 +10,7 @@ namespace Jagapippi.UnityAsReadOnly
         {
             if (type.IsGenericType) return GenericToString(type);
             if (type.IsArray) return ArrayToString(type);
-            return BuiltInTypeToString(type);
+            return type.ToAliasName();
         }
 
         public static string GenericToString(Type type)
@@ -34,7 +33,7 @@ namespace Jagapippi.UnityAsReadOnly
                 }
                 else
                 {
-                    builder.Append(BuiltInTypeToString(genericArgument));
+                    builder.Append(genericArgument.ToAliasName());
                 }
 
                 if (i < genericArguments.Length - 1) builder.Append(", ");
@@ -59,45 +58,7 @@ namespace Jagapippi.UnityAsReadOnly
                 type = type.GetElementType();
             }
 
-            return builder.Insert(0, BuiltInTypeToString(type)).ToString();
+            return builder.Insert(0, type.ToAliasName()).ToString();
         }
-
-        public static string BuiltInTypeToString(Type type)
-        {
-            return TypeAliases.ContainsKey(type) ? TypeAliases[type] : type.Name;
-        }
-
-        private static readonly Dictionary<Type, string> TypeAliases = new Dictionary<Type, string>
-        {
-            {typeof(bool), "bool"},
-            {typeof(byte), "byte"},
-            {typeof(char), "char"},
-            {typeof(decimal), "decimal"},
-            {typeof(double), "double"},
-            {typeof(float), "float"},
-            {typeof(int), "int"},
-            {typeof(long), "long"},
-            {typeof(object), "object"},
-            {typeof(sbyte), "sbyte"},
-            {typeof(short), "short"},
-            {typeof(string), "string"},
-            {typeof(uint), "uint"},
-            {typeof(ulong), "ulong"},
-            {typeof(ushort), "ushort"},
-            {typeof(void), "void"},
-            {typeof(bool?), "bool?"},
-            {typeof(byte?), "byte?"},
-            {typeof(char?), "char?"},
-            {typeof(decimal?), "decimal?"},
-            {typeof(double?), "double?"},
-            {typeof(float?), "float?"},
-            {typeof(int?), "int?"},
-            {typeof(long?), "long?"},
-            {typeof(sbyte?), "sbyte?"},
-            {typeof(short?), "short?"},
-            {typeof(uint?), "uint?"},
-            {typeof(ulong?), "ulong?"},
-            {typeof(ushort?), "ushort?"},
-        };
     }
 }
