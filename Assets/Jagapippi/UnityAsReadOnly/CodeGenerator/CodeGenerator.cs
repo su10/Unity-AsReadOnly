@@ -56,38 +56,12 @@ namespace Jagapippi.UnityAsReadOnly
                 list.Add(new KeyValuePair<string, MethodInfo>(TypeHelper.ToString(m.ReturnType), m));
             }
 
-            var parameters = new StringBuilder();
-            var invokes = new StringBuilder();
             var resultBuilder = new StringBuilder();
 
             foreach (var kv in list.OrderBy(kv => kv.Value.Name))
             {
                 var methodInfo = kv.Value;
-
-                parameters.Clear();
-                invokes.Clear();
-
-                parameters.Append("(");
-                invokes.Append($"{methodInfo.Name}(");
-
-                var parameterInfoArray = methodInfo.GetParameters();
-                for (var i = 0; i < parameterInfoArray.Length; i++)
-                {
-                    var p = parameterInfoArray[i];
-                    parameters.Append($"{TypeHelper.ToString(p.ParameterType)} {p.Name}");
-                    invokes.Append($"{p.Name}");
-
-                    if (i < parameterInfoArray.Length - 1)
-                    {
-                        parameters.Append(", ");
-                        invokes.Append(", ");
-                    }
-                }
-
-                parameters.Append(")");
-                invokes.Append(");");
-
-                resultBuilder.AppendLine($"public {kv.Key} {methodInfo.Name}{parameters} => _obj.{invokes}");
+                resultBuilder.Append(methodInfo.ToDelegationString());
             }
 
             return resultBuilder.ToString();
