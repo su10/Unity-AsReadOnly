@@ -21,7 +21,7 @@ namespace Jagapippi.UnityAsReadOnly
             return builder.ToString();
         }
 
-        public static string GetPropertiesSection(Type type)
+        public static string GetPropertiesSection(Type type, int indentSpace = 0)
         {
             var properties = type.GetProperties(BindingFlags.DeclaredOnly | BindingFlags.Instance | BindingFlags.Public);
             var list = new List<KeyValuePair<string, string>>();
@@ -36,13 +36,13 @@ namespace Jagapippi.UnityAsReadOnly
 
             foreach (var kv in list.OrderBy(kv => kv.Value))
             {
-                builder.AppendLine($"public {kv.Key} {kv.Value} => _obj.{kv.Value};");
+                builder.AppendLine($"{new string(' ', indentSpace)}public {kv.Key} {kv.Value} => _obj.{kv.Value};");
             }
 
             return builder.ToString();
         }
 
-        public static string GetMethodsSection(Type type)
+        public static string GetMethodsSection(Type type, int indentSpace = 0)
         {
             var properties = type.GetMethods(BindingFlags.DeclaredOnly | BindingFlags.Instance | BindingFlags.Public);
             var list = new List<KeyValuePair<string, MethodInfo>>();
@@ -60,7 +60,7 @@ namespace Jagapippi.UnityAsReadOnly
             foreach (var kv in list.OrderBy(kv => kv.Value.Name))
             {
                 var methodInfo = kv.Value;
-                resultBuilder.Append(methodInfo.ToDelegationString());
+                resultBuilder.Append($"{new string(' ', indentSpace)}{methodInfo.ToDelegationString()}");
             }
 
             return resultBuilder.ToString();
@@ -72,8 +72,8 @@ namespace Jagapippi.UnityAsReadOnly
                 GetUsingSection(type),
                 type.Name,
                 baseClass,
-                GetPropertiesSection(type),
-                GetMethodsSection(type)
+                GetPropertiesSection(type, 8),
+                GetMethodsSection(type, 8)
             );
         }
     }
