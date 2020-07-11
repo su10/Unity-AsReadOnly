@@ -40,10 +40,8 @@ namespace Jagapippi.UnityAsReadOnly
                 var iterator = settings.GetIterator();
                 while (iterator.NextVisible(true))
                 {
-                    using (new EditorGUI.DisabledScope("m_Script" == iterator.propertyPath))
-                    {
-                        EditorGUILayout.PropertyField(iterator, true);
-                    }
+                    if ("m_Script" == iterator.propertyPath) continue;
+                    EditorGUILayout.PropertyField(iterator, true);
                 }
 
                 settings.ApplyModifiedProperties();
