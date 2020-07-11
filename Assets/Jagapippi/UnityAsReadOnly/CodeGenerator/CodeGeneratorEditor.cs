@@ -2,7 +2,7 @@
 using System.IO;
 using UnityEditor;
 using UnityEngine;
-using Object = UnityEngine.Object;
+using Object = System.Object;
 
 namespace Jagapippi.UnityAsReadOnly
 {
@@ -34,6 +34,7 @@ namespace Jagapippi.UnityAsReadOnly
         }
 
         private SerializedObject settings;
+        private string _result;
 
         void OnEnable()
         {
@@ -56,63 +57,70 @@ namespace Jagapippi.UnityAsReadOnly
                 EditorGUI.EndChangeCheck();
             }
 
-            var target = (Settings) settings.targetObject;
+            if (GUILayout.Button("Dry Run")) _result = this.Generate(dryRun: true);
+            if (GUILayout.Button("Generate")) _result = this.Generate(dryRun: false);
 
-            if (GUILayout.Button("Generate"))
             {
-                var type = FindType(target.typeName);
-
-                if (type != null)
-                {
-                    if (Type.GetType($"Jagapippi.UnityAsReadOnly.ReadOnly{type.Name},UnityAsReadOnly") == null)
-                    {
-                        var dirPath = CreateDirectoryIfNecessary(type);
-                        var path = $"{dirPath}/ReadOnly{type.Name}.cs";
-                        var code = string.Empty;
-
-                        switch (settings.FindProperty("template").enumValueIndex)
-                        {
-                            case (int) Settings.Template.Simple:
-                                code = CodeGenerator.GenerateSimpleClass(type, type.BaseType.Name);
-                                break;
-
-                            case (int) Settings.Template.WithInterface:
-                                code = CodeGenerator.GenerateClassWithInterface(type, type.BaseType.Name);
-                                break;
-
-                            case (int) Settings.Template.Generic:
-                                if (type.IsSealed)
-                                {
-                                    Debug.LogError($"Type is sealed: \"{target.typeName}\"");
-                                }
-                                else
-                                {
-                                    code = CodeGenerator.GenerateGenericClass(type, type.BaseType.Name);
-                                }
-
-                                break;
-
-                            default:
-                                throw new ArgumentOutOfRangeException(nameof(Settings.template));
-                        }
-
-                        if (string.IsNullOrEmpty(code) == false)
-                        {
-                            File.WriteAllText(path, code);
-                            AssetDatabase.ImportAsset(path);
-                            EditorGUIUtility.PingObject(AssetDatabase.LoadAssetAtPath(path, typeof(Object)));
-                        }
-                    }
-                    else
-                    {
-                        Debug.LogError($"Type already exists: \"{target.typeName}\"");
-                    }
-                }
-                else
-                {
-                    Debug.LogError($"Type not found: \"{target.typeName}\"");
-                }
+                const string style = "ScriptText";
+                var rect = GUILayoutUtility.GetRect(new GUIContent(_result), style);
+                rect.x = 0;
+                rect.width = EditorGUIUtility.currentViewWidth;
+                GUI.Box(rect, _result, style);
             }
+        }
+
+        private string Generate(bool dryRun = false)
+        {
+            var target = (Settings) settings.targetObject;
+            var type = FindType(target.typeName);
+
+            if (type == null)
+            {
+                Debug.LogError($"Type not found: \"{target.typeName}\"");
+                return string.Empty;
+            }
+
+            if (Type.GetType($"Jagapippi.UnityAsReadOnly.ReadOnly{type.Name},UnityAsReadOnly") != null)
+            {
+                Debug.LogError($"Type already exists: \"{target.typeName}\"");
+                return string.Empty;
+            }
+
+            var code = string.Empty;
+
+            switch (target.template)
+            {
+                case Settings.Template.Simple:
+                    code = CodeGenerator.GenerateSimpleClass(type, type.BaseType.Name);
+                    break;
+
+                case Settings.Template.WithInterface:
+                    code = CodeGenerator.GenerateClassWithInterface(type, type.BaseType.Name);
+                    break;
+
+                case Settings.Template.Generic:
+                    if (type.IsSealed)
+                    {
+                        Debug.LogError($"Type is sealed: \"{target.typeName}\"");
+                        return string.Empty;
+                    }
+
+                    code = CodeGenerator.GenerateGenericClass(type, type.BaseType.Name);
+                    break;
+
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(Settings.template));
+            }
+
+            if (dryRun) return code;
+
+            var dirPath = CreateDirectoryIfNecessary(type);
+            var path = $"{dirPath}/ReadOnly{type.Name}.cs";
+            File.WriteAllText(path, code);
+            AssetDatabase.ImportAsset(path);
+            EditorGUIUtility.PingObject(AssetDatabase.LoadAssetAtPath(path, typeof(Object)));
+
+            return code;
         }
 
         private static string CreateDirectoryIfNecessary(Type type)
