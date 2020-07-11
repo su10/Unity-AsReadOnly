@@ -22,7 +22,15 @@ namespace Jagapippi.UnityAsReadOnly
                 }
             }
 
+            public enum Template
+            {
+                Simple,
+                WithInterface,
+                Generic,
+            }
+
             public string typeName = "UnityEngine.Transform";
+            public Template template;
         }
 
         private SerializedObject settings;
@@ -60,11 +68,40 @@ namespace Jagapippi.UnityAsReadOnly
                     {
                         var dirPath = CreateDirectoryIfNecessary(type);
                         var path = $"{dirPath}/ReadOnly{type.Name}.cs";
-                        var code = CodeGenerator.Generate(type, type.BaseType.Name);
+                        var code = string.Empty;
 
-                        File.WriteAllText(path, code);
-                        AssetDatabase.ImportAsset(path);
-                        EditorGUIUtility.PingObject(AssetDatabase.LoadAssetAtPath(path, typeof(Object)));
+                        switch (settings.FindProperty("template").enumValueIndex)
+                        {
+                            case (int) Settings.Template.Simple:
+                                code = CodeGenerator.GenerateSimpleClass(type, type.BaseType.Name);
+                                break;
+
+                            case (int) Settings.Template.WithInterface:
+                                code = CodeGenerator.GenerateClassWithInterface(type, type.BaseType.Name);
+                                break;
+
+                            case (int) Settings.Template.Generic:
+                                if (type.IsSealed)
+                                {
+                                    Debug.LogError($"Type is sealed: \"{target.typeName}\"");
+                                }
+                                else
+                                {
+                                    code = CodeGenerator.GenerateGenericClass(type, type.BaseType.Name);
+                                }
+
+                                break;
+
+                            default:
+                                throw new ArgumentOutOfRangeException(nameof(Settings.template));
+                        }
+
+                        if (string.IsNullOrEmpty(code) == false)
+                        {
+                            File.WriteAllText(path, code);
+                            AssetDatabase.ImportAsset(path);
+                            EditorGUIUtility.PingObject(AssetDatabase.LoadAssetAtPath(path, typeof(Object)));
+                        }
                     }
                     else
                     {

@@ -5,6 +5,31 @@ namespace Jagapippi.UnityAsReadOnly
 {
     public static class MethodInfoExtensions
     {
+        public static string ToInterfaceString(this MethodInfo self)
+        {
+            return ToInterfaceString(self, new StringBuilder()).ToString();
+        }
+
+        public static StringBuilder ToInterfaceString(this MethodInfo self, StringBuilder builder)
+        {
+            var parameters = new StringBuilder();
+            var parameterInfoArray = self.GetParameters();
+
+            for (var i = 0; i < parameterInfoArray.Length; i++)
+            {
+                var p = parameterInfoArray[i];
+                parameters.Append($"{p.ParameterType.ToSimpleString()} {p.Name}");
+
+                if (parameterInfoArray.Length - 1 <= i) continue;
+
+                parameters.Append(", ");
+            }
+
+            builder.AppendLine($"{self.ReturnType.ToSimpleString()} {self.Name}({parameters});");
+
+            return builder;
+        }
+
         public static string ToDelegationString(this MethodInfo self)
         {
             return ToDelegationString(self, new StringBuilder()).ToString();

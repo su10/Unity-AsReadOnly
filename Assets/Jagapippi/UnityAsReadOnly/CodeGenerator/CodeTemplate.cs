@@ -44,8 +44,7 @@ namespace Jagapippi.UnityAsReadOnly
 {{
     public interface IReadOnly{1} : IReadOnly{2}
     {{
-{3}
-    }}
+{3}    }}
 
     public class ReadOnly{1} : ReadOnly{2}<{1}>, IReadOnly{1}
     {{
@@ -87,10 +86,9 @@ namespace Jagapippi.UnityAsReadOnly
 {{
     public interface IReadOnly{1} : IReadOnly{2}
     {{
-{3}
-    }}
+{3}    }}
 
-    public class ReadOnly{1}<T> : ReadOnly{2}<T> where T : {1}
+    public class ReadOnly{1}<T> : ReadOnly{2}<T>, IReadOnly{1} where T : {1}
     {{
         protected ReadOnly{1}(T obj) : base(obj)
         {{
