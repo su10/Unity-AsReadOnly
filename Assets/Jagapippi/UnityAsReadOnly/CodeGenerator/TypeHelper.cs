@@ -3,7 +3,6 @@ using System.Text;
 
 namespace Jagapippi.UnityAsReadOnly
 {
-    // TODO: Use NUnit.Framework.Internal.TypeHelper if possible
     public static class TypeHelper
     {
         public static string ToString(Type type)
@@ -45,7 +44,6 @@ namespace Jagapippi.UnityAsReadOnly
             return builder.Insert(0, name.Substring(0, name.IndexOf("`"))).ToString();
         }
 
-        // TODO: Consider generic type
         public static string ArrayToString(Type type)
         {
             if (type.IsArray == false) throw new ArgumentException(nameof(type));
@@ -65,7 +63,7 @@ namespace Jagapippi.UnityAsReadOnly
                 type = type.GetElementType();
             }
 
-            builder.Insert(0, type.ToAliasName());
+            builder.Insert(0, ToString(type));
             return builder.ToString();
         }
     }
