@@ -90,5 +90,10 @@ namespace Jagapippi.UnityAsReadOnly
 
             return set;
         }
+
+        public static bool IsMultidimensionalArray(this Type type)
+        {
+            return type.IsArray && (2 <= type.GetArrayRank());
+        }
     }
 }

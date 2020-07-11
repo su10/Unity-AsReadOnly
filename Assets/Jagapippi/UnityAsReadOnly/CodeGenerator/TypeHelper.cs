@@ -49,16 +49,24 @@ namespace Jagapippi.UnityAsReadOnly
         public static string ArrayToString(Type type)
         {
             if (type.IsArray == false) throw new ArgumentException(nameof(type));
-
             var builder = new StringBuilder();
 
             while (type.HasElementType)
             {
-                builder.Append("[]");
+                if (type.IsMultidimensionalArray()) // like a int[,]
+                {
+                    builder.Append($"[{new string(',', type.GetArrayRank() - 1)}]");
+                }
+                else
+                {
+                    builder.Append("[]");
+                }
+
                 type = type.GetElementType();
             }
 
-            return builder.Insert(0, type.ToAliasName()).ToString();
+            builder.Insert(0, type.ToAliasName());
+            return builder.ToString();
         }
     }
 }
