@@ -26,8 +26,7 @@ namespace Jagapippi.UnityAsReadOnly
     {{
         public static ReadOnly{1} AsReadOnly(this {1} self) => new ReadOnly{1}(self);
     }}
-}}
-";
+}}";
 
         public static string FormatSimpleClass(
             string usingSection,
@@ -69,8 +68,7 @@ namespace Jagapippi.UnityAsReadOnly
     {{
         public static ReadOnly{1} AsReadOnly(this {1} self) => new ReadOnly{1}(self);
     }}
-}}
-";
+}}";
 
         public static string FormatClassWithInterface(
             string usingSection,
@@ -120,8 +118,7 @@ namespace Jagapippi.UnityAsReadOnly
     {{
         public static ReadOnly{1} AsReadOnly(this {1} self) => new ReadOnly{1}(self);
     }}
-}}
-";
+}}";
 
         public static string FormatGenericClass(
             string usingSection,
