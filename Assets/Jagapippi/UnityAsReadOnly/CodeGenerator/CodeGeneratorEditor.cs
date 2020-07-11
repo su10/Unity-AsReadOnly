@@ -7,7 +7,7 @@ using Object = UnityEngine.Object;
 namespace Jagapippi.UnityAsReadOnly
 {
     [CustomEditor(typeof(CodeGenerator))]
-    public class CodeGeneratorDrawer : Editor
+    public class CodeGeneratorEditor : Editor
     {
         [Serializable]
         public class Settings : ScriptableSingleton<Settings>
