@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Linq;
 using UnityEditor;
 using UnityEngine;
 using Object = System.Object;
@@ -30,6 +31,7 @@ namespace Jagapippi.UnityAsReadOnly
             }
 
             public string typeName = "UnityEngine.Transform";
+            public string @namespace = "Jagapippi.UnityAsReadOnly";
             public Template template;
         }
 
@@ -72,7 +74,7 @@ namespace Jagapippi.UnityAsReadOnly
         private string Generate(bool dryRun = false)
         {
             var target = (Settings) settings.targetObject;
-            var type = FindType(target.typeName);
+            var type = FindUnityType(target.typeName);
 
             if (type == null)
             {
@@ -80,9 +82,10 @@ namespace Jagapippi.UnityAsReadOnly
                 return string.Empty;
             }
 
-            if (Type.GetType($"Jagapippi.UnityAsReadOnly.ReadOnly{type.Name},UnityAsReadOnly") != null)
+            var shortTypeName = target.typeName.Split('.').Last();
+            if (FindType($"{target.@namespace}.ReadOnly{shortTypeName}") != null)
             {
-                Debug.LogError($"Type already exists: \"{target.typeName}\"");
+                Debug.LogError($"Type already exists: \"ReadOnly{shortTypeName}\"");
                 return string.Empty;
             }
 
@@ -91,11 +94,11 @@ namespace Jagapippi.UnityAsReadOnly
             switch (target.template)
             {
                 case Settings.Template.Simple:
-                    code = CodeGenerator.GenerateSimpleClass(type, type.BaseType.Name);
+                    code = CodeGenerator.GenerateSimpleClass(type, target.@namespace, type.BaseType.Name);
                     break;
 
                 case Settings.Template.WithInterface:
-                    code = CodeGenerator.GenerateClassWithInterface(type, type.BaseType.Name);
+                    code = CodeGenerator.GenerateClassWithInterface(type, target.@namespace, type.BaseType.Name);
                     break;
 
                 case Settings.Template.Generic:
@@ -105,7 +108,7 @@ namespace Jagapippi.UnityAsReadOnly
                         return string.Empty;
                     }
 
-                    code = CodeGenerator.GenerateGenericClass(type, type.BaseType.Name);
+                    code = CodeGenerator.GenerateGenericClass(type, target.@namespace, type.BaseType.Name);
                     break;
 
                 default:
@@ -134,11 +137,22 @@ namespace Jagapippi.UnityAsReadOnly
             return path;
         }
 
-        private static Type FindType(string typeName)
+        private static Type FindUnityType(string typeName)
         {
             foreach (var assembly in AppDomain.CurrentDomain.GetAssemblies())
             {
                 if (assembly.GetName().Name.StartsWith("Unity") == false) continue;
+                var type = assembly.GetType(typeName);
+                if (type != null) return type;
+            }
+
+            return null;
+        }
+
+        private static Type FindType(string typeName)
+        {
+            foreach (var assembly in AppDomain.CurrentDomain.GetAssemblies())
+            {
                 var type = assembly.GetType(typeName);
                 if (type != null) return type;
             }
