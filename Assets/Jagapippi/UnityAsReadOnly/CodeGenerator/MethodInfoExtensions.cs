@@ -20,7 +20,7 @@ namespace Jagapippi.UnityAsReadOnly
             for (var i = 0; i < parameterInfoArray.Length; i++)
             {
                 var p = parameterInfoArray[i];
-                parameters.Append($"{TypeHelper.ToString(p.ParameterType)} {p.Name}");
+                parameters.Append($"{p.ParameterType.ToSimpleString()} {p.Name}");
                 arguments.Append($"{p.Name}");
 
                 if (parameterInfoArray.Length - 1 <= i) continue;
@@ -29,7 +29,7 @@ namespace Jagapippi.UnityAsReadOnly
                 arguments.Append(", ");
             }
 
-            builder.AppendLine($"public {TypeHelper.ToString(self.ReturnType)} {self.Name}({parameters}) => _obj.{self.Name}({arguments});");
+            builder.AppendLine($"public {self.ReturnType.ToSimpleString()} {self.Name}({parameters}) => _obj.{self.Name}({arguments});");
 
             return builder;
         }

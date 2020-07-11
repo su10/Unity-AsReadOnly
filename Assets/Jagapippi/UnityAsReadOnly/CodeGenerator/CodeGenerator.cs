@@ -29,7 +29,7 @@ namespace Jagapippi.UnityAsReadOnly
             foreach (var p in properties)
             {
                 if (p.IsDefined(typeof(ObsoleteAttribute))) continue;
-                list.Add(new KeyValuePair<string, string>(TypeHelper.ToString(p.PropertyType), p.Name));
+                list.Add(new KeyValuePair<string, string>(p.PropertyType.ToSimpleString(), p.Name));
             }
 
             var builder = new StringBuilder();
@@ -52,7 +52,7 @@ namespace Jagapippi.UnityAsReadOnly
                 if (m.IsDefined(typeof(ObsoleteAttribute))) continue;
                 if (m.Name.StartsWith("get_") || m.Name.StartsWith("set_")) continue;
 
-                list.Add(new KeyValuePair<string, MethodInfo>(TypeHelper.ToString(m.ReturnType), m));
+                list.Add(new KeyValuePair<string, MethodInfo>(m.ReturnType.ToSimpleString(), m));
             }
 
             var resultBuilder = new StringBuilder();

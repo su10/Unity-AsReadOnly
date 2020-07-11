@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using System.Text;
 
 namespace Jagapippi.UnityAsReadOnly
 {
@@ -39,11 +40,6 @@ namespace Jagapippi.UnityAsReadOnly
             {typeof(ulong?), "ulong?"},
             {typeof(ushort?), "ushort?"},
         };
-
-        public static string ToAliasName(this Type self)
-        {
-            return TypeAliases.ContainsKey(self) ? TypeAliases[self] : self.Name;
-        }
 
         public static IEnumerable<string> GetRelatedNamespaces(this Type self)
         {
@@ -91,7 +87,74 @@ namespace Jagapippi.UnityAsReadOnly
             return set;
         }
 
-        public static bool IsMultidimensionalArray(this Type type)
+        public static string ToSimpleString(this Type type)
+        {
+            if (type.IsGenericType) return GenericTypeToString(type);
+            if (type.IsArray) return ArrayTypeToString(type);
+            return type.ToAliasName();
+        }
+
+        private static string GenericTypeToString(Type type)
+        {
+            if (type.IsGenericType == false) throw new ArgumentException(nameof(type));
+
+            var builder = new StringBuilder("<");
+            var genericArguments = type.GetGenericArguments();
+
+            for (var i = 0; i < genericArguments.Length; i++)
+            {
+                var genericArgument = genericArguments[i];
+                if (genericArgument.IsArray)
+                {
+                    builder.Append(ArrayTypeToString(genericArgument));
+                }
+                else if (genericArgument.IsGenericType)
+                {
+                    builder.Append(GenericTypeToString(genericArgument));
+                }
+                else
+                {
+                    builder.Append(genericArgument.ToAliasName());
+                }
+
+                if (i < genericArguments.Length - 1) builder.Append(", ");
+            }
+
+            builder.Append(">");
+
+            var name = type.Name;
+            return builder.Insert(0, name.Substring(0, name.IndexOf("`"))).ToString();
+        }
+
+        private static string ArrayTypeToString(Type type)
+        {
+            if (type.IsArray == false) throw new ArgumentException(nameof(type));
+            var builder = new StringBuilder();
+
+            while (type.HasElementType)
+            {
+                if (type.IsMultidimensionalArray()) // like a int[,]
+                {
+                    builder.Append($"[{new string(',', type.GetArrayRank() - 1)}]");
+                }
+                else
+                {
+                    builder.Append("[]");
+                }
+
+                type = type.GetElementType();
+            }
+
+            builder.Insert(0, ToSimpleString(type));
+            return builder.ToString();
+        }
+
+        private static string ToAliasName(this Type self)
+        {
+            return TypeAliases.ContainsKey(self) ? TypeAliases[self] : self.Name;
+        }
+
+        private static bool IsMultidimensionalArray(this Type type)
         {
             return type.IsArray && (2 <= type.GetArrayRank());
         }
