@@ -13,13 +13,11 @@ namespace {1}
 
         #region Properties
 
-{4}
-        #endregion
+{4}        #endregion
 
         #region Public Methods
 
-{5}
-        #endregion
+{5}        #endregion
     }}
 
     public static class {2}Extensions
@@ -55,13 +53,11 @@ namespace {1}
 
         #region Properties
 
-{5}
-        #endregion
+{5}        #endregion
 
         #region Public Methods
 
-{6}
-        #endregion
+{6}        #endregion
     }}
 
     public static class {2}Extensions
@@ -98,13 +94,11 @@ namespace {1}
 
         #region Properties
 
-{5}
-        #endregion
+{5}        #endregion
 
         #region Public Methods
 
-{6}
-        #endregion
+{6}        #endregion
     }}
 
     public class ReadOnly{2} : ReadOnly{2}<{2}>

@@ -80,6 +80,8 @@ namespace Jagapippi.UnityAsReadOnly
                 builder.AppendLine($"{new string(' ', indentSpace)}public {kv.Key} {kv.Value} => _obj.{kv.Value};");
             }
 
+            if (0 < builder.Length) builder.AppendLine();
+
             return builder.ToString();
         }
 
@@ -96,15 +98,17 @@ namespace Jagapippi.UnityAsReadOnly
                 list.Add(new KeyValuePair<string, MethodInfo>(m.ReturnType.ToSimpleString(), m));
             }
 
-            var resultBuilder = new StringBuilder();
+            var builder = new StringBuilder();
 
             foreach (var kv in list.OrderBy(kv => kv.Value.Name))
             {
                 var methodInfo = kv.Value;
-                resultBuilder.Append($"{new string(' ', indentSpace)}{methodInfo.ToDelegationString()}");
+                builder.Append($"{new string(' ', indentSpace)}{methodInfo.ToDelegationString()}");
             }
 
-            return resultBuilder.ToString();
+            if (0 < builder.Length) builder.AppendLine();
+
+            return builder.ToString();
         }
 
         public static string GenerateSimpleClass(Type type, string @namespace, string baseClass)
