@@ -36,6 +36,7 @@ namespace Jagapippi.UnityAsReadOnly
             public string typeName = "UnityEngine.Transform";
             public string @namespace = "Jagapippi.UnityAsReadOnly";
             public Template template;
+            public bool overwrite = false;
         }
 
         private SerializedObject settings;
@@ -86,7 +87,7 @@ namespace Jagapippi.UnityAsReadOnly
             }
 
             var shortTypeName = target.typeName.Split('.').Last();
-            if (FindType($"{target.@namespace}.ReadOnly{shortTypeName}") != null)
+            if ((target.overwrite == false) && (FindType($"{target.@namespace}.ReadOnly{shortTypeName}") != null))
             {
                 Debug.LogError($"Type already exists: \"ReadOnly{shortTypeName}\"");
                 return string.Empty;
