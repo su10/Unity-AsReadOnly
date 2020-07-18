@@ -1,28 +1,38 @@
-﻿namespace Jagapippi.UnityAsReadOnly
+﻿using System.Text;
+
+namespace Jagapippi.UnityAsReadOnly
 {
     public static class CodeTemplate
     {
-        public const string SimpleClass = @"{0}
-namespace {1}
+        private const string Usings = "#USINGS#";
+        private const string Namespace = "#NAMESPACE#";
+        private const string ClassName = "#CLASSNAME#";
+        private const string BaseClassName = "#BASECLASSNAME#";
+        private const string Interface = "#INTERFACE#";
+        private const string Properties = "#PROPERTIES#";
+        private const string Methods = "#METHODS#";
+
+        private static readonly string SimpleClass = $@"{Usings}
+namespace {Namespace}
 {{
-    public class ReadOnly{2} : ReadOnly{3}<{2}>
+    public class ReadOnly{ClassName} : ReadOnly{BaseClassName}<{ClassName}>
     {{
-        public ReadOnly{2}({2} obj) : base(obj)
+        public ReadOnly{ClassName}({ClassName} obj) : base(obj)
         {{
         }}
 
         #region Properties
 
-{4}        #endregion
+{Properties}        #endregion
 
         #region Public Methods
 
-{5}        #endregion
+{Methods}        #endregion
     }}
 
-    public static class {2}Extensions
+    public static class {ClassName}Extensions
     {{
-        public static ReadOnly{2} AsReadOnly(this {2} self) => new ReadOnly{2}(self);
+        public static ReadOnly{ClassName} AsReadOnly(this {ClassName} self) => new ReadOnly{ClassName}(self);
     }}
 }}";
 
@@ -35,34 +45,41 @@ namespace {1}
             string publicMethodSection
         )
         {
-            return string.Format(SimpleClass, usingSection, @namespace, className, baseClassName, propertiesSection, publicMethodSection);
+            return new StringBuilder().Append(SimpleClass)
+                .Replace(Usings, usingSection)
+                .Replace(Namespace, @namespace)
+                .Replace(ClassName, className)
+                .Replace(BaseClassName, baseClassName)
+                .Replace(Properties, propertiesSection)
+                .Replace(Methods, publicMethodSection)
+                .ToString();
         }
 
-        public const string ClassWithInterface = @"{0}
-namespace {1}
+        private static readonly string ClassWithInterface = $@"{Usings}
+namespace {Namespace}
 {{
-    public interface IReadOnly{2} : IReadOnly{3}
+    public interface IReadOnly{ClassName} : IReadOnly{BaseClassName}
     {{
-{4}    }}
+{Interface}    }}
 
-    public class ReadOnly{2} : ReadOnly{3}<{2}>, IReadOnly{2}
+    public class ReadOnly{ClassName} : ReadOnly{BaseClassName}<{ClassName}>, IReadOnly{ClassName}
     {{
-        public ReadOnly{2}({2} obj) : base(obj)
+        public ReadOnly{ClassName}({ClassName} obj) : base(obj)
         {{
         }}
 
         #region Properties
 
-{5}        #endregion
+{Properties}        #endregion
 
         #region Public Methods
 
-{6}        #endregion
+{Methods}        #endregion
     }}
 
-    public static class {2}Extensions
+    public static class {ClassName}Extensions
     {{
-        public static ReadOnly{2} AsReadOnly(this {2} self) => new ReadOnly{2}(self);
+        public static ReadOnly{ClassName} AsReadOnly(this {ClassName} self) => new ReadOnly{ClassName}(self);
     }}
 }}";
 
@@ -76,41 +93,49 @@ namespace {1}
             string publicMethodSection
         )
         {
-            return string.Format(ClassWithInterface, usingSection, @namespace, className, baseClassName, interfaceSection, propertiesSection, publicMethodSection);
+            return new StringBuilder().Append(ClassWithInterface)
+                .Replace(Usings, usingSection)
+                .Replace(Namespace, @namespace)
+                .Replace(ClassName, className)
+                .Replace(BaseClassName, baseClassName)
+                .Replace(Interface, interfaceSection)
+                .Replace(Properties, propertiesSection)
+                .Replace(Methods, publicMethodSection)
+                .ToString();
         }
 
-        public const string GenericClass = @"{0}
-namespace {1}
+        private static readonly string GenericClass = $@"{Usings}
+namespace {Namespace}
 {{
-    public interface IReadOnly{2} : IReadOnly{3}
+    public interface IReadOnly{ClassName} : IReadOnly{BaseClassName}
     {{
-{4}    }}
+{Interface}    }}
 
-    public class ReadOnly{2}<T> : ReadOnly{3}<T>, IReadOnly{2} where T : {2}
+    public class ReadOnly{ClassName}<T> : ReadOnly{BaseClassName}<T>, IReadOnly{ClassName} where T : {ClassName}
     {{
-        protected ReadOnly{2}(T obj) : base(obj)
+        protected ReadOnly{ClassName}(T obj) : base(obj)
         {{
         }}
 
         #region Properties
 
-{5}        #endregion
+{Properties}        #endregion
 
         #region Public Methods
 
-{6}        #endregion
+{Methods}        #endregion
     }}
 
-    public class ReadOnly{2} : ReadOnly{2}<{2}>
+    public class ReadOnly{ClassName} : ReadOnly{ClassName}<{ClassName}>
     {{
-        public ReadOnly{2}({2} obj) : base(obj)
+        public ReadOnly{ClassName}({ClassName} obj) : base(obj)
         {{
         }}
     }}
 
-    public static class {2}Extensions
+    public static class {ClassName}Extensions
     {{
-        public static ReadOnly{2} AsReadOnly(this {2} self) => new ReadOnly{2}(self);
+        public static ReadOnly{ClassName} AsReadOnly(this {ClassName} self) => new ReadOnly{ClassName}(self);
     }}
 }}";
 
@@ -124,7 +149,15 @@ namespace {1}
             string publicMethodSection
         )
         {
-            return string.Format(GenericClass, usingSection, @namespace, className, baseClassName, interfaceSection, propertiesSection, publicMethodSection);
+            return new StringBuilder().Append(GenericClass)
+                .Replace(Usings, usingSection)
+                .Replace(Namespace, @namespace)
+                .Replace(ClassName, className)
+                .Replace(BaseClassName, baseClassName)
+                .Replace(Interface, interfaceSection)
+                .Replace(Properties, propertiesSection)
+                .Replace(Methods, publicMethodSection)
+                .ToString();
         }
     }
 }
