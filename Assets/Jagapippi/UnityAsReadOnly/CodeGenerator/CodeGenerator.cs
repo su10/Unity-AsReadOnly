@@ -111,21 +111,21 @@ namespace Jagapippi.UnityAsReadOnly
             return builder.ToString();
         }
 
-        public static string GenerateSimpleClass(Type type, string @namespace, string baseClass)
+        public static string GenerateSimpleClass(Type type, string @namespace)
         {
             return CodeTemplate.FormatSimpleClass(
                 GetUsingSection(type),
                 @namespace,
                 type.Name,
-                baseClass,
+                GetInterfaceSection(type, 8),
                 GetPropertiesSection(type, 8),
                 GetMethodsSection(type, 8)
             );
         }
 
-        public static string GenerateClassWithInterface(Type type, string @namespace, string baseClass)
+        public static string GenerateDerivedClass(Type type, string @namespace, string baseClass)
         {
-            return CodeTemplate.FormatClassWithInterface(
+            return CodeTemplate.FormatDerivedClass(
                 GetUsingSection(type),
                 @namespace,
                 type.Name,
@@ -136,9 +136,9 @@ namespace Jagapippi.UnityAsReadOnly
             );
         }
 
-        public static string GenerateGenericClass(Type type, string @namespace, string baseClass)
+        public static string GenerateInheritableClass(Type type, string @namespace, string baseClass)
         {
-            return CodeTemplate.FormatGenericClass(
+            return CodeTemplate.FormatInheritableClass(
                 GetUsingSection(type),
                 @namespace,
                 type.Name,

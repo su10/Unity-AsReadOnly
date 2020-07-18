@@ -15,10 +15,17 @@ namespace Jagapippi.UnityAsReadOnly
         private static readonly string SimpleClass = $@"{Usings}
 namespace {Namespace}
 {{
-    public class ReadOnly{ClassName} : ReadOnly{BaseClassName}<{ClassName}>
+    public interface IReadOnly{ClassName}
     {{
-        public ReadOnly{ClassName}({ClassName} obj) : base(obj)
+{Interface}    }}
+
+    public sealed class ReadOnly{ClassName} : IReadOnly{ClassName}
+    {{
+        private readonly {ClassName} _obj;
+
+        public ReadOnly{ClassName}({ClassName} obj)
         {{
+            _obj = obj;
         }}
 
         #region Properties
@@ -40,7 +47,7 @@ namespace {Namespace}
             string usingSection,
             string @namespace,
             string className,
-            string baseClassName,
+            string interfaceSection,
             string propertiesSection,
             string publicMethodSection
         )
@@ -49,13 +56,13 @@ namespace {Namespace}
                 .Replace(Usings, usingSection)
                 .Replace(Namespace, @namespace)
                 .Replace(ClassName, className)
-                .Replace(BaseClassName, baseClassName)
+                .Replace(Interface, interfaceSection)
                 .Replace(Properties, propertiesSection)
                 .Replace(Methods, publicMethodSection)
                 .ToString();
         }
 
-        private static readonly string ClassWithInterface = $@"{Usings}
+        private static readonly string DerivedClass = $@"{Usings}
 namespace {Namespace}
 {{
     public interface IReadOnly{ClassName} : IReadOnly{BaseClassName}
@@ -83,7 +90,7 @@ namespace {Namespace}
     }}
 }}";
 
-        public static string FormatClassWithInterface(
+        public static string FormatDerivedClass(
             string usingSection,
             string @namespace,
             string className,
@@ -93,7 +100,7 @@ namespace {Namespace}
             string publicMethodSection
         )
         {
-            return new StringBuilder().Append(ClassWithInterface)
+            return new StringBuilder().Append(DerivedClass)
                 .Replace(Usings, usingSection)
                 .Replace(Namespace, @namespace)
                 .Replace(ClassName, className)
@@ -104,7 +111,7 @@ namespace {Namespace}
                 .ToString();
         }
 
-        private static readonly string GenericClass = $@"{Usings}
+        private static readonly string InheritableClass = $@"{Usings}
 namespace {Namespace}
 {{
     public interface IReadOnly{ClassName} : IReadOnly{BaseClassName}
@@ -139,7 +146,7 @@ namespace {Namespace}
     }}
 }}";
 
-        public static string FormatGenericClass(
+        public static string FormatInheritableClass(
             string usingSection,
             string @namespace,
             string className,
@@ -149,7 +156,7 @@ namespace {Namespace}
             string publicMethodSection
         )
         {
-            return new StringBuilder().Append(GenericClass)
+            return new StringBuilder().Append(InheritableClass)
                 .Replace(Usings, usingSection)
                 .Replace(Namespace, @namespace)
                 .Replace(ClassName, className)

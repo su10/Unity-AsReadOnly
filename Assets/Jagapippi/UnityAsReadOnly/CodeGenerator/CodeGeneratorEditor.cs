@@ -29,8 +29,8 @@ namespace Jagapippi.UnityAsReadOnly
             public enum Template
             {
                 Simple,
-                WithInterface,
-                Generic,
+                Derived,
+                Inheritable,
             }
 
             public string typeName = "UnityEngine.Transform";
@@ -98,21 +98,21 @@ namespace Jagapippi.UnityAsReadOnly
             switch (target.template)
             {
                 case Settings.Template.Simple:
-                    code = CodeGenerator.GenerateSimpleClass(type, target.@namespace, type.BaseType.Name);
+                    code = CodeGenerator.GenerateSimpleClass(type, target.@namespace);
                     break;
 
-                case Settings.Template.WithInterface:
-                    code = CodeGenerator.GenerateClassWithInterface(type, target.@namespace, type.BaseType.Name);
+                case Settings.Template.Derived:
+                    code = CodeGenerator.GenerateDerivedClass(type, target.@namespace, type.BaseType.Name);
                     break;
 
-                case Settings.Template.Generic:
+                case Settings.Template.Inheritable:
                     if (type.IsSealed)
                     {
                         Debug.LogError($"Type is sealed: \"{target.typeName}\"");
                         return string.Empty;
                     }
 
-                    code = CodeGenerator.GenerateGenericClass(type, target.@namespace, type.BaseType.Name);
+                    code = CodeGenerator.GenerateInheritableClass(type, target.@namespace, type.BaseType.Name);
                     break;
 
                 default:
