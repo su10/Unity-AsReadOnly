@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Linq;
+using System.Text;
 using UnityEditor;
 using UnityEngine;
 using Object = System.Object;
@@ -10,6 +11,8 @@ namespace Jagapippi.UnityAsReadOnly
     [CustomEditor(typeof(CodeGenerator))]
     public class CodeGeneratorEditor : Editor
     {
+        private static readonly Encoding Encoding = new UTF8Encoding(true);
+
         [Serializable]
         public class Settings : ScriptableSingleton<Settings>
         {
@@ -119,7 +122,7 @@ namespace Jagapippi.UnityAsReadOnly
 
             var dirPath = CreateDirectoryIfNecessary(type);
             var path = $"{dirPath}/ReadOnly{type.Name}.cs";
-            File.WriteAllText(path, code);
+            File.WriteAllText(path, code, Encoding);
             AssetDatabase.ImportAsset(path);
             EditorGUIUtility.PingObject(AssetDatabase.LoadAssetAtPath(path, typeof(Object)));
 
