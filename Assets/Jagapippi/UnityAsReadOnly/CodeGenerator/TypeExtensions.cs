@@ -87,76 +87,71 @@ namespace Jagapippi.UnityAsReadOnly
             return set;
         }
 
-        public static string ToSimpleString(this Type type)
+        public static string ToCSharpRepresentation(this Type self)
         {
-            if (type.IsGenericType) return GenericTypeToString(type);
-            if (type.IsArray) return ArrayTypeToString(type);
-            return type.ToAliasName();
+            return ToCSharpRepresentation(self, null);
         }
 
-        private static string GenericTypeToString(Type type)
+        // SEE: https://stackoverflow.com/a/47317027
+        private static string ToCSharpRepresentation(Type type, Stack<Type> genericArgs, StringBuilder arrayBrackets = null)
         {
-            if (type.IsGenericType == false) throw new ArgumentException(nameof(type));
+            if (TypeAliases.ContainsKey(type)) return TypeAliases[type];
 
-            var builder = new StringBuilder("<");
-            var genericArguments = type.GetGenericArguments();
+            var code = new StringBuilder();
+            var declaringType = type.DeclaringType;
+            var arrayBracketsWasNull = (arrayBrackets == null);
 
-            for (var i = 0; i < genericArguments.Length; i++)
+            if (genericArgs == null) genericArgs = new Stack<Type>(type.GetGenericArguments());
+            var currentTypeGenericArgsCount = genericArgs.Count;
+            if (declaringType != null) currentTypeGenericArgsCount -= declaringType.GetGenericArguments().Length;
+
+            var currentTypeGenericArgs = new Type[currentTypeGenericArgsCount];
+            for (var i = currentTypeGenericArgsCount - 1; 0 <= i; i--)
             {
-                var genericArgument = genericArguments[i];
-                if (genericArgument.IsArray)
-                {
-                    builder.Append(ArrayTypeToString(genericArgument));
-                }
-                else if (genericArgument.IsGenericType)
-                {
-                    builder.Append(GenericTypeToString(genericArgument));
-                }
-                else
-                {
-                    builder.Append(genericArgument.ToAliasName());
-                }
-
-                if (i < genericArguments.Length - 1) builder.Append(", ");
+                currentTypeGenericArgs[i] = genericArgs.Pop();
             }
 
-            builder.Append(">");
+            if (declaringType != null) code.Append(ToCSharpRepresentation(declaringType, genericArgs)).Append('.');
 
-            var name = type.Name;
-            return builder.Insert(0, name.Substring(0, name.IndexOf("`"))).ToString();
-        }
-
-        private static string ArrayTypeToString(Type type)
-        {
-            if (type.IsArray == false) throw new ArgumentException(nameof(type));
-            var builder = new StringBuilder();
-
-            while (type.HasElementType)
+            if (type.IsArray)
             {
-                if (type.IsMultidimensionalArray()) // like a int[,]
-                {
-                    builder.Append($"[{new string(',', type.GetArrayRank() - 1)}]");
-                }
-                else
-                {
-                    builder.Append("[]");
-                }
+                if (arrayBrackets == null) arrayBrackets = new StringBuilder();
 
-                type = type.GetElementType();
+                arrayBrackets.Append('[');
+                arrayBrackets.Append(',', type.GetArrayRank() - 1);
+                arrayBrackets.Append(']');
+
+                var elementType = type.GetElementType();
+                code.Insert(0, ToCSharpRepresentation(elementType, null, arrayBrackets));
+            }
+            else
+            {
+                code.Append(new string(type.Name.TakeWhile(c => char.IsLetterOrDigit(c) || c == '_').ToArray()));
+
+                if (0 < currentTypeGenericArgsCount)
+                {
+                    code.Append('<');
+
+                    for (var i = 0; i < currentTypeGenericArgsCount; i++)
+                    {
+                        code.Append(ToCSharpRepresentation(currentTypeGenericArgs[i], null));
+
+                        if (i < currentTypeGenericArgsCount - 1)
+                        {
+                            code.Append(", ");
+                        }
+                    }
+
+                    code.Append('>');
+                }
             }
 
-            builder.Insert(0, ToSimpleString(type));
-            return builder.ToString();
-        }
+            if (arrayBracketsWasNull && arrayBrackets != null)
+            {
+                code.Append(arrayBrackets);
+            }
 
-        private static string ToAliasName(this Type self)
-        {
-            return TypeAliases.ContainsKey(self) ? TypeAliases[self] : self.Name;
-        }
-
-        private static bool IsMultidimensionalArray(this Type type)
-        {
-            return type.IsArray && (2 <= type.GetArrayRank());
+            return code.ToString();
         }
     }
 }

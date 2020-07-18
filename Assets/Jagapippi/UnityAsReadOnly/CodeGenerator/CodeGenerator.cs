@@ -32,7 +32,7 @@ namespace Jagapippi.UnityAsReadOnly
                 foreach (var p in properties)
                 {
                     if (p.IsDefined(typeof(ObsoleteAttribute))) continue;
-                    list.Add(new KeyValuePair<string, string>(p.PropertyType.ToSimpleString(), p.Name));
+                    list.Add(new KeyValuePair<string, string>(p.PropertyType.ToCSharpRepresentation(), p.Name));
                 }
 
                 foreach (var kv in list.OrderBy(kv => kv.Value))
@@ -49,7 +49,7 @@ namespace Jagapippi.UnityAsReadOnly
                     if (m.IsDefined(typeof(ObsoleteAttribute))) continue;
                     if (m.Name.StartsWith("get_") || m.Name.StartsWith("set_")) continue;
 
-                    list.Add(new KeyValuePair<string, MethodInfo>(m.ReturnType.ToSimpleString(), m));
+                    list.Add(new KeyValuePair<string, MethodInfo>(m.ReturnType.ToCSharpRepresentation(), m));
                 }
 
                 foreach (var kv in list.OrderBy(kv => kv.Value.Name))
@@ -70,7 +70,7 @@ namespace Jagapippi.UnityAsReadOnly
             foreach (var p in properties)
             {
                 if (p.IsDefined(typeof(ObsoleteAttribute))) continue;
-                list.Add(new KeyValuePair<string, string>(p.PropertyType.ToSimpleString(), p.Name));
+                list.Add(new KeyValuePair<string, string>(p.PropertyType.ToCSharpRepresentation(), p.Name));
             }
 
             var builder = new StringBuilder();
@@ -95,7 +95,7 @@ namespace Jagapippi.UnityAsReadOnly
                 if (m.IsDefined(typeof(ObsoleteAttribute))) continue;
                 if (m.Name.StartsWith("get_") || m.Name.StartsWith("set_")) continue;
 
-                list.Add(new KeyValuePair<string, MethodInfo>(m.ReturnType.ToSimpleString(), m));
+                list.Add(new KeyValuePair<string, MethodInfo>(m.ReturnType.ToCSharpRepresentation(), m));
             }
 
             var builder = new StringBuilder();

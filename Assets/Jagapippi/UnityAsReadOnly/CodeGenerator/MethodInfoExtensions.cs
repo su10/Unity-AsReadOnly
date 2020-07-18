@@ -18,14 +18,14 @@ namespace Jagapippi.UnityAsReadOnly
             for (var i = 0; i < parameterInfoArray.Length; i++)
             {
                 var p = parameterInfoArray[i];
-                parameters.Append($"{p.ParameterType.ToSimpleString()} {p.Name}");
+                parameters.Append($"{p.ParameterType.ToCSharpRepresentation()} {p.Name}");
 
                 if (parameterInfoArray.Length - 1 <= i) continue;
 
                 parameters.Append(", ");
             }
 
-            builder.AppendLine($"{self.ReturnType.ToSimpleString()} {self.Name}({parameters});");
+            builder.AppendLine($"{self.ReturnType.ToCSharpRepresentation()} {self.Name}({parameters});");
 
             return builder;
         }
@@ -45,7 +45,7 @@ namespace Jagapippi.UnityAsReadOnly
             for (var i = 0; i < parameterInfoArray.Length; i++)
             {
                 var p = parameterInfoArray[i];
-                parameters.Append($"{p.ParameterType.ToSimpleString()} {p.Name}");
+                parameters.Append($"{p.ParameterType.ToCSharpRepresentation()} {p.Name}");
                 arguments.Append($"{p.Name}");
 
                 if (parameterInfoArray.Length - 1 <= i) continue;
@@ -54,7 +54,7 @@ namespace Jagapippi.UnityAsReadOnly
                 arguments.Append(", ");
             }
 
-            builder.AppendLine($"public {self.ReturnType.ToSimpleString()} {self.Name}({parameters}) => _obj.{self.Name}({arguments});");
+            builder.AppendLine($"public {self.ReturnType.ToCSharpRepresentation()} {self.Name}({parameters}) => _obj.{self.Name}({arguments});");
 
             return builder;
         }
