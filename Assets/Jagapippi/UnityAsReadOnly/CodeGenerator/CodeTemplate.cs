@@ -69,7 +69,7 @@ namespace {Namespace}
     {{
 {Interface}    }}
 
-    public class ReadOnly{ClassName} : ReadOnly{BaseClassName}<{ClassName}>, IReadOnly{ClassName}
+    public sealed class ReadOnly{ClassName} : ReadOnly{BaseClassName}<{ClassName}>, IReadOnly{ClassName}
     {{
         public ReadOnly{ClassName}({ClassName} obj) : base(obj)
         {{
@@ -133,7 +133,7 @@ namespace {Namespace}
 {Methods}        #endregion
     }}
 
-    public class ReadOnly{ClassName} : ReadOnly{ClassName}<{ClassName}>
+    public sealed class ReadOnly{ClassName} : ReadOnly{ClassName}<{ClassName}>
     {{
         public ReadOnly{ClassName}({ClassName} obj) : base(obj)
         {{
