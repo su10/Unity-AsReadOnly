@@ -8,6 +8,19 @@ namespace Jagapippi.UnityAsReadOnly
         bool runInEditMode { get; }
 #endif
         bool useGUILayout { get; }
+        // void CancelInvoke();
+        // void CancelInvoke(string methodName);
+        // void Invoke(string methodName, float time);
+        // void InvokeRepeating(string methodName, float time, float repeatRate);
+        bool IsInvoking();
+        bool IsInvoking(string methodName);
+        // Coroutine StartCoroutine(string methodName);
+        // Coroutine StartCoroutine(string methodName, object value);
+        // Coroutine StartCoroutine(IEnumerator routine);
+        // void StopAllCoroutines();
+        // void StopCoroutine(IEnumerator routine);
+        // void StopCoroutine(Coroutine routine);
+        // void StopCoroutine(string methodName);
     }
 
     public class ReadOnlyMonoBehaviour<T> : ReadOnlyBehaviour<T>, IReadOnlyMonoBehaviour where T : MonoBehaviour
@@ -27,18 +40,24 @@ namespace Jagapippi.UnityAsReadOnly
 
         #region Public Methods
 
-        // CancelInvoke
-        // Invoke
-        // InvokeRepeating
-        // IsInvoking
-        // StartCoroutine
-        // StopAllCoroutines
-        // StopCoroutine
+        // public void CancelInvoke() => _obj.CancelInvoke();
+        // public void CancelInvoke(string methodName) => _obj.CancelInvoke(methodName);
+        // public void Invoke(string methodName, float time) => _obj.Invoke(methodName, time);
+        // public void InvokeRepeating(string methodName, float time, float repeatRate) => _obj.InvokeRepeating(methodName, time, repeatRate);
+        public bool IsInvoking() => _obj.IsInvoking();
+        public bool IsInvoking(string methodName) => _obj.IsInvoking(methodName);
+        // public Coroutine StartCoroutine(string methodName) => _obj.StartCoroutine(methodName);
+        // public Coroutine StartCoroutine(string methodName, object value) => _obj.StartCoroutine(methodName, value);
+        // public Coroutine StartCoroutine(IEnumerator routine) => _obj.StartCoroutine(routine);
+        // public void StopAllCoroutines() => _obj.StopAllCoroutines();
+        // public void StopCoroutine(IEnumerator routine) => _obj.StopCoroutine(routine);
+        // public void StopCoroutine(Coroutine routine) => _obj.StopCoroutine(routine);
+        // public void StopCoroutine(string methodName) => _obj.StopCoroutine(methodName);
 
         #endregion
     }
 
-    public class ReadOnlyMonoBehaviour : ReadOnlyMonoBehaviour<MonoBehaviour>
+    public sealed class ReadOnlyMonoBehaviour : ReadOnlyMonoBehaviour<MonoBehaviour>
     {
         public ReadOnlyMonoBehaviour(MonoBehaviour obj) : base(obj)
         {
@@ -47,6 +66,6 @@ namespace Jagapippi.UnityAsReadOnly
 
     public static class MonoBehaviourExtensions
     {
-        public static ReadOnlyMonoBehaviour AsReadOnly(this MonoBehaviour self) => new ReadOnlyMonoBehaviour(self);
+        public static IReadOnlyMonoBehaviour AsReadOnly(this MonoBehaviour self) => new ReadOnlyMonoBehaviour(self);
     }
 }

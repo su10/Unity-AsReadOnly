@@ -25,10 +25,10 @@ namespace Jagapippi.UnityAsReadOnly
 
         #region Public Methods
 
-        public ReadOnlyGameObject[] GetRootGameObjects()
+        public IReadOnlyGameObject[] GetRootGameObjects()
         {
             var gameObjects = _scene.GetRootGameObjects();
-            var readOnlyGameObjects = new ReadOnlyGameObject[gameObjects.Length];
+            var readOnlyGameObjects = new IReadOnlyGameObject[gameObjects.Length];
 
             for (var i = 0; i < gameObjects.Length; i++)
             {
@@ -38,7 +38,7 @@ namespace Jagapippi.UnityAsReadOnly
             return readOnlyGameObjects;
         }
 
-        public void GetRootGameObjects(List<ReadOnlyGameObject> rootGameObjects)
+        public void GetRootGameObjects(List<IReadOnlyGameObject> rootGameObjects)
         {
             var gameObjects = _scene.GetRootGameObjects();
 

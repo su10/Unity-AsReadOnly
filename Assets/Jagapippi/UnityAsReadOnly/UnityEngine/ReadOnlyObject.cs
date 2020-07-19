@@ -66,7 +66,7 @@ namespace Jagapippi.UnityAsReadOnly
         #endregion
     }
 
-    public class ReadOnlyObject : ReadOnlyObject<Object>
+    public sealed class ReadOnlyObject : ReadOnlyObject<Object>
     {
         public ReadOnlyObject(Object obj) : base(obj)
         {
@@ -75,6 +75,6 @@ namespace Jagapippi.UnityAsReadOnly
 
     public static class ObjectExtensions
     {
-        public static ReadOnlyObject AsReadOnly(this Object self) => new ReadOnlyObject(self);
+        public static IReadOnlyObject AsReadOnly(this Object self) => new ReadOnlyObject(self);
     }
 }

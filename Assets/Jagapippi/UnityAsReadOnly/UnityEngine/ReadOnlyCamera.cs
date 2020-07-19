@@ -1,10 +1,118 @@
 ﻿using UnityEngine;
 using UnityEngine.Rendering;
-using UnityEngine.SceneManagement;
 
 namespace Jagapippi.UnityAsReadOnly
 {
-    public class ReadOnlyCamera : ReadOnlyBehaviour<Camera>
+    public interface IReadOnlyCamera : IReadOnlyBehaviour
+    {
+        RenderTexture activeTexture { get; }
+        RenderingPath actualRenderingPath { get; }
+        bool allowDynamicResolution { get; }
+        bool allowHDR { get; }
+        bool allowMSAA { get; }
+        bool areVRStereoViewMatricesWithinSingleCullTolerance { get; }
+        float aspect { get; }
+        Color backgroundColor { get; }
+        Matrix4x4 cameraToWorldMatrix { get; }
+        CameraType cameraType { get; }
+        CameraClearFlags clearFlags { get; }
+        bool clearStencilAfterLightingPass { get; }
+        int commandBufferCount { get; }
+        int cullingMask { get; }
+        Matrix4x4 cullingMatrix { get; }
+        float depth { get; }
+        DepthTextureMode depthTextureMode { get; }
+        int eventMask { get; }
+        float farClipPlane { get; }
+        float fieldOfView { get; }
+        float focalLength { get; }
+        bool forceIntoRenderTexture { get; }
+        Camera.GateFitMode gateFit { get; }
+        float[] layerCullDistances { get; }
+        bool layerCullSpherical { get; }
+        Vector2 lensShift { get; }
+        float nearClipPlane { get; }
+        Matrix4x4 nonJitteredProjectionMatrix { get; }
+        OpaqueSortMode opaqueSortMode { get; }
+        bool orthographic { get; }
+        float orthographicSize { get; }
+        int pixelHeight { get; }
+        Rect pixelRect { get; }
+        int pixelWidth { get; }
+        Matrix4x4 previousViewProjectionMatrix { get; }
+        Matrix4x4 projectionMatrix { get; }
+        Rect rect { get; }
+        RenderingPath renderingPath { get; }
+        int scaledPixelHeight { get; }
+        int scaledPixelWidth { get; }
+        ReadOnlyScene scene { get; }
+        Vector2 sensorSize { get; }
+        Camera.MonoOrStereoscopicEye stereoActiveEye { get; }
+        float stereoConvergence { get; }
+        bool stereoEnabled { get; }
+        float stereoSeparation { get; }
+        StereoTargetEyeMask stereoTargetEye { get; }
+        int targetDisplay { get; }
+        RenderTexture targetTexture { get; }
+        Vector3 transparencySortAxis { get; }
+        TransparencySortMode transparencySortMode { get; }
+        bool useJitteredProjectionMatrixForTransparentRendering { get; }
+        bool useOcclusionCulling { get; }
+        bool usePhysicalProperties { get; }
+        Vector3 velocity { get; }
+        Matrix4x4 worldToCameraMatrix { get; }
+        // void AddCommandBuffer(CameraEvent evt, CommandBuffer buffer);
+        // void AddCommandBufferAsync(CameraEvent evt, CommandBuffer buffer, ComputeQueueType queueType);
+        void CalculateFrustumCorners(Rect viewport, float z, Camera.MonoOrStereoscopicEye eye, Vector3[] outCorners);
+        Matrix4x4 CalculateObliqueMatrix(Vector4 clipPlane);
+        // void CopyFrom(Camera other);
+        // void CopyStereoDeviceProjectionMatrixToNonJittered(Camera.StereoscopicEye eye);
+        // CommandBuffer[] GetCommandBuffers(CameraEvent evt);
+        Matrix4x4 GetStereoNonJitteredProjectionMatrix(Camera.StereoscopicEye eye);
+        Matrix4x4 GetStereoProjectionMatrix(Camera.StereoscopicEye eye);
+        Matrix4x4 GetStereoViewMatrix(Camera.StereoscopicEye eye);
+        // void RemoveAllCommandBuffers();
+        // void RemoveCommandBuffer(CameraEvent evt, CommandBuffer buffer);
+        // void RemoveCommandBuffers(CameraEvent evt);
+        // void Render();
+        // void RenderDontRestore();
+        bool RenderToCubemap(Cubemap cubemap, int faceMask);
+        bool RenderToCubemap(Cubemap cubemap);
+        bool RenderToCubemap(RenderTexture cubemap, int faceMask);
+        bool RenderToCubemap(RenderTexture cubemap);
+        bool RenderToCubemap(RenderTexture cubemap, int faceMask, Camera.MonoOrStereoscopicEye stereoEye);
+        // void RenderWithShader(Shader shader, string replacementTag);
+        // void Reset();
+        // void ResetAspect();
+        // void ResetCullingMatrix();
+        // void ResetProjectionMatrix();
+        // void ResetReplacementShader();
+        // void ResetStereoProjectionMatrices();
+        // void ResetStereoViewMatrices();
+        // void ResetTransparencySortSettings();
+        // void ResetWorldToCameraMatrix();
+        Ray ScreenPointToRay(Vector3 pos, Camera.MonoOrStereoscopicEye eye);
+        Ray ScreenPointToRay(Vector3 pos);
+        Vector3 ScreenToViewportPoint(Vector3 position);
+        Vector3 ScreenToWorldPoint(Vector3 position, Camera.MonoOrStereoscopicEye eye);
+        Vector3 ScreenToWorldPoint(Vector3 position);
+        // void SetReplacementShader(Shader shader, string replacementTag);
+        // void SetStereoProjectionMatrix(Camera.StereoscopicEye eye, Matrix4x4 matrix);
+        // void SetStereoViewMatrix(Camera.StereoscopicEye eye, Matrix4x4 matrix);
+        // void SetTargetBuffers(RenderBuffer colorBuffer, RenderBuffer depthBuffer);
+        // void SetTargetBuffers(RenderBuffer[] colorBuffer, RenderBuffer depthBuffer);
+        Ray ViewportPointToRay(Vector3 pos, Camera.MonoOrStereoscopicEye eye);
+        Ray ViewportPointToRay(Vector3 pos);
+        Vector3 ViewportToScreenPoint(Vector3 position);
+        Vector3 ViewportToWorldPoint(Vector3 position, Camera.MonoOrStereoscopicEye eye);
+        Vector3 ViewportToWorldPoint(Vector3 position);
+        Vector3 WorldToScreenPoint(Vector3 position, Camera.MonoOrStereoscopicEye eye);
+        Vector3 WorldToScreenPoint(Vector3 position);
+        Vector3 WorldToViewportPoint(Vector3 position, Camera.MonoOrStereoscopicEye eye);
+        Vector3 WorldToViewportPoint(Vector3 position);
+    }
+
+    public sealed class ReadOnlyCamera : ReadOnlyBehaviour<Camera>, IReadOnlyCamera
     {
         public ReadOnlyCamera(Camera obj) : base(obj)
         {
@@ -52,7 +160,7 @@ namespace Jagapippi.UnityAsReadOnly
         public RenderingPath renderingPath => _obj.renderingPath;
         public int scaledPixelHeight => _obj.scaledPixelHeight;
         public int scaledPixelWidth => _obj.scaledPixelWidth;
-        public Scene scene => _obj.scene;
+        public ReadOnlyScene scene => _obj.scene.AsReadOnly();
         public Vector2 sensorSize => _obj.sensorSize;
         public Camera.MonoOrStereoscopicEye stereoActiveEye => _obj.stereoActiveEye;
         public float stereoConvergence => _obj.stereoConvergence;
@@ -79,7 +187,7 @@ namespace Jagapippi.UnityAsReadOnly
         public Matrix4x4 CalculateObliqueMatrix(Vector4 clipPlane) => _obj.CalculateObliqueMatrix(clipPlane);
         // public void CopyFrom(Camera other) => _obj.CopyFrom(other);
         // public void CopyStereoDeviceProjectionMatrixToNonJittered(Camera.StereoscopicEye eye) => _obj.CopyStereoDeviceProjectionMatrixToNonJittered(eye);
-        public CommandBuffer[] GetCommandBuffers(CameraEvent evt) => _obj.GetCommandBuffers(evt);
+        // public CommandBuffer[] GetCommandBuffers(CameraEvent evt) => _obj.GetCommandBuffers(evt);
         public Matrix4x4 GetStereoNonJitteredProjectionMatrix(Camera.StereoscopicEye eye) => _obj.GetStereoNonJitteredProjectionMatrix(eye);
         public Matrix4x4 GetStereoProjectionMatrix(Camera.StereoscopicEye eye) => _obj.GetStereoProjectionMatrix(eye);
         public Matrix4x4 GetStereoViewMatrix(Camera.StereoscopicEye eye) => _obj.GetStereoViewMatrix(eye);
@@ -88,11 +196,11 @@ namespace Jagapippi.UnityAsReadOnly
         // public void RemoveCommandBuffers(CameraEvent evt) => _obj.RemoveCommandBuffers(evt);
         // public void Render() => _obj.Render();
         // public void RenderDontRestore() => _obj.RenderDontRestore();
-        // public bool RenderToCubemap(Cubemap cubemap, int faceMask) => _obj.RenderToCubemap(cubemap, faceMask);
-        // public bool RenderToCubemap(Cubemap cubemap) => _obj.RenderToCubemap(cubemap);
-        // public bool RenderToCubemap(RenderTexture cubemap, int faceMask) => _obj.RenderToCubemap(cubemap, faceMask);
-        // public bool RenderToCubemap(RenderTexture cubemap) => _obj.RenderToCubemap(cubemap);
-        // public bool RenderToCubemap(RenderTexture cubemap, int faceMask, Camera.MonoOrStereoscopicEye stereoEye) => _obj.RenderToCubemap(cubemap, faceMask, stereoEye);
+        public bool RenderToCubemap(Cubemap cubemap, int faceMask) => _obj.RenderToCubemap(cubemap, faceMask);
+        public bool RenderToCubemap(Cubemap cubemap) => _obj.RenderToCubemap(cubemap);
+        public bool RenderToCubemap(RenderTexture cubemap, int faceMask) => _obj.RenderToCubemap(cubemap, faceMask);
+        public bool RenderToCubemap(RenderTexture cubemap) => _obj.RenderToCubemap(cubemap);
+        public bool RenderToCubemap(RenderTexture cubemap, int faceMask, Camera.MonoOrStereoscopicEye stereoEye) => _obj.RenderToCubemap(cubemap, faceMask, stereoEye);
         // public void RenderWithShader(Shader shader, string replacementTag) => _obj.RenderWithShader(shader, replacementTag);
         // public void Reset() => _obj.Reset();
         // public void ResetAspect() => _obj.ResetAspect();
@@ -128,6 +236,6 @@ namespace Jagapippi.UnityAsReadOnly
 
     public static class CameraExtensions
     {
-        public static ReadOnlyCamera AsReadOnly(this Camera self) => new ReadOnlyCamera(self);
+        public static IReadOnlyCamera AsReadOnly(this Camera self) => new ReadOnlyCamera(self);
     }
 }

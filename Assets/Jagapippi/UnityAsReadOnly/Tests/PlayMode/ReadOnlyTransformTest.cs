@@ -88,7 +88,7 @@ namespace Jagapippi.UnityAsReadOnly.Tests
             Assert.IsFalse(transform != null);
             Assert.IsTrue(ReferenceEquals(transform, null));
 
-            transform = _transform.AsReadOnly();
+            transform = (ReadOnlyTransform) _transform.AsReadOnly();
 
             Assert.IsTrue(transform);
             Assert.IsFalse(transform == null);
@@ -102,8 +102,8 @@ namespace Jagapippi.UnityAsReadOnly.Tests
         {
             var go1 = new GameObject("LHS");
             var go2 = new GameObject("RHS");
-            var transform1 = go1.transform.AsReadOnly();
-            var transform2 = go2.transform.AsReadOnly();
+            var transform1 = (ReadOnlyTransform) go1.transform.AsReadOnly();
+            var transform2 = (ReadOnlyTransform) go2.transform.AsReadOnly();
 
             Assert.IsFalse(transform1 == transform2);
             Assert.IsTrue(transform1 != transform2);
@@ -117,7 +117,7 @@ namespace Jagapippi.UnityAsReadOnly.Tests
         [Test]
         public void ReadOnlyTransformEqualsSame()
         {
-            var transform1 = _transform.AsReadOnly();
+            var transform1 = (ReadOnlyTransform) _transform.AsReadOnly();
 
             Assert.IsTrue(transform1 == _transform);
             Assert.IsFalse(transform1 != _transform);
@@ -131,7 +131,7 @@ namespace Jagapippi.UnityAsReadOnly.Tests
             Assert.IsTrue(transform1.Equals(transform2));
             Assert.IsTrue(ReferenceEquals(transform1, transform2));
 
-            transform2 = _transform.AsReadOnly();
+            transform2 = (ReadOnlyTransform) _transform.AsReadOnly();
             Assert.IsTrue(transform1 == transform2);
             Assert.IsFalse(transform1 != transform2);
             Assert.IsTrue(transform1.Equals(transform2));
@@ -141,7 +141,7 @@ namespace Jagapippi.UnityAsReadOnly.Tests
         [UnityTest]
         public IEnumerator ReadOnlyTransformDestroy()
         {
-            var transform = _transform.AsReadOnly();
+            var transform = (ReadOnlyTransform) _transform.AsReadOnly();
             Object.Destroy(_transform.gameObject);
 
             Assert.IsTrue(transform);

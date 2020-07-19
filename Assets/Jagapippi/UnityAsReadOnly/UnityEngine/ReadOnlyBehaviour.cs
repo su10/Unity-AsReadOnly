@@ -20,9 +20,13 @@ namespace Jagapippi.UnityAsReadOnly
         public bool isActiveAndEnabled => _obj.isActiveAndEnabled;
 
         #endregion
+
+        #region Public Methods
+
+        #endregion
     }
 
-    public class ReadOnlyBehaviour : ReadOnlyBehaviour<Behaviour>
+    public sealed class ReadOnlyBehaviour : ReadOnlyBehaviour<Behaviour>
     {
         public ReadOnlyBehaviour(Behaviour obj) : base(obj)
         {
@@ -31,6 +35,6 @@ namespace Jagapippi.UnityAsReadOnly
 
     public static class BehaviourExtensions
     {
-        public static ReadOnlyBehaviour AsReadOnly(this Behaviour self) => new ReadOnlyBehaviour(self);
+        public static IReadOnlyBehaviour AsReadOnly(this Behaviour self) => new ReadOnlyBehaviour(self);
     }
 }
