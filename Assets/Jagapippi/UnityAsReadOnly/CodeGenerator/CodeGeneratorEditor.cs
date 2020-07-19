@@ -34,7 +34,7 @@ namespace Jagapippi.UnityAsReadOnly
             }
 
             public string typeName = "UnityEngine.Transform";
-            public string @namespace = "Jagapippi.UnityAsReadOnly";
+            public string outputNamespace = "Jagapippi.UnityAsReadOnly";
             public Template template;
             public bool overwrite = false;
         }
@@ -87,7 +87,7 @@ namespace Jagapippi.UnityAsReadOnly
             }
 
             var shortTypeName = target.typeName.Split('.').Last();
-            if ((target.overwrite == false) && (FindType($"{target.@namespace}.ReadOnly{shortTypeName}") != null))
+            if ((target.overwrite == false) && (FindType($"{target.outputNamespace}.ReadOnly{shortTypeName}") != null))
             {
                 Debug.LogError($"Type already exists: \"ReadOnly{shortTypeName}\"");
                 return string.Empty;
@@ -98,11 +98,11 @@ namespace Jagapippi.UnityAsReadOnly
             switch (target.template)
             {
                 case Settings.Template.Simple:
-                    code = CodeGenerator.GenerateSimpleClass(type, target.@namespace);
+                    code = CodeGenerator.GenerateSimpleClass(type, target.outputNamespace);
                     break;
 
                 case Settings.Template.Derived:
-                    code = CodeGenerator.GenerateDerivedClass(type, target.@namespace, type.BaseType.Name);
+                    code = CodeGenerator.GenerateDerivedClass(type, target.outputNamespace, type.BaseType.Name);
                     break;
 
                 case Settings.Template.Inheritable:
@@ -112,7 +112,7 @@ namespace Jagapippi.UnityAsReadOnly
                         return string.Empty;
                     }
 
-                    code = CodeGenerator.GenerateInheritableClass(type, target.@namespace, type.BaseType.Name);
+                    code = CodeGenerator.GenerateInheritableClass(type, target.outputNamespace, type.BaseType.Name);
                     break;
 
                 default:
