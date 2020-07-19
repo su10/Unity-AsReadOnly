@@ -1,0 +1,19 @@
+{
+    "name": "UnityAsReadOnly.Tests.EditMode",
+    "references": [
+        "UnityAsReadOnly",
+        "UnityAsReadOnly.CodeGenerator"
+    ],
+    "optionalUnityReferences": [
+        "TestAssemblies"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": false,
+    "defineConstraints": []
+}

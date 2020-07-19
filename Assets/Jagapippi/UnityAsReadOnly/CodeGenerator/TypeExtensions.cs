@@ -96,6 +96,7 @@ namespace Jagapippi.UnityAsReadOnly
         private static string ToCSharpRepresentation(Type type, Stack<Type> genericArgs, StringBuilder arrayBrackets = null)
         {
             if (TypeAliases.ContainsKey(type)) return TypeAliases[type];
+            if (type.IsGenericParameter) return type.ToString();
 
             var code = new StringBuilder();
             var declaringType = type.DeclaringType;
@@ -152,6 +153,47 @@ namespace Jagapippi.UnityAsReadOnly
             }
 
             return code.ToString();
+        }
+
+        public static string GetConstraints(this Type self)
+        {
+            var builder = new StringBuilder();
+            var isValueType = false;
+
+            foreach (var constraint in self.GetGenericParameterConstraints())
+            {
+                if (0 < builder.Length) builder.Append(", ");
+                if (constraint == typeof(ValueType))
+                {
+                    isValueType = true;
+                }
+                else
+                {
+                    builder.Append(constraint.Name);
+                }
+            }
+
+            var constraints = self.GenericParameterAttributes & GenericParameterAttributes.SpecialConstraintMask;
+
+            if ((constraints & GenericParameterAttributes.ReferenceTypeConstraint) != 0)
+            {
+                if (0 < builder.Length) builder.Append(", ");
+                builder.Append("class");
+            }
+
+            if ((constraints & GenericParameterAttributes.NotNullableValueTypeConstraint) != 0)
+            {
+                if (0 < builder.Length) builder.Append(", ");
+                builder.Append("struct");
+            }
+
+            if ((constraints & GenericParameterAttributes.DefaultConstructorConstraint) != 0 && (isValueType == false))
+            {
+                if (0 < builder.Length) builder.Append(", ");
+                builder.Append("new()");
+            }
+
+            return builder.ToString();
         }
     }
 }

@@ -55,7 +55,7 @@ namespace Jagapippi.UnityAsReadOnly
                 foreach (var kv in list.OrderBy(kv => kv.Value.Name))
                 {
                     var methodInfo = kv.Value;
-                    builder.Append($"{new string(' ', indentSpace)}{methodInfo.ToInterfaceString()}");
+                    builder.AppendLine($"{new string(' ', indentSpace)}{methodInfo.ToInterfaceString()}");
                 }
             }
 
@@ -103,7 +103,7 @@ namespace Jagapippi.UnityAsReadOnly
             foreach (var kv in list.OrderBy(kv => kv.Value.Name))
             {
                 var methodInfo = kv.Value;
-                builder.Append($"{new string(' ', indentSpace)}{methodInfo.ToDelegationString()}");
+                builder.AppendLine($"{new string(' ', indentSpace)}{methodInfo.ToDelegationString()}");
             }
 
             if (0 < builder.Length) builder.AppendLine();

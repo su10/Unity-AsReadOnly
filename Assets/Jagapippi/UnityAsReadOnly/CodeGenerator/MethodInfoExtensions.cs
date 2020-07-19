@@ -7,25 +7,68 @@ namespace Jagapippi.UnityAsReadOnly
     {
         public static string ToInterfaceString(this MethodInfo self)
         {
-            return ToInterfaceString(self, new StringBuilder()).ToString();
+            return self.GetSignature(new StringBuilder()).Append(";").ToString();
         }
 
-        public static StringBuilder ToInterfaceString(this MethodInfo self, StringBuilder builder)
+        private static StringBuilder GetSignature(this MethodInfo self, StringBuilder builder)
         {
-            var parameters = new StringBuilder();
-            var parameterInfoArray = self.GetParameters();
+            builder.Append($"{self.ReturnType.ToCSharpRepresentation()} {self.Name}");
 
-            for (var i = 0; i < parameterInfoArray.Length; i++)
+            if (self.IsGenericMethod)
             {
-                var p = parameterInfoArray[i];
-                parameters.Append($"{p.ParameterType.ToCSharpRepresentation()} {p.Name}");
+                builder.Append("<");
 
-                if (parameterInfoArray.Length - 1 <= i) continue;
+                var genericArguments = self.GetGenericArguments();
 
-                parameters.Append(", ");
+                for (var i = 0; i < genericArguments.Length; i++)
+                {
+                    if (0 < i) builder.Append(", ");
+                    builder.Append(genericArguments[i]);
+                }
+
+                builder.Append(">");
             }
 
-            builder.AppendLine($"{self.ReturnType.ToCSharpRepresentation()} {self.Name}({parameters});");
+            builder.Append("(");
+
+            var parameters = self.GetParameters();
+
+            for (var i = 0; i < parameters.Length; i++)
+            {
+                var param = parameters[i];
+
+                if (0 < i) builder.Append(", ");
+
+                if (param.ParameterType.IsByRef)
+                {
+                    builder.Append(param.IsOut ? "out " : "ref ");
+                    builder.Append(param.ParameterType.GetElementType().ToCSharpRepresentation());
+                }
+                else
+                {
+                    builder.Append(param.ParameterType.ToCSharpRepresentation());
+                }
+
+                builder.Append($" {param.Name}");
+            }
+
+            builder.Append(")");
+
+            if (self.IsGenericMethod)
+            {
+                var genericArguments = self.GetGenericArguments();
+
+                for (var i = 0; i < genericArguments.Length; i++)
+                {
+                    var argumentType = genericArguments[i];
+                    var constraints = argumentType.GetConstraints();
+
+                    if (string.IsNullOrEmpty(constraints) == false)
+                    {
+                        builder.Append($" where {argumentType.Name} : {constraints}");
+                    }
+                }
+            }
 
             return builder;
         }
@@ -35,26 +78,44 @@ namespace Jagapippi.UnityAsReadOnly
             return ToDelegationString(self, new StringBuilder()).ToString();
         }
 
-        public static StringBuilder ToDelegationString(this MethodInfo self, StringBuilder builder)
+        private static StringBuilder ToDelegationString(this MethodInfo self, StringBuilder builder)
         {
-            var parameters = new StringBuilder();
-            var arguments = new StringBuilder();
+            builder.Append($"public {self.GetSignature(new StringBuilder())} => _obj.{self.Name}");
 
-            var parameterInfoArray = self.GetParameters();
-
-            for (var i = 0; i < parameterInfoArray.Length; i++)
+            if (self.IsGenericMethod)
             {
-                var p = parameterInfoArray[i];
-                parameters.Append($"{p.ParameterType.ToCSharpRepresentation()} {p.Name}");
-                arguments.Append($"{p.Name}");
+                builder.Append("<");
 
-                if (parameterInfoArray.Length - 1 <= i) continue;
+                var genericArguments = self.GetGenericArguments();
 
-                parameters.Append(", ");
-                arguments.Append(", ");
+                for (var i = 0; i < genericArguments.Length; i++)
+                {
+                    if (0 < i) builder.Append(", ");
+                    builder.Append(genericArguments[i]);
+                }
+
+                builder.Append(">");
             }
 
-            builder.AppendLine($"public {self.ReturnType.ToCSharpRepresentation()} {self.Name}({parameters}) => _obj.{self.Name}({arguments});");
+            builder.Append("(");
+
+            var parameters = self.GetParameters();
+
+            for (var i = 0; i < parameters.Length; i++)
+            {
+                if (0 < i) builder.Append(", ");
+
+                var param = parameters[i];
+
+                if (param.ParameterType.IsByRef)
+                {
+                    builder.Append(param.IsOut ? "out " : "ref ");
+                }
+
+                builder.Append(param.Name);
+            }
+
+            builder.Append(");");
 
             return builder;
         }
