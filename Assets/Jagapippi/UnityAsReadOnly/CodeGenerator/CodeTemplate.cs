@@ -65,7 +65,7 @@ namespace {Namespace}
         private static readonly string DerivedClass = $@"{Usings}
 namespace {Namespace}
 {{
-    public interface IReadOnly{ClassName} : IReadOnly{BaseClassName}
+    public interface IReadOnly{ClassName}
     {{
 {Interface}    }}
 
@@ -114,7 +114,7 @@ namespace {Namespace}
         private static readonly string InheritableClass = $@"{Usings}
 namespace {Namespace}
 {{
-    public interface IReadOnly{ClassName} : IReadOnly{BaseClassName}
+    public interface IReadOnly{ClassName}
     {{
 {Interface}    }}
 
