@@ -3,13 +3,13 @@ using UnityEngine.EventSystems;
 
 namespace Jagapippi.UnityAsReadOnly
 {
-    public interface IReadOnlyBaseRaycaster : IReadOnlyUIBehaviour
+    public interface IReadOnlyBaseRaycaster
     {
         IReadOnlyCamera eventCamera { get; }
         int renderOrderPriority { get; }
         int sortOrderPriority { get; }
         void Raycast(PointerEventData eventData, List<RaycastResult> resultAppendList);
-        new string ToString();
+        string ToString();
     }
 
     public class ReadOnlyBaseRaycaster<T> : ReadOnlyUIBehaviour<T>, IReadOnlyBaseRaycaster where T : BaseRaycaster
@@ -20,7 +20,8 @@ namespace Jagapippi.UnityAsReadOnly
 
         #region Properties
 
-        public IReadOnlyCamera eventCamera => (_obj.eventCamera == null) ? null : _obj.eventCamera.AsReadOnly();
+        public ReadOnlyCamera eventCamera => (_obj.eventCamera == null) ? null : _obj.eventCamera.AsReadOnly();
+        IReadOnlyCamera IReadOnlyBaseRaycaster.eventCamera => this.eventCamera;
         public int renderOrderPriority => _obj.renderOrderPriority;
         public int sortOrderPriority => _obj.sortOrderPriority;
 
@@ -43,6 +44,6 @@ namespace Jagapippi.UnityAsReadOnly
 
     public static class BaseRaycasterExtensions
     {
-        public static IReadOnlyBaseRaycaster AsReadOnly(this BaseRaycaster self) => new ReadOnlyBaseRaycaster(self);
+        public static ReadOnlyBaseRaycaster AsReadOnly(this BaseRaycaster self) => new ReadOnlyBaseRaycaster(self);
     }
 }

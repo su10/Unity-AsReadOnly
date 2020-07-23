@@ -1,9 +1,10 @@
 ﻿using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Jagapippi.UnityAsReadOnly
 {
-    public interface IReadOnlyTransform : IReadOnlyComponent
+    public interface IReadOnlyTransform : IEnumerable<IReadOnlyTransform>
     {
         int childCount { get; }
         Vector3 eulerAngles { get; }
@@ -27,7 +28,7 @@ namespace Jagapippi.UnityAsReadOnly
         // void DetachChildren();
         IReadOnlyTransform Find(string n);
         IReadOnlyTransform GetChild(int index);
-        IEnumerator GetEnumerator();
+        new IEnumerator<IReadOnlyTransform> GetEnumerator();
         int GetSiblingIndex();
         Vector3 InverseTransformDirection(Vector3 direction);
         Vector3 InverseTransformDirection(float x, float y, float z);
@@ -67,7 +68,7 @@ namespace Jagapippi.UnityAsReadOnly
         // void Translate(float x, float y, float z, Transform relativeTo);
     }
 
-    public class ReadOnlyTransform : ReadOnlyComponent<Transform>, IReadOnlyTransform
+    public class ReadOnlyTransform : ReadOnlyComponent<Transform>, IReadOnlyTransform, IEnumerable<ReadOnlyTransform>
     {
         public ReadOnlyTransform(Transform obj) : base(obj)
         {
@@ -87,10 +88,12 @@ namespace Jagapippi.UnityAsReadOnly
         public Vector3 localScale => _obj.localScale;
         public Matrix4x4 localToWorldMatrix => _obj.localToWorldMatrix;
         public Vector3 lossyScale => _obj.lossyScale;
-        public IReadOnlyTransform parent => _obj.parent.AsReadOnly();
+        public ReadOnlyTransform parent => _obj.parent.AsReadOnly();
+        IReadOnlyTransform IReadOnlyTransform.parent => this.parent;
         public Vector3 position => _obj.position;
         public Vector3 right => _obj.right;
-        public IReadOnlyTransform root => _obj.root.AsReadOnly();
+        public ReadOnlyTransform root => _obj.root.AsReadOnly();
+        IReadOnlyTransform IReadOnlyTransform.root => this.root;
         public Quaternion rotation => _obj.rotation;
         public Vector3 up => _obj.up;
         public Matrix4x4 worldToLocalMatrix => _obj.worldToLocalMatrix;
@@ -101,19 +104,25 @@ namespace Jagapippi.UnityAsReadOnly
 
         // public void DetachChildren() => _obj.DetachChildren();
 
-        public IReadOnlyTransform Find(string n)
+        public ReadOnlyTransform Find(string n)
         {
             var transform = _obj.Find(n);
             return (transform == null) ? null : transform.AsReadOnly();
         }
 
-        public IReadOnlyTransform GetChild(int index)
+        IReadOnlyTransform IReadOnlyTransform.Find(string n) => this.Find(n);
+
+        public ReadOnlyTransform GetChild(int index)
         {
             var transform = _obj.GetChild(index);
             return (transform == null) ? null : transform.AsReadOnly();
         }
 
-        public IEnumerator GetEnumerator() => new Enumerator(this);
+        IReadOnlyTransform IReadOnlyTransform.GetChild(int index) => this.GetChild(index);
+        public IEnumerator<ReadOnlyTransform> GetEnumerator() => new Enumerator<ReadOnlyTransform>(this);
+        IEnumerator IEnumerable.GetEnumerator() => this.GetEnumerator();
+        IEnumerator<IReadOnlyTransform> IReadOnlyTransform.GetEnumerator() => new Enumerator<IReadOnlyTransform>(this);
+        IEnumerator<IReadOnlyTransform> IEnumerable<IReadOnlyTransform>.GetEnumerator() => ((IReadOnlyTransform) this).GetEnumerator();
         public int GetSiblingIndex() => _obj.GetSiblingIndex();
         public Vector3 InverseTransformDirection(Vector3 direction) => _obj.InverseTransformDirection(direction);
         public Vector3 InverseTransformDirection(float x, float y, float z) => _obj.InverseTransformDirection(x, y, z);
@@ -154,24 +163,26 @@ namespace Jagapippi.UnityAsReadOnly
 
         #endregion
 
-        private class Enumerator : IEnumerator
+        private class Enumerator<T> : IEnumerator<T> where T : IReadOnlyTransform
         {
             private int _currentIndex = -1;
-            private readonly IReadOnlyTransform _readOnlyTransform;
+            private readonly T _readOnlyTransform;
 
-            internal Enumerator(IReadOnlyTransform transform)
+            internal Enumerator(T transform)
             {
                 _readOnlyTransform = transform;
             }
 
-            public object Current => _readOnlyTransform.GetChild(_currentIndex);
+            object IEnumerator.Current => this.Current;
             public bool MoveNext() => ++_currentIndex < _readOnlyTransform.childCount;
             public void Reset() => _currentIndex = -1;
+            public void Dispose() => this.Reset();
+            public T Current => (T) _readOnlyTransform.GetChild(_currentIndex);
         }
     }
 
     public static class TransformExtensions
     {
-        public static IReadOnlyTransform AsReadOnly(this Transform self) => new ReadOnlyTransform(self);
+        public static ReadOnlyTransform AsReadOnly(this Transform self) => new ReadOnlyTransform(self);
     }
 }

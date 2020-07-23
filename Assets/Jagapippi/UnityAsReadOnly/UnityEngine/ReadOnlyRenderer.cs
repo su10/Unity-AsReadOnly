@@ -5,7 +5,7 @@ using UnityEngine.Rendering;
 
 namespace Jagapippi.UnityAsReadOnly
 {
-    public interface IReadOnlyRenderer : IReadOnlyComponent
+    public interface IReadOnlyRenderer
     {
         bool allowOcclusionWhenDynamic { get; }
         Bounds bounds { get; }
@@ -59,13 +59,17 @@ namespace Jagapippi.UnityAsReadOnly
         public bool isVisible => _obj.isVisible;
         public int lightmapIndex => _obj.lightmapIndex;
         public Vector4 lightmapScaleOffset => _obj.lightmapScaleOffset;
-        public IReadOnlyGameObject lightProbeProxyVolumeOverride => (_obj.lightProbeProxyVolumeOverride == null) ? null : _obj.lightProbeProxyVolumeOverride.AsReadOnly();
+        public ReadOnlyGameObject lightProbeProxyVolumeOverride => (_obj.lightProbeProxyVolumeOverride == null) ? null : _obj.lightProbeProxyVolumeOverride.AsReadOnly();
+        IReadOnlyGameObject IReadOnlyRenderer.lightProbeProxyVolumeOverride => this.lightProbeProxyVolumeOverride;
         public LightProbeUsage lightProbeUsage => _obj.lightProbeUsage;
         public Matrix4x4 localToWorldMatrix => _obj.localToWorldMatrix;
-        public IReadOnlyMaterial material => (_obj.material == null) ? null : _obj.material.AsReadOnly();
-        public IReadOnlyMaterial[] materials => (_obj.materials == null) ? null : _obj.materials.Select(m => m.AsReadOnly()).ToArray();
+        public ReadOnlyMaterial material => (_obj.material == null) ? null : _obj.material.AsReadOnly();
+        IReadOnlyMaterial IReadOnlyRenderer.material => this.material;
+        public ReadOnlyMaterial[] materials => (_obj.materials == null) ? null : _obj.materials.Select(m => m.AsReadOnly()).ToArray();
+        IReadOnlyMaterial[] IReadOnlyRenderer.materials => this.materials;
         public MotionVectorGenerationMode motionVectorGenerationMode => _obj.motionVectorGenerationMode;
-        public IReadOnlyTransform probeAnchor => (_obj.probeAnchor == null) ? null : _obj.probeAnchor.AsReadOnly();
+        public ReadOnlyTransform probeAnchor => (_obj.probeAnchor == null) ? null : _obj.probeAnchor.AsReadOnly();
+        IReadOnlyTransform IReadOnlyRenderer.probeAnchor => this.probeAnchor;
         public int realtimeLightmapIndex => _obj.realtimeLightmapIndex;
         public Vector4 realtimeLightmapScaleOffset => _obj.realtimeLightmapScaleOffset;
         public bool receiveShadows => _obj.receiveShadows;
@@ -73,8 +77,10 @@ namespace Jagapippi.UnityAsReadOnly
         public int rendererPriority => _obj.rendererPriority;
         public uint renderingLayerMask => _obj.renderingLayerMask;
         public ShadowCastingMode shadowCastingMode => _obj.shadowCastingMode;
-        public IReadOnlyMaterial sharedMaterial => (_obj.sharedMaterial == null) ? null : _obj.sharedMaterial.AsReadOnly();
-        public IReadOnlyMaterial[] sharedMaterials => (_obj.sharedMaterials == null) ? null : _obj.sharedMaterials.Select(m => m.AsReadOnly()).ToArray();
+        public ReadOnlyMaterial sharedMaterial => (_obj.sharedMaterial == null) ? null : _obj.sharedMaterial.AsReadOnly();
+        IReadOnlyMaterial IReadOnlyRenderer.sharedMaterial => this.sharedMaterial;
+        public ReadOnlyMaterial[] sharedMaterials => (_obj.sharedMaterials == null) ? null : _obj.sharedMaterials.Select(m => m.AsReadOnly()).ToArray();
+        IReadOnlyMaterial[] IReadOnlyRenderer.sharedMaterials => this.sharedMaterials;
         public int sortingLayerID => _obj.sortingLayerID;
         public string sortingLayerName => _obj.sortingLayerName;
         public int sortingOrder => _obj.sortingOrder;
@@ -86,7 +92,14 @@ namespace Jagapippi.UnityAsReadOnly
 
         public void GetClosestReflectionProbes(List<ReflectionProbeBlendInfo> result) => _obj.GetClosestReflectionProbes(result);
 
-        public void GetMaterials(List<IReadOnlyMaterial> m)
+        public void GetMaterials(List<ReadOnlyMaterial> m)
+        {
+            var materials = new List<Material>();
+            _obj.GetMaterials(materials);
+            m.AddRange(materials.Select(material => material.AsReadOnly()));
+        }
+
+        void IReadOnlyRenderer.GetMaterials(List<IReadOnlyMaterial> m)
         {
             var materials = new List<Material>();
             _obj.GetMaterials(materials);
@@ -96,7 +109,14 @@ namespace Jagapippi.UnityAsReadOnly
         public void GetPropertyBlock(MaterialPropertyBlock properties) => _obj.GetPropertyBlock(properties);
         public void GetPropertyBlock(MaterialPropertyBlock properties, int materialIndex) => _obj.GetPropertyBlock(properties, materialIndex);
 
-        public void GetSharedMaterials(List<IReadOnlyMaterial> m)
+        public void GetSharedMaterials(List<ReadOnlyMaterial> m)
+        {
+            var materials = new List<Material>();
+            _obj.GetSharedMaterials(materials);
+            m.AddRange(materials.Select(material => material.AsReadOnly()));
+        }
+
+        void IReadOnlyRenderer.GetSharedMaterials(List<IReadOnlyMaterial> m)
         {
             var materials = new List<Material>();
             _obj.GetSharedMaterials(materials);
@@ -119,6 +139,6 @@ namespace Jagapippi.UnityAsReadOnly
 
     public static class RendererExtensions
     {
-        public static IReadOnlyRenderer AsReadOnly(this Renderer self) => new ReadOnlyRenderer(self);
+        public static ReadOnlyRenderer AsReadOnly(this Renderer self) => new ReadOnlyRenderer(self);
     }
 }

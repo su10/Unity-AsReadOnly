@@ -3,7 +3,7 @@ using UnityEngine.EventSystems;
 
 namespace Jagapippi.UnityAsReadOnly
 {
-    public interface IReadOnlyEventSystem : IReadOnlyUIBehaviour
+    public interface IReadOnlyEventSystem
     {
         bool alreadySelecting { get; }
         IReadOnlyBaseInputModule currentInputModule { get; }
@@ -17,7 +17,7 @@ namespace Jagapippi.UnityAsReadOnly
         void RaycastAll(PointerEventData eventData, List<RaycastResult> raycastResults);
         // void SetSelectedGameObject(GameObject selected, BaseEventData pointer);
         // void SetSelectedGameObject(GameObject selected);
-        new string ToString();
+        string ToString();
         // void UpdateModules();
     }
 
@@ -30,9 +30,12 @@ namespace Jagapippi.UnityAsReadOnly
         #region Properties
 
         public bool alreadySelecting => _obj.alreadySelecting;
-        public IReadOnlyBaseInputModule currentInputModule => (_obj.currentInputModule == null) ? null : _obj.currentInputModule.AsReadOnly();
-        public IReadOnlyGameObject currentSelectedGameObject => (_obj.currentSelectedGameObject == null) ? null : _obj.currentSelectedGameObject.AsReadOnly();
-        public IReadOnlyGameObject firstSelectedGameObject => (_obj.firstSelectedGameObject == null) ? null : _obj.firstSelectedGameObject.AsReadOnly();
+        public ReadOnlyBaseInputModule currentInputModule => (_obj.currentInputModule == null) ? null : _obj.currentInputModule.AsReadOnly();
+        IReadOnlyBaseInputModule IReadOnlyEventSystem.currentInputModule => this.currentInputModule;
+        public ReadOnlyGameObject currentSelectedGameObject => (_obj.currentSelectedGameObject == null) ? null : _obj.currentSelectedGameObject.AsReadOnly();
+        IReadOnlyGameObject IReadOnlyEventSystem.currentSelectedGameObject => this.currentSelectedGameObject;
+        public ReadOnlyGameObject firstSelectedGameObject => (_obj.firstSelectedGameObject == null) ? null : _obj.firstSelectedGameObject.AsReadOnly();
+        IReadOnlyGameObject IReadOnlyEventSystem.firstSelectedGameObject => this.firstSelectedGameObject;
         public bool isFocused => _obj.isFocused;
         public int pixelDragThreshold => _obj.pixelDragThreshold;
         public bool sendNavigationEvents => _obj.sendNavigationEvents;
@@ -54,6 +57,6 @@ namespace Jagapippi.UnityAsReadOnly
 
     public static class EventSystemExtensions
     {
-        public static IReadOnlyEventSystem AsReadOnly(this EventSystem self) => new ReadOnlyEventSystem(self);
+        public static ReadOnlyEventSystem AsReadOnly(this EventSystem self) => new ReadOnlyEventSystem(self);
     }
 }

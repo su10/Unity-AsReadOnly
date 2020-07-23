@@ -2,7 +2,7 @@
 
 namespace Jagapippi.UnityAsReadOnly
 {
-    public interface IReadOnlyUIBehaviour : IReadOnlyMonoBehaviour
+    public interface IReadOnlyUIBehaviour
     {
         bool IsActive();
         bool IsDestroyed();
@@ -35,6 +35,6 @@ namespace Jagapippi.UnityAsReadOnly
 
     public static class UIBehaviourExtensions
     {
-        public static IReadOnlyUIBehaviour AsReadOnly(this UIBehaviour self) => new ReadOnlyUIBehaviour(self);
+        public static ReadOnlyUIBehaviour AsReadOnly(this UIBehaviour self) => new ReadOnlyUIBehaviour(self);
     }
 }

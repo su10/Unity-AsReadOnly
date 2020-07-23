@@ -3,7 +3,7 @@ using UnityEngine.Rendering;
 
 namespace Jagapippi.UnityAsReadOnly
 {
-    public interface IReadOnlyLight : IReadOnlyBehaviour
+    public interface IReadOnlyLight
     {
         Vector2 areaSize { get; }
         LightBakingOutput bakingOutput { get; }
@@ -100,6 +100,6 @@ namespace Jagapippi.UnityAsReadOnly
 
     public static class LightExtensions
     {
-        public static IReadOnlyLight AsReadOnly(this Light self) => new ReadOnlyLight(self);
+        public static ReadOnlyLight AsReadOnly(this Light self) => new ReadOnlyLight(self);
     }
 }

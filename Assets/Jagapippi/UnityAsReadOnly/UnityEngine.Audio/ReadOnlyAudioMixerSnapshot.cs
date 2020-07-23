@@ -2,7 +2,7 @@
 
 namespace Jagapippi.UnityAsReadOnly
 {
-    public interface IReadOnlyAudioMixerSnapshot : IReadOnlyObject
+    public interface IReadOnlyAudioMixerSnapshot
     {
         IReadOnlyAudioMixer audioMixer { get; }
         // void TransitionTo(float timeToReach);
@@ -16,7 +16,8 @@ namespace Jagapippi.UnityAsReadOnly
 
         #region Properties
 
-        public IReadOnlyAudioMixer audioMixer => (_obj.audioMixer == null) ? null : _obj.audioMixer.AsReadOnly();
+        public ReadOnlyAudioMixer audioMixer => (_obj.audioMixer == null) ? null : _obj.audioMixer.AsReadOnly();
+        IReadOnlyAudioMixer IReadOnlyAudioMixerSnapshot.audioMixer => this.audioMixer;
 
         #endregion
 
@@ -29,6 +30,6 @@ namespace Jagapippi.UnityAsReadOnly
 
     public static class AudioMixerSnapshotExtensions
     {
-        public static IReadOnlyAudioMixerSnapshot AsReadOnly(this AudioMixerSnapshot self) => new ReadOnlyAudioMixerSnapshot(self);
+        public static ReadOnlyAudioMixerSnapshot AsReadOnly(this AudioMixerSnapshot self) => new ReadOnlyAudioMixerSnapshot(self);
     }
 }

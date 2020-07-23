@@ -2,7 +2,7 @@
 
 namespace Jagapippi.UnityAsReadOnly
 {
-    public interface IReadOnlyStandaloneInputModule : IReadOnlyPointerInputModule
+    public interface IReadOnlyStandaloneInputModule
     {
         string cancelButton { get; }
         bool forceModuleActive { get; }
@@ -13,9 +13,9 @@ namespace Jagapippi.UnityAsReadOnly
         string verticalAxis { get; }
         // void ActivateModule();
         // void DeactivateModule();
-        new bool IsModuleSupported();
+        bool IsModuleSupported();
         // void Process();
-        new bool ShouldActivateModule();
+        bool ShouldActivateModule();
         // void UpdateModule();
     }
 
@@ -51,6 +51,6 @@ namespace Jagapippi.UnityAsReadOnly
 
     public static class StandaloneInputModuleExtensions
     {
-        public static IReadOnlyStandaloneInputModule AsReadOnly(this StandaloneInputModule self) => new ReadOnlyStandaloneInputModule(self);
+        public static ReadOnlyStandaloneInputModule AsReadOnly(this StandaloneInputModule self) => new ReadOnlyStandaloneInputModule(self);
     }
 }

@@ -2,7 +2,7 @@
 
 namespace Jagapippi.UnityAsReadOnly
 {
-    public interface IReadOnlyGameObject : IReadOnlyObject
+    public interface IReadOnlyGameObject
     {
         bool activeInHierarchy { get; }
         bool activeSelf { get; }
@@ -66,14 +66,16 @@ namespace Jagapippi.UnityAsReadOnly
 
         public bool activeInHierarchy => _obj.activeInHierarchy;
         public bool activeSelf => _obj.activeSelf;
-        public IReadOnlyGameObject gameObject => (_obj.gameObject == null) ? null : _obj.gameObject.AsReadOnly();
+        public ReadOnlyGameObject gameObject => (_obj.gameObject == null) ? null : _obj.gameObject.AsReadOnly();
+        IReadOnlyGameObject IReadOnlyGameObject.gameObject => this.gameObject;
 #if UNITY_EDITOR
         public bool isStatic => _obj.isStatic;
 #endif
         public int layer => _obj.layer;
         public ReadOnlyScene scene => _obj.scene.AsReadOnly();
         public string tag => _obj.tag;
-        public IReadOnlyTransform transform => (_obj.transform == null) ? null : _obj.transform.AsReadOnly();
+        public ReadOnlyTransform transform => (_obj.transform == null) ? null : _obj.transform.AsReadOnly();
+        IReadOnlyTransform IReadOnlyGameObject.transform => this.transform;
 
         #endregion
 
@@ -125,6 +127,6 @@ namespace Jagapippi.UnityAsReadOnly
 
     public static class GameObjectExtensions
     {
-        public static IReadOnlyGameObject AsReadOnly(this GameObject self) => new ReadOnlyGameObject(self);
+        public static ReadOnlyGameObject AsReadOnly(this GameObject self) => new ReadOnlyGameObject(self);
     }
 }

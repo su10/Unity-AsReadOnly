@@ -3,7 +3,7 @@ using UnityEngine.Rendering;
 
 namespace Jagapippi.UnityAsReadOnly
 {
-    public interface IReadOnlyCamera : IReadOnlyBehaviour
+    public interface IReadOnlyCamera
     {
         RenderTexture activeTexture { get; }
         RenderingPath actualRenderingPath { get; }
@@ -236,6 +236,6 @@ namespace Jagapippi.UnityAsReadOnly
 
     public static class CameraExtensions
     {
-        public static IReadOnlyCamera AsReadOnly(this Camera self) => new ReadOnlyCamera(self);
+        public static ReadOnlyCamera AsReadOnly(this Camera self) => new ReadOnlyCamera(self);
     }
 }

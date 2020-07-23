@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Jagapippi.UnityAsReadOnly
 {
-    public interface IReadOnlyMaterial : IReadOnlyObject
+    public interface IReadOnlyMaterial
     {
         Color color { get; }
         bool doubleSidedGI { get; }
@@ -120,7 +120,8 @@ namespace Jagapippi.UnityAsReadOnly
         public Vector2 mainTextureScale => _obj.mainTextureScale;
         public int passCount => _obj.passCount;
         public int renderQueue => _obj.renderQueue;
-        public IReadOnlyShader shader => (_obj.shader == null) ? null : _obj.shader.AsReadOnly();
+        public ReadOnlyShader shader => (_obj.shader == null) ? null : _obj.shader.AsReadOnly();
+        IReadOnlyShader IReadOnlyMaterial.shader => this.shader;
         public string[] shaderKeywords => _obj.shaderKeywords;
 
         #endregion
@@ -218,6 +219,6 @@ namespace Jagapippi.UnityAsReadOnly
 
     public static class MaterialExtensions
     {
-        public static IReadOnlyMaterial AsReadOnly(this Material self) => new ReadOnlyMaterial(self);
+        public static ReadOnlyMaterial AsReadOnly(this Material self) => new ReadOnlyMaterial(self);
     }
 }

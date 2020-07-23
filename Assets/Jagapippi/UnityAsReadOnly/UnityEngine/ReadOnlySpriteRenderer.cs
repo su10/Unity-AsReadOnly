@@ -2,7 +2,7 @@
 
 namespace Jagapippi.UnityAsReadOnly
 {
-    public interface IReadOnlySpriteRenderer : IReadOnlyRenderer
+    public interface IReadOnlySpriteRenderer
     {
         float adaptiveModeThreshold { get; }
         Color color { get; }
@@ -44,6 +44,6 @@ namespace Jagapippi.UnityAsReadOnly
 
     public static class SpriteRendererExtensions
     {
-        public static IReadOnlySpriteRenderer AsReadOnly(this SpriteRenderer self) => new ReadOnlySpriteRenderer(self);
+        public static ReadOnlySpriteRenderer AsReadOnly(this SpriteRenderer self) => new ReadOnlySpriteRenderer(self);
     }
 }

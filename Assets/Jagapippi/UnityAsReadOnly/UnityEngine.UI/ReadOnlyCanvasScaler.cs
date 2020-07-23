@@ -3,7 +3,7 @@ using UnityEngine.UI;
 
 namespace Jagapippi.UnityAsReadOnly
 {
-    public interface IReadOnlyCanvasScaler : IReadOnlyUIBehaviour
+    public interface IReadOnlyCanvasScaler
     {
         float defaultSpriteDPI { get; }
         float dynamicPixelsPerUnit { get; }
@@ -45,6 +45,6 @@ namespace Jagapippi.UnityAsReadOnly
 
     public static class CanvasScalerExtensions
     {
-        public static IReadOnlyCanvasScaler AsReadOnly(this CanvasScaler self) => new ReadOnlyCanvasScaler(self);
+        public static ReadOnlyCanvasScaler AsReadOnly(this CanvasScaler self) => new ReadOnlyCanvasScaler(self);
     }
 }

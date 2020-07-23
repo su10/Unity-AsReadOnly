@@ -3,7 +3,7 @@ using UnityEngine.EventSystems;
 
 namespace Jagapippi.UnityAsReadOnly
 {
-    public interface IReadOnlyBaseInput : IReadOnlyUIBehaviour
+    public interface IReadOnlyBaseInput
     {
         Vector2 compositionCursorPos { get; }
         string compositionString { get; }
@@ -18,7 +18,7 @@ namespace Jagapippi.UnityAsReadOnly
         bool GetMouseButton(int button);
         bool GetMouseButtonDown(int button);
         bool GetMouseButtonUp(int button);
-        ReadOnlyTouch GetTouch(int index);
+        Touch GetTouch(int index);
     }
 
     public class ReadOnlyBaseInput<T> : ReadOnlyUIBehaviour<T>, IReadOnlyBaseInput where T : BaseInput
@@ -47,7 +47,7 @@ namespace Jagapippi.UnityAsReadOnly
         public bool GetMouseButton(int button) => _obj.GetMouseButton(button);
         public bool GetMouseButtonDown(int button) => _obj.GetMouseButtonDown(button);
         public bool GetMouseButtonUp(int button) => _obj.GetMouseButtonUp(button);
-        public ReadOnlyTouch GetTouch(int index) => _obj.GetTouch(index).AsReadOnly();
+        public Touch GetTouch(int index) => _obj.GetTouch(index);
 
         #endregion
     }
@@ -61,6 +61,6 @@ namespace Jagapippi.UnityAsReadOnly
 
     public static class BaseInputExtensions
     {
-        public static IReadOnlyBaseInput AsReadOnly(this BaseInput self) => new ReadOnlyBaseInput(self);
+        public static ReadOnlyBaseInput AsReadOnly(this BaseInput self) => new ReadOnlyBaseInput(self);
     }
 }

@@ -2,7 +2,7 @@
 
 namespace Jagapippi.UnityAsReadOnly
 {
-    public interface IReadOnlyShader : IReadOnlyObject
+    public interface IReadOnlyShader
     {
         bool isSupported { get; }
         int maximumLOD { get; }
@@ -30,6 +30,6 @@ namespace Jagapippi.UnityAsReadOnly
 
     public static class ShaderExtensions
     {
-        public static IReadOnlyShader AsReadOnly(this Shader self) => new ReadOnlyShader(self);
+        public static ReadOnlyShader AsReadOnly(this Shader self) => new ReadOnlyShader(self);
     }
 }

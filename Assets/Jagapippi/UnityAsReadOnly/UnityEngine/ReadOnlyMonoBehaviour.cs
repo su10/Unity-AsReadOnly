@@ -2,7 +2,7 @@
 
 namespace Jagapippi.UnityAsReadOnly
 {
-    public interface IReadOnlyMonoBehaviour : IReadOnlyBehaviour
+    public interface IReadOnlyMonoBehaviour
     {
 #if UNITY_EDITOR
         bool runInEditMode { get; }
@@ -66,6 +66,6 @@ namespace Jagapippi.UnityAsReadOnly
 
     public static class MonoBehaviourExtensions
     {
-        public static IReadOnlyMonoBehaviour AsReadOnly(this MonoBehaviour self) => new ReadOnlyMonoBehaviour(self);
+        public static ReadOnlyMonoBehaviour AsReadOnly(this MonoBehaviour self) => new ReadOnlyMonoBehaviour(self);
     }
 }

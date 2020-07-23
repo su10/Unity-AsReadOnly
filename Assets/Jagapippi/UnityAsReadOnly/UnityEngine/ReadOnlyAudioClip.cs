@@ -2,7 +2,7 @@
 
 namespace Jagapippi.UnityAsReadOnly
 {
-    public interface IReadOnlyAudioClip : IReadOnlyObject
+    public interface IReadOnlyAudioClip
     {
         bool ambisonic { get; }
         int channels { get; }
@@ -51,6 +51,6 @@ namespace Jagapippi.UnityAsReadOnly
 
     public static class AudioClipExtensions
     {
-        public static IReadOnlyAudioClip AsReadOnly(this AudioClip self) => new ReadOnlyAudioClip(self);
+        public static ReadOnlyAudioClip AsReadOnly(this AudioClip self) => new ReadOnlyAudioClip(self);
     }
 }

@@ -2,10 +2,10 @@
 
 namespace Jagapippi.UnityAsReadOnly
 {
-    public interface IReadOnlyPointerInputModule : IReadOnlyBaseInputModule
+    public interface IReadOnlyPointerInputModule
     {
-        new bool IsPointerOverGameObject(int pointerId);
-        new string ToString();
+        bool IsPointerOverGameObject(int pointerId);
+        string ToString();
     }
 
     public class ReadOnlyPointerInputModule<T> : ReadOnlyBaseInputModule<T>, IReadOnlyPointerInputModule where T : PointerInputModule
@@ -35,6 +35,6 @@ namespace Jagapippi.UnityAsReadOnly
 
     public static class PointerInputModuleExtensions
     {
-        public static IReadOnlyPointerInputModule AsReadOnly(this PointerInputModule self) => new ReadOnlyPointerInputModule(self);
+        public static ReadOnlyPointerInputModule AsReadOnly(this PointerInputModule self) => new ReadOnlyPointerInputModule(self);
     }
 }
