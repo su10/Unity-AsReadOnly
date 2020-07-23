@@ -30,7 +30,7 @@ namespace Jagapippi.UnityAsReadOnly
         #region Public Methods
 
         public void Raycast(PointerEventData eventData, List<RaycastResult> resultAppendList) => _obj.Raycast(eventData, resultAppendList);
-        public new string ToString() => _obj.ToString();
+        public override string ToString() => _obj.ToString();
 
         #endregion
     }

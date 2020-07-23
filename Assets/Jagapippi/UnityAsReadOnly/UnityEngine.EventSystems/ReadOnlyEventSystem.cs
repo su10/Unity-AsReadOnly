@@ -49,7 +49,7 @@ namespace Jagapippi.UnityAsReadOnly
         public void RaycastAll(PointerEventData eventData, List<RaycastResult> raycastResults) => _obj.RaycastAll(eventData, raycastResults);
         // public void SetSelectedGameObject(GameObject selected, BaseEventData pointer) => _obj.SetSelectedGameObject(selected, pointer);
         // public void SetSelectedGameObject(GameObject selected) => _obj.SetSelectedGameObject(selected);
-        public new string ToString() => _obj.ToString();
+        public override string ToString() => _obj.ToString();
         // public void UpdateModules() => _obj.UpdateModules();
 
         #endregion

@@ -21,7 +21,7 @@ namespace Jagapippi.UnityAsReadOnly
         #region Public Methods
 
         public new bool IsPointerOverGameObject(int pointerId) => _obj.IsPointerOverGameObject(pointerId);
-        public new string ToString() => _obj.ToString();
+        public override string ToString() => _obj.ToString();
 
         #endregion
     }
