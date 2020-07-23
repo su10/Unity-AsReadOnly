@@ -89,11 +89,11 @@ namespace Jagapippi.UnityAsReadOnly
         public Vector3 localScale => _obj.localScale;
         public Matrix4x4 localToWorldMatrix => _obj.localToWorldMatrix;
         public Vector3 lossyScale => _obj.lossyScale;
-        public ReadOnlyTransform parent => _obj.parent.AsReadOnly();
+        public ReadOnlyTransform parent => _obj.parent.IsTrulyNull() ? null : _obj.parent.AsReadOnly();
         IReadOnlyTransform IReadOnlyTransform.parent => this.parent;
         public Vector3 position => _obj.position;
         public Vector3 right => _obj.right;
-        public ReadOnlyTransform root => _obj.root.AsReadOnly();
+        public ReadOnlyTransform root => _obj.root.IsTrulyNull() ? null : _obj.root.AsReadOnly();
         IReadOnlyTransform IReadOnlyTransform.root => this.root;
         public Quaternion rotation => _obj.rotation;
         public Vector3 up => _obj.up;
@@ -108,7 +108,7 @@ namespace Jagapippi.UnityAsReadOnly
         public ReadOnlyTransform Find(string n)
         {
             var transform = _obj.Find(n);
-            return (transform == null) ? null : transform.AsReadOnly();
+            return transform.IsTrulyNull() ? null : transform.AsReadOnly();
         }
 
         IReadOnlyTransform IReadOnlyTransform.Find(string n) => this.Find(n);
@@ -116,7 +116,7 @@ namespace Jagapippi.UnityAsReadOnly
         public ReadOnlyTransform GetChild(int index)
         {
             var transform = _obj.GetChild(index);
-            return (transform == null) ? null : transform.AsReadOnly();
+            return transform.IsTrulyNull() ? null : transform.AsReadOnly();
         }
 
         IReadOnlyTransform IReadOnlyTransform.GetChild(int index) => this.GetChild(index);

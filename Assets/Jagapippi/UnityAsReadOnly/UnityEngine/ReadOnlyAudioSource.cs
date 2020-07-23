@@ -64,7 +64,7 @@ namespace Jagapippi.UnityAsReadOnly
         public bool bypassEffects => _obj.bypassEffects;
         public bool bypassListenerEffects => _obj.bypassListenerEffects;
         public bool bypassReverbZones => _obj.bypassReverbZones;
-        public ReadOnlyAudioClip clip => (_obj.clip == null) ? null : _obj.clip.AsReadOnly();
+        public ReadOnlyAudioClip clip => _obj.clip.IsTrulyNull() ? null : _obj.clip.AsReadOnly();
         IReadOnlyAudioClip IReadOnlyAudioSource.clip => this.clip;
         public float dopplerLevel => _obj.dopplerLevel;
         public bool ignoreListenerPause => _obj.ignoreListenerPause;
@@ -75,7 +75,7 @@ namespace Jagapippi.UnityAsReadOnly
         public float maxDistance => _obj.maxDistance;
         public float minDistance => _obj.minDistance;
         public bool mute => _obj.mute;
-        public ReadOnlyAudioMixerGroup outputAudioMixerGroup => (_obj.outputAudioMixerGroup == null) ? null : _obj.outputAudioMixerGroup.AsReadOnly();
+        public ReadOnlyAudioMixerGroup outputAudioMixerGroup => _obj.outputAudioMixerGroup.IsTrulyNull() ? null : _obj.outputAudioMixerGroup.AsReadOnly();
         IReadOnlyAudioMixerGroup IReadOnlyAudioSource.outputAudioMixerGroup => this.outputAudioMixerGroup;
         public float panStereo => _obj.panStereo;
         public float pitch => _obj.pitch;

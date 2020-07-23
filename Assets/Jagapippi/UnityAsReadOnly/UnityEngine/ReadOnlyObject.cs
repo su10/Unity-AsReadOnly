@@ -18,7 +18,7 @@ namespace Jagapippi.UnityAsReadOnly
 
         protected ReadOnlyObject(T obj)
         {
-            if (ReferenceEquals(obj, null)) throw new ArgumentNullException(nameof(obj));
+            if (obj.IsTrulyNull()) throw new ArgumentNullException(nameof(obj));
 
             _obj = obj;
         }
@@ -76,5 +76,6 @@ namespace Jagapippi.UnityAsReadOnly
     public static class ObjectExtensions
     {
         public static ReadOnlyObject AsReadOnly(this Object self) => new ReadOnlyObject(self);
+        internal static bool IsTrulyNull(this Object self) => ReferenceEquals(self, null);
     }
 }

@@ -104,12 +104,12 @@ namespace Jagapippi.UnityAsReadOnly
         public bool sendFrameReadyEvents => _obj.sendFrameReadyEvents;
         public bool skipOnDrop => _obj.skipOnDrop;
         public VideoSource source => _obj.source;
-        public ReadOnlyCamera targetCamera => (_obj.targetCamera == null) ? null : _obj.targetCamera.AsReadOnly();
+        public ReadOnlyCamera targetCamera => _obj.targetCamera.IsTrulyNull() ? null : _obj.targetCamera.AsReadOnly();
         IReadOnlyCamera IReadOnlyVideoPlayer.targetCamera => this.targetCamera;
         public Video3DLayout targetCamera3DLayout => _obj.targetCamera3DLayout;
         public float targetCameraAlpha => _obj.targetCameraAlpha;
         public string targetMaterialProperty => _obj.targetMaterialProperty;
-        public ReadOnlyRenderer targetMaterialRenderer => (_obj.targetMaterialRenderer == null) ? null : _obj.targetMaterialRenderer.AsReadOnly();
+        public ReadOnlyRenderer targetMaterialRenderer => _obj.targetMaterialRenderer.IsTrulyNull() ? null : _obj.targetMaterialRenderer.AsReadOnly();
         IReadOnlyRenderer IReadOnlyVideoPlayer.targetMaterialRenderer => this.targetMaterialRenderer;
         public RenderTexture targetTexture => _obj.targetTexture;
         public Texture texture => _obj.texture;
@@ -134,7 +134,7 @@ namespace Jagapippi.UnityAsReadOnly
         public ReadOnlyAudioSource GetTargetAudioSource(ushort trackIndex)
         {
             var audioSource = _obj.GetTargetAudioSource(trackIndex);
-            return (audioSource == null) ? null : audioSource.AsReadOnly();
+            return audioSource.IsTrulyNull() ? null : audioSource.AsReadOnly();
         }
 
         IReadOnlyAudioSource IReadOnlyVideoPlayer.GetTargetAudioSource(ushort trackIndex) => this.GetTargetAudioSource(trackIndex);

@@ -54,10 +54,10 @@ namespace Jagapippi.UnityAsReadOnly
 
         #region Properties
 
-        public ReadOnlyGameObject gameObject => (_obj.gameObject == null) ? null : _obj.gameObject.AsReadOnly();
+        public ReadOnlyGameObject gameObject => _obj.gameObject.IsTrulyNull() ? null : _obj.gameObject.AsReadOnly();
         IReadOnlyGameObject IReadOnlyComponent.gameObject => this.gameObject;
         public string tag => _obj.tag;
-        public ReadOnlyTransform transform => (_obj.transform == null) ? null : _obj.transform.AsReadOnly();
+        public ReadOnlyTransform transform => _obj.transform.IsTrulyNull() ? null : _obj.transform.AsReadOnly();
         IReadOnlyTransform IReadOnlyComponent.transform => this.transform;
 
         #endregion

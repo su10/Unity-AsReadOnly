@@ -23,7 +23,7 @@ namespace Jagapippi.UnityAsReadOnly
 
         #region Properties
 
-        public ReadOnlyAudioMixerGroup outputAudioMixerGroup => (_obj.outputAudioMixerGroup == null) ? null : _obj.outputAudioMixerGroup.AsReadOnly();
+        public ReadOnlyAudioMixerGroup outputAudioMixerGroup => _obj.outputAudioMixerGroup.IsTrulyNull() ? null : _obj.outputAudioMixerGroup.AsReadOnly();
         IReadOnlyAudioMixerGroup IReadOnlyAudioMixer.outputAudioMixerGroup => this.outputAudioMixerGroup;
         public AudioMixerUpdateMode updateMode => _obj.updateMode;
 
@@ -32,19 +32,13 @@ namespace Jagapippi.UnityAsReadOnly
         #region Public Methods
 
         // public bool ClearFloat(string name) => _obj.ClearFloat(name);
-
-        public ReadOnlyAudioMixerGroup[] FindMatchingGroups(string subPath)
-        {
-            var mixerGroups = _obj.FindMatchingGroups(subPath);
-            return (mixerGroups == null) ? null : mixerGroups.Select(g => g.AsReadOnly()).ToArray();
-        }
-
+        public ReadOnlyAudioMixerGroup[] FindMatchingGroups(string subPath) => _obj.FindMatchingGroups(subPath)?.Select(g => g.AsReadOnly()).ToArray();
         IReadOnlyAudioMixerGroup[] IReadOnlyAudioMixer.FindMatchingGroups(string subPath) => this.FindMatchingGroups(subPath);
 
         public ReadOnlyAudioMixerSnapshot FindSnapshot(string name)
         {
             var snapshot = _obj.FindSnapshot(name);
-            return (snapshot == null) ? null : snapshot.AsReadOnly();
+            return snapshot.IsTrulyNull() ? null : snapshot.AsReadOnly();
         }
 
         IReadOnlyAudioMixerSnapshot IReadOnlyAudioMixer.FindSnapshot(string name) => this.FindSnapshot(name);

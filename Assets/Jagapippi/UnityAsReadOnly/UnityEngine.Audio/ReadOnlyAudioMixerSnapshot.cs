@@ -16,7 +16,7 @@ namespace Jagapippi.UnityAsReadOnly
 
         #region Properties
 
-        public ReadOnlyAudioMixer audioMixer => (_obj.audioMixer == null) ? null : _obj.audioMixer.AsReadOnly();
+        public ReadOnlyAudioMixer audioMixer => _obj.audioMixer.IsTrulyNull() ? null : _obj.audioMixer.AsReadOnly();
         IReadOnlyAudioMixer IReadOnlyAudioMixerSnapshot.audioMixer => this.audioMixer;
 
         #endregion

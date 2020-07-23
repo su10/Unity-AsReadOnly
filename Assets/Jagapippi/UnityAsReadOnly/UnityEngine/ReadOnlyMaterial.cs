@@ -120,7 +120,7 @@ namespace Jagapippi.UnityAsReadOnly
         public Vector2 mainTextureScale => _obj.mainTextureScale;
         public int passCount => _obj.passCount;
         public int renderQueue => _obj.renderQueue;
-        public ReadOnlyShader shader => (_obj.shader == null) ? null : _obj.shader.AsReadOnly();
+        public ReadOnlyShader shader => _obj.shader.IsTrulyNull() ? null : _obj.shader.AsReadOnly();
         IReadOnlyShader IReadOnlyMaterial.shader => this.shader;
         public string[] shaderKeywords => _obj.shaderKeywords;
 

@@ -30,11 +30,11 @@ namespace Jagapippi.UnityAsReadOnly
         #region Properties
 
         public bool alreadySelecting => _obj.alreadySelecting;
-        public ReadOnlyBaseInputModule currentInputModule => (_obj.currentInputModule == null) ? null : _obj.currentInputModule.AsReadOnly();
+        public ReadOnlyBaseInputModule currentInputModule => _obj.currentInputModule.IsTrulyNull() ? null : _obj.currentInputModule.AsReadOnly();
         IReadOnlyBaseInputModule IReadOnlyEventSystem.currentInputModule => this.currentInputModule;
-        public ReadOnlyGameObject currentSelectedGameObject => (_obj.currentSelectedGameObject == null) ? null : _obj.currentSelectedGameObject.AsReadOnly();
+        public ReadOnlyGameObject currentSelectedGameObject => _obj.currentSelectedGameObject.IsTrulyNull() ? null : _obj.currentSelectedGameObject.AsReadOnly();
         IReadOnlyGameObject IReadOnlyEventSystem.currentSelectedGameObject => this.currentSelectedGameObject;
-        public ReadOnlyGameObject firstSelectedGameObject => (_obj.firstSelectedGameObject == null) ? null : _obj.firstSelectedGameObject.AsReadOnly();
+        public ReadOnlyGameObject firstSelectedGameObject => _obj.firstSelectedGameObject.IsTrulyNull() ? null : _obj.firstSelectedGameObject.AsReadOnly();
         IReadOnlyGameObject IReadOnlyEventSystem.firstSelectedGameObject => this.firstSelectedGameObject;
         public bool isFocused => _obj.isFocused;
         public int pixelDragThreshold => _obj.pixelDragThreshold;

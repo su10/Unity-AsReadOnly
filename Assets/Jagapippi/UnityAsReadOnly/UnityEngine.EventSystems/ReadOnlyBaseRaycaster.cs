@@ -20,7 +20,7 @@ namespace Jagapippi.UnityAsReadOnly
 
         #region Properties
 
-        public ReadOnlyCamera eventCamera => (_obj.eventCamera == null) ? null : _obj.eventCamera.AsReadOnly();
+        public ReadOnlyCamera eventCamera => _obj.eventCamera.IsTrulyNull() ? null : _obj.eventCamera.AsReadOnly();
         IReadOnlyCamera IReadOnlyBaseRaycaster.eventCamera => this.eventCamera;
         public int renderOrderPriority => _obj.renderOrderPriority;
         public int sortOrderPriority => _obj.sortOrderPriority;
