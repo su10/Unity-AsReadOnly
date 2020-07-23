@@ -37,6 +37,7 @@ namespace Jagapippi.UnityAsReadOnly
         Vector3 InverseTransformVector(Vector3 vector);
         Vector3 InverseTransformVector(float x, float y, float z);
         bool IsChildOf(Transform parent);
+        bool IsChildOf(ReadOnlyTransform parent);
         // void LookAt(Transform target, Vector3 worldUp);
         // void LookAt(Transform target);
         // void LookAt(Vector3 worldPosition, Vector3 worldUp);
@@ -131,6 +132,7 @@ namespace Jagapippi.UnityAsReadOnly
         public Vector3 InverseTransformVector(Vector3 vector) => _obj.InverseTransformVector(vector);
         public Vector3 InverseTransformVector(float x, float y, float z) => _obj.InverseTransformVector(x, y, z);
         public bool IsChildOf(Transform parent) => _obj.IsChildOf(parent);
+        public bool IsChildOf(ReadOnlyTransform parent) => _obj.IsChildOf(parent._obj);
         // public void LookAt(Transform target, Vector3 worldUp) => _obj.LookAt(target, worldUp);
         // public void LookAt(Transform target) => _obj.LookAt(target);
         // public void LookAt(Vector3 worldPosition, Vector3 worldUp) => _obj.LookAt(worldPosition, worldUp);
