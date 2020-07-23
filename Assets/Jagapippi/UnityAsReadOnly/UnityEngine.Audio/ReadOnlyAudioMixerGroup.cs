@@ -7,9 +7,9 @@ namespace Jagapippi.UnityAsReadOnly
         IReadOnlyAudioMixer audioMixer { get; }
     }
 
-    public sealed class ReadOnlyAudioMixerGroup : ReadOnlyObject<AudioMixerGroup>, IReadOnlyAudioMixerGroup
+    public class ReadOnlyAudioMixerGroup<T> : ReadOnlyObject<T>, IReadOnlyAudioMixerGroup where T : AudioMixerGroup
     {
-        public ReadOnlyAudioMixerGroup(AudioMixerGroup obj) : base(obj)
+        protected ReadOnlyAudioMixerGroup(T obj) : base(obj)
         {
         }
 
@@ -23,6 +23,13 @@ namespace Jagapippi.UnityAsReadOnly
         #region Public Methods
 
         #endregion
+    }
+
+    public sealed class ReadOnlyAudioMixerGroup : ReadOnlyAudioMixerGroup<AudioMixerGroup>
+    {
+        public ReadOnlyAudioMixerGroup(AudioMixerGroup obj) : base(obj)
+        {
+        }
     }
 
     public static class AudioMixerGroupExtensions

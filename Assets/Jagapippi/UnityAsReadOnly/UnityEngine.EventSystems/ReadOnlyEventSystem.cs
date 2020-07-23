@@ -21,9 +21,9 @@ namespace Jagapippi.UnityAsReadOnly
         // void UpdateModules();
     }
 
-    public sealed class ReadOnlyEventSystem : ReadOnlyUIBehaviour<EventSystem>, IReadOnlyEventSystem
+    public class ReadOnlyEventSystem<T> : ReadOnlyUIBehaviour<T>, IReadOnlyEventSystem where T : EventSystem
     {
-        public ReadOnlyEventSystem(EventSystem obj) : base(obj)
+        protected ReadOnlyEventSystem(T obj) : base(obj)
         {
         }
 
@@ -53,6 +53,13 @@ namespace Jagapippi.UnityAsReadOnly
         // public void UpdateModules() => _obj.UpdateModules();
 
         #endregion
+    }
+
+    public sealed class ReadOnlyEventSystem : ReadOnlyEventSystem<EventSystem>
+    {
+        public ReadOnlyEventSystem(EventSystem obj) : base(obj)
+        {
+        }
     }
 
     public static class EventSystemExtensions

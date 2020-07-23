@@ -11,9 +11,9 @@ namespace Jagapippi.UnityAsReadOnly
         float staticFriction { get; }
     }
 
-    public class ReadOnlyPhysicMaterial : ReadOnlyObject<PhysicMaterial>, IReadOnlyPhysicMaterial
+    public class ReadOnlyPhysicMaterial<T> : ReadOnlyObject<T>, IReadOnlyPhysicMaterial where T : PhysicMaterial
     {
-        public ReadOnlyPhysicMaterial(PhysicMaterial obj) : base(obj)
+        protected ReadOnlyPhysicMaterial(T obj) : base(obj)
         {
         }
 
@@ -30,6 +30,13 @@ namespace Jagapippi.UnityAsReadOnly
         #region Public Methods
 
         #endregion
+    }
+
+    public sealed class ReadOnlyPhysicMaterial : ReadOnlyPhysicMaterial<PhysicMaterial>
+    {
+        public ReadOnlyPhysicMaterial(PhysicMaterial obj) : base(obj)
+        {
+        }
     }
 
     public static class PhysicMaterialExtensions

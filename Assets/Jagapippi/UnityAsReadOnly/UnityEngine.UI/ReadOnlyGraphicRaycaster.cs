@@ -14,9 +14,9 @@ namespace Jagapippi.UnityAsReadOnly
         void Raycast(PointerEventData eventData, List<RaycastResult> resultAppendList);
     }
 
-    public sealed class ReadOnlyGraphicRaycaster : ReadOnlyBaseRaycaster<GraphicRaycaster>, IReadOnlyGraphicRaycaster
+    public class ReadOnlyGraphicRaycaster<T> : ReadOnlyBaseRaycaster<T>, IReadOnlyGraphicRaycaster where T : GraphicRaycaster
     {
-        public ReadOnlyGraphicRaycaster(GraphicRaycaster obj) : base(obj)
+        protected ReadOnlyGraphicRaycaster(T obj) : base(obj)
         {
         }
 
@@ -36,6 +36,13 @@ namespace Jagapippi.UnityAsReadOnly
         public new void Raycast(PointerEventData eventData, List<RaycastResult> resultAppendList) => _obj.Raycast(eventData, resultAppendList);
 
         #endregion
+    }
+
+    public sealed class ReadOnlyGraphicRaycaster : ReadOnlyGraphicRaycaster<GraphicRaycaster>
+    {
+        public ReadOnlyGraphicRaycaster(GraphicRaycaster obj) : base(obj)
+        {
+        }
     }
 
     public static class GraphicRaycasterExtensions

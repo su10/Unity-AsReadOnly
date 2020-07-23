@@ -67,9 +67,9 @@ namespace Jagapippi.UnityAsReadOnly
         // void WakeUp();
     }
 
-    public class ReadOnlyRigidbody : ReadOnlyComponent<Rigidbody>, IReadOnlyRigidbody
+    public class ReadOnlyRigidbody<T> : ReadOnlyComponent<T>, IReadOnlyRigidbody where T : Rigidbody
     {
-        public ReadOnlyRigidbody(Rigidbody obj) : base(obj)
+        protected ReadOnlyRigidbody(T obj) : base(obj)
         {
         }
 
@@ -143,6 +143,13 @@ namespace Jagapippi.UnityAsReadOnly
         // public void WakeUp() => _obj.WakeUp();
 
         #endregion
+    }
+
+    public sealed class ReadOnlyRigidbody : ReadOnlyRigidbody<Rigidbody>
+    {
+        public ReadOnlyRigidbody(Rigidbody obj) : base(obj)
+        {
+        }
     }
 
     public static class RigidbodyExtensions

@@ -103,9 +103,9 @@ namespace Jagapippi.UnityAsReadOnly
         // void SetVectorArray(int nameID, Vector4[] values);
     }
 
-    public sealed class ReadOnlyMaterial : ReadOnlyObject<Material>, IReadOnlyMaterial
+    public class ReadOnlyMaterial<T> : ReadOnlyObject<T>, IReadOnlyMaterial where T : Material
     {
-        public ReadOnlyMaterial(Material obj) : base(obj)
+        protected ReadOnlyMaterial(T obj) : base(obj)
         {
         }
 
@@ -215,6 +215,13 @@ namespace Jagapippi.UnityAsReadOnly
         // public void SetVectorArray(int nameID, Vector4[] values) => _obj.SetVectorArray(nameID, values);
 
         #endregion
+    }
+
+    public sealed class ReadOnlyMaterial : ReadOnlyMaterial<Material>
+    {
+        public ReadOnlyMaterial(Material obj) : base(obj)
+        {
+        }
     }
 
     public static class MaterialExtensions

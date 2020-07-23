@@ -19,9 +19,9 @@ namespace Jagapippi.UnityAsReadOnly
         // void UpdateModule();
     }
 
-    public sealed class ReadOnlyStandaloneInputModule : ReadOnlyPointerInputModule<StandaloneInputModule>, IReadOnlyStandaloneInputModule
+    public class ReadOnlyStandaloneInputModule<T> : ReadOnlyPointerInputModule<T>, IReadOnlyStandaloneInputModule where T : StandaloneInputModule
     {
-        public ReadOnlyStandaloneInputModule(StandaloneInputModule obj) : base(obj)
+        protected ReadOnlyStandaloneInputModule(T obj) : base(obj)
         {
         }
 
@@ -47,6 +47,13 @@ namespace Jagapippi.UnityAsReadOnly
         // public void UpdateModule() => _obj.UpdateModule();
 
         #endregion
+    }
+
+    public sealed class ReadOnlyStandaloneInputModule : ReadOnlyStandaloneInputModule<StandaloneInputModule>
+    {
+        public ReadOnlyStandaloneInputModule(StandaloneInputModule obj) : base(obj)
+        {
+        }
     }
 
     public static class StandaloneInputModuleExtensions

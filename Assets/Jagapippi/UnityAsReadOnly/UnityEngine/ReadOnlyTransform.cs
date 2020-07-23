@@ -69,9 +69,9 @@ namespace Jagapippi.UnityAsReadOnly
         // void Translate(float x, float y, float z, Transform relativeTo);
     }
 
-    public class ReadOnlyTransform : ReadOnlyComponent<Transform>, IReadOnlyTransform, IEnumerable<ReadOnlyTransform>
+    public class ReadOnlyTransform<T> : ReadOnlyComponent<T>, IReadOnlyTransform, IEnumerable<ReadOnlyTransform> where T : Transform
     {
-        public ReadOnlyTransform(Transform obj) : base(obj)
+        protected ReadOnlyTransform(T obj) : base(obj)
         {
         }
 
@@ -120,7 +120,7 @@ namespace Jagapippi.UnityAsReadOnly
         }
 
         IReadOnlyTransform IReadOnlyTransform.GetChild(int index) => this.GetChild(index);
-        public IEnumerator<ReadOnlyTransform> GetEnumerator() => new Enumerator<ReadOnlyTransform>(this);
+        public IEnumerator<ReadOnlyTransform> GetEnumerator() => new Enumerator<ReadOnlyTransform<T>, ReadOnlyTransform>(this);
         IEnumerator IEnumerable.GetEnumerator() => this.GetEnumerator();
         IEnumerator<IReadOnlyTransform> IReadOnlyTransform.GetEnumerator() => new Enumerator<IReadOnlyTransform>(this);
         IEnumerator<IReadOnlyTransform> IEnumerable<IReadOnlyTransform>.GetEnumerator() => ((IReadOnlyTransform) this).GetEnumerator();
@@ -165,12 +165,19 @@ namespace Jagapippi.UnityAsReadOnly
 
         #endregion
 
-        private class Enumerator<T> : IEnumerator<T> where T : IReadOnlyTransform
+        private class Enumerator<TSource> : Enumerator<TSource, TSource> where TSource : IReadOnlyTransform
+        {
+            internal Enumerator(TSource transform) : base(transform)
+            {
+            }
+        }
+
+        private class Enumerator<TSource, TResult> : IEnumerator<TResult> where TSource : IReadOnlyTransform
         {
             private int _currentIndex = -1;
-            private readonly T _readOnlyTransform;
+            private readonly TSource _readOnlyTransform;
 
-            internal Enumerator(T transform)
+            internal Enumerator(TSource transform)
             {
                 _readOnlyTransform = transform;
             }
@@ -179,7 +186,14 @@ namespace Jagapippi.UnityAsReadOnly
             public bool MoveNext() => ++_currentIndex < _readOnlyTransform.childCount;
             public void Reset() => _currentIndex = -1;
             public void Dispose() => this.Reset();
-            public T Current => (T) _readOnlyTransform.GetChild(_currentIndex);
+            public TResult Current => (TResult) _readOnlyTransform.GetChild(_currentIndex);
+        }
+    }
+
+    public sealed class ReadOnlyTransform : ReadOnlyTransform<Transform>
+    {
+        public ReadOnlyTransform(Transform obj) : base(obj)
+        {
         }
     }
 

@@ -8,9 +8,9 @@ namespace Jagapippi.UnityAsReadOnly
         // void TransitionTo(float timeToReach);
     }
 
-    public sealed class ReadOnlyAudioMixerSnapshot : ReadOnlyObject<AudioMixerSnapshot>, IReadOnlyAudioMixerSnapshot
+    public class ReadOnlyAudioMixerSnapshot<T> : ReadOnlyObject<T>, IReadOnlyAudioMixerSnapshot where T : AudioMixerSnapshot
     {
-        public ReadOnlyAudioMixerSnapshot(AudioMixerSnapshot obj) : base(obj)
+        protected ReadOnlyAudioMixerSnapshot(T obj) : base(obj)
         {
         }
 
@@ -26,6 +26,13 @@ namespace Jagapippi.UnityAsReadOnly
         // public void TransitionTo(float timeToReach) => _obj.TransitionTo(timeToReach);
 
         #endregion
+    }
+
+    public sealed class ReadOnlyAudioMixerSnapshot : ReadOnlyAudioMixerSnapshot<AudioMixerSnapshot>
+    {
+        public ReadOnlyAudioMixerSnapshot(AudioMixerSnapshot obj) : base(obj)
+        {
+        }
     }
 
     public static class AudioMixerSnapshotExtensions
