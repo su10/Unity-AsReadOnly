@@ -1,8 +1,9 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace Jagapippi.UnityAsReadOnly
 {
-    public readonly struct ReadOnlyBoneWeight
+    public readonly struct ReadOnlyBoneWeight : IEquatable<BoneWeight>, IEquatable<ReadOnlyBoneWeight>
     {
         private readonly BoneWeight _boneWeight;
 
@@ -36,6 +37,9 @@ namespace Jagapippi.UnityAsReadOnly
         public static bool operator !=(ReadOnlyBoneWeight lhs, BoneWeight rhs) => !(lhs == rhs);
         public static bool operator ==(BoneWeight lhs, ReadOnlyBoneWeight rhs) => (lhs == rhs._boneWeight);
         public static bool operator !=(BoneWeight lhs, ReadOnlyBoneWeight rhs) => !(lhs == rhs);
+
+        public bool Equals(BoneWeight other) => (_boneWeight == other);
+        public bool Equals(ReadOnlyBoneWeight other) => (_boneWeight == other._boneWeight);
 
         public override bool Equals(object other)
         {
