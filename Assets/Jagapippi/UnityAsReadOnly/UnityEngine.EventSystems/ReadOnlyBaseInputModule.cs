@@ -34,10 +34,10 @@ namespace Jagapippi.UnityAsReadOnly
 
         // public void ActivateModule() => _obj.ActivateModule();
         // public void DeactivateModule() => _obj.DeactivateModule();
-        public bool IsModuleSupported() => _obj.IsModuleSupported();
-        public bool IsPointerOverGameObject(int pointerId) => _obj.IsPointerOverGameObject(pointerId);
+        public virtual bool IsModuleSupported() => _obj.IsModuleSupported();
+        public virtual bool IsPointerOverGameObject(int pointerId) => _obj.IsPointerOverGameObject(pointerId);
         // public void Process() => _obj.Process();
-        public bool ShouldActivateModule() => _obj.ShouldActivateModule();
+        public virtual bool ShouldActivateModule() => _obj.ShouldActivateModule();
         // public void UpdateModule() => _obj.UpdateModule();
 
         #endregion

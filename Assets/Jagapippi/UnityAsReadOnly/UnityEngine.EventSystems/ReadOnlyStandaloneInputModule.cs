@@ -41,9 +41,9 @@ namespace Jagapippi.UnityAsReadOnly
 
         // public void ActivateModule() => _obj.ActivateModule();
         // public void DeactivateModule() => _obj.DeactivateModule();
-        public new bool IsModuleSupported() => _obj.IsModuleSupported();
+        public override bool IsModuleSupported() => _obj.IsModuleSupported();
         // public void Process() => _obj.Process();
-        public new bool ShouldActivateModule() => _obj.ShouldActivateModule();
+        public override bool ShouldActivateModule() => _obj.ShouldActivateModule();
         // public void UpdateModule() => _obj.UpdateModule();
 
         #endregion

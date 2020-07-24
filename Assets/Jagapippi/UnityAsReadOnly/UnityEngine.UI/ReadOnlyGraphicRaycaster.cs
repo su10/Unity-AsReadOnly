@@ -23,17 +23,17 @@ namespace Jagapippi.UnityAsReadOnly
         #region Properties
 
         public GraphicRaycaster.BlockingObjects blockingObjects => _obj.blockingObjects;
-        public new ReadOnlyCamera eventCamera => _obj.eventCamera.IsTrulyNull() ? null : _obj.eventCamera.AsReadOnly();
+        public override ReadOnlyCamera eventCamera => _obj.eventCamera.IsTrulyNull() ? null : _obj.eventCamera.AsReadOnly();
         IReadOnlyCamera IReadOnlyGraphicRaycaster.eventCamera => this.eventCamera;
         public bool ignoreReversedGraphics => _obj.ignoreReversedGraphics;
-        public new int renderOrderPriority => _obj.renderOrderPriority;
-        public new int sortOrderPriority => _obj.sortOrderPriority;
+        public override int renderOrderPriority => _obj.renderOrderPriority;
+        public override int sortOrderPriority => _obj.sortOrderPriority;
 
         #endregion
 
         #region Public Methods
 
-        public new void Raycast(PointerEventData eventData, List<RaycastResult> resultAppendList) => _obj.Raycast(eventData, resultAppendList);
+        public override void Raycast(PointerEventData eventData, List<RaycastResult> resultAppendList) => _obj.Raycast(eventData, resultAppendList);
 
         #endregion
     }

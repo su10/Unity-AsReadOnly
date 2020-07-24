@@ -20,16 +20,16 @@ namespace Jagapippi.UnityAsReadOnly
 
         #region Properties
 
-        public ReadOnlyCamera eventCamera => _obj.eventCamera.IsTrulyNull() ? null : _obj.eventCamera.AsReadOnly();
+        public virtual ReadOnlyCamera eventCamera => _obj.eventCamera.IsTrulyNull() ? null : _obj.eventCamera.AsReadOnly();
         IReadOnlyCamera IReadOnlyBaseRaycaster.eventCamera => this.eventCamera;
-        public int renderOrderPriority => _obj.renderOrderPriority;
-        public int sortOrderPriority => _obj.sortOrderPriority;
+        public virtual int renderOrderPriority => _obj.renderOrderPriority;
+        public virtual int sortOrderPriority => _obj.sortOrderPriority;
 
         #endregion
 
         #region Public Methods
 
-        public void Raycast(PointerEventData eventData, List<RaycastResult> resultAppendList) => _obj.Raycast(eventData, resultAppendList);
+        public virtual void Raycast(PointerEventData eventData, List<RaycastResult> resultAppendList) => _obj.Raycast(eventData, resultAppendList);
         public override string ToString() => _obj.ToString();
 
         #endregion
