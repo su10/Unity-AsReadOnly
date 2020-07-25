@@ -1,5 +1,4 @@
-﻿using System;
-using Unity.Collections;
+﻿using Unity.Collections;
 using UnityEngine;
 
 namespace Jagapippi.UnityAsReadOnly
@@ -32,14 +31,14 @@ namespace Jagapippi.UnityAsReadOnly
         byte[] GetRawTextureData();
         NativeArray<T> GetRawTextureData<T>() where T : struct;
         bool IsRequestedMipmapLevelLoaded();
-        void LoadRawTextureData(IntPtr data, int size);
-        void LoadRawTextureData(byte[] data);
-        void LoadRawTextureData<T>(NativeArray<T> data) where T : struct;
-        Rect[] PackTextures(Texture2D[] textures, int padding, int maximumAtlasSize, bool makeNoLongerReadable);
-        Rect[] PackTextures(Texture2D[] textures, int padding, int maximumAtlasSize);
-        Rect[] PackTextures(Texture2D[] textures, int padding);
-        void ReadPixels(Rect source, int destX, int destY, bool recalculateMipMaps);
-        void ReadPixels(Rect source, int destX, int destY);
+        // void LoadRawTextureData(IntPtr data, int size);
+        // void LoadRawTextureData(byte[] data);
+        // void LoadRawTextureData<T>(NativeArray<T> data) where T : struct;
+        // Rect[] PackTextures(Texture2D[] textures, int padding, int maximumAtlasSize, bool makeNoLongerReadable);
+        // Rect[] PackTextures(Texture2D[] textures, int padding, int maximumAtlasSize);
+        // Rect[] PackTextures(Texture2D[] textures, int padding);
+        // void ReadPixels(Rect source, int destX, int destY, bool recalculateMipMaps);
+        // void ReadPixels(Rect source, int destX, int destY);
         // bool Resize(int width, int height);
         // bool Resize(int width, int height, TextureFormat format, bool hasMipMap);
         // void SetPixel(int x, int y, Color color);
@@ -93,14 +92,14 @@ namespace Jagapippi.UnityAsReadOnly
         public byte[] GetRawTextureData() => _obj.GetRawTextureData();
         public NativeArray<T> GetRawTextureData<T>() where T : struct => _obj.GetRawTextureData<T>();
         public bool IsRequestedMipmapLevelLoaded() => _obj.IsRequestedMipmapLevelLoaded();
-        public void LoadRawTextureData(IntPtr data, int size) => _obj.LoadRawTextureData(data, size);
-        public void LoadRawTextureData(byte[] data) => _obj.LoadRawTextureData(data);
-        public void LoadRawTextureData<T>(NativeArray<T> data) where T : struct => _obj.LoadRawTextureData<T>(data);
-        public Rect[] PackTextures(Texture2D[] textures, int padding, int maximumAtlasSize, bool makeNoLongerReadable) => _obj.PackTextures(textures, padding, maximumAtlasSize, makeNoLongerReadable);
-        public Rect[] PackTextures(Texture2D[] textures, int padding, int maximumAtlasSize) => _obj.PackTextures(textures, padding, maximumAtlasSize);
-        public Rect[] PackTextures(Texture2D[] textures, int padding) => _obj.PackTextures(textures, padding);
-        public void ReadPixels(Rect source, int destX, int destY, bool recalculateMipMaps) => _obj.ReadPixels(source, destX, destY, recalculateMipMaps);
-        public void ReadPixels(Rect source, int destX, int destY) => _obj.ReadPixels(source, destX, destY);
+        // public void LoadRawTextureData(IntPtr data, int size) => _obj.LoadRawTextureData(data, size);
+        // public void LoadRawTextureData(byte[] data) => _obj.LoadRawTextureData(data);
+        // public void LoadRawTextureData<T>(NativeArray<T> data) where T : struct => _obj.LoadRawTextureData<T>(data);
+        // public Rect[] PackTextures(Texture2D[] textures, int padding, int maximumAtlasSize, bool makeNoLongerReadable) => _obj.PackTextures(textures, padding, maximumAtlasSize, makeNoLongerReadable);
+        // public Rect[] PackTextures(Texture2D[] textures, int padding, int maximumAtlasSize) => _obj.PackTextures(textures, padding, maximumAtlasSize);
+        // public Rect[] PackTextures(Texture2D[] textures, int padding) => _obj.PackTextures(textures, padding);
+        // public void ReadPixels(Rect source, int destX, int destY, bool recalculateMipMaps) => _obj.ReadPixels(source, destX, destY, recalculateMipMaps);
+        // public void ReadPixels(Rect source, int destX, int destY) => _obj.ReadPixels(source, destX, destY);
         // public bool Resize(int width, int height) => _obj.Resize(width, height);
         // public bool Resize(int width, int height, TextureFormat format, bool hasMipMap) => _obj.Resize(width, height, format, hasMipMap);
         // public void SetPixel(int x, int y, Color color) => _obj.SetPixel(x, y, color);
