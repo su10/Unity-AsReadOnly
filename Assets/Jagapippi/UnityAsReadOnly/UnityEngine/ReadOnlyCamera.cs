@@ -121,7 +121,7 @@ namespace Jagapippi.UnityAsReadOnly
         #region Properties
 
         public ReadOnlyRenderTexture activeTexture => _obj.activeTexture.AsReadOnly();
-        IReadOnlyRenderTexture IReadOnlyCamera.activeTexture => _obj.activeTexture.AsReadOnly();
+        IReadOnlyRenderTexture IReadOnlyCamera.activeTexture => this.activeTexture;
         public RenderingPath actualRenderingPath => _obj.actualRenderingPath;
         public bool allowDynamicResolution => _obj.allowDynamicResolution;
         public bool allowHDR => _obj.allowHDR;
