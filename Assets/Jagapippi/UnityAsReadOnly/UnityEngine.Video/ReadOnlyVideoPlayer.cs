@@ -1,5 +1,4 @@
-﻿using UnityEngine;
-using UnityEngine.Video;
+﻿using UnityEngine.Video;
 
 namespace Jagapippi.UnityAsReadOnly
 {
