@@ -13,9 +13,9 @@ namespace Jagapippi.UnityAsReadOnly
         int materialCount { get; }
         int popMaterialCount { get; }
         int relativeDepth { get; }
-        void Clear();
-        void DisableRectClipping();
-        void EnableRectClipping(Rect rect);
+        // void Clear();
+        // void DisableRectClipping();
+        // void EnableRectClipping(Rect rect);
         float GetAlpha();
         Color GetColor();
         float GetInheritedAlpha();
@@ -54,9 +54,9 @@ namespace Jagapippi.UnityAsReadOnly
 
         #region Public Methods
 
-        public void Clear() => _obj.Clear();
-        public void DisableRectClipping() => _obj.DisableRectClipping();
-        public void EnableRectClipping(Rect rect) => _obj.EnableRectClipping(rect);
+        // public void Clear() => _obj.Clear();
+        // public void DisableRectClipping() => _obj.DisableRectClipping();
+        // public void EnableRectClipping(Rect rect) => _obj.EnableRectClipping(rect);
         public float GetAlpha() => _obj.GetAlpha();
         public Color GetColor() => _obj.GetColor();
         public float GetInheritedAlpha() => _obj.GetInheritedAlpha();
