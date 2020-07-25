@@ -44,7 +44,7 @@ namespace Jagapippi.UnityAsReadOnly
         public float minValue => _obj.minValue;
         public float normalizedValue => _obj.normalizedValue;
         // public Slider.SliderEvent onValueChanged => _obj.onValueChanged;
-        public float value => _obj.value;
+        public virtual float value => _obj.value;
         public bool wholeNumbers => _obj.wholeNumbers;
 
         #endregion

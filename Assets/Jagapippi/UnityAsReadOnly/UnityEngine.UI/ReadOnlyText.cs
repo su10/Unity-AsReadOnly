@@ -50,27 +50,27 @@ namespace Jagapippi.UnityAsReadOnly
         IReadOnlyTextGenerator IReadOnlyText.cachedTextGenerator => this.cachedTextGenerator;
         public ReadOnlyTextGenerator cachedTextGeneratorForLayout => _obj.cachedTextGeneratorForLayout.AsReadOnly();
         IReadOnlyTextGenerator IReadOnlyText.cachedTextGeneratorForLayout => this.cachedTextGeneratorForLayout;
-        public float flexibleHeight => _obj.flexibleHeight;
-        public float flexibleWidth => _obj.flexibleWidth;
+        public virtual float flexibleHeight => _obj.flexibleHeight;
+        public virtual float flexibleWidth => _obj.flexibleWidth;
         public ReadOnlyFont font => _obj.font.AsReadOnly();
         IReadOnlyFont IReadOnlyText.font => this.font;
         public int fontSize => _obj.fontSize;
         public FontStyle fontStyle => _obj.fontStyle;
         public HorizontalWrapMode horizontalOverflow => _obj.horizontalOverflow;
-        public int layoutPriority => _obj.layoutPriority;
+        public virtual int layoutPriority => _obj.layoutPriority;
         public float lineSpacing => _obj.lineSpacing;
         public override ReadOnlyTexture mainTexture => _obj.mainTexture.AsReadOnly();
         IReadOnlyTexture IReadOnlyText.mainTexture => this.mainTexture;
-        public float minHeight => _obj.minHeight;
-        public float minWidth => _obj.minWidth;
+        public virtual float minHeight => _obj.minHeight;
+        public virtual float minWidth => _obj.minWidth;
         public float pixelsPerUnit => _obj.pixelsPerUnit;
-        public float preferredHeight => _obj.preferredHeight;
-        public float preferredWidth => _obj.preferredWidth;
+        public virtual float preferredHeight => _obj.preferredHeight;
+        public virtual float preferredWidth => _obj.preferredWidth;
         public bool resizeTextForBestFit => _obj.resizeTextForBestFit;
         public int resizeTextMaxSize => _obj.resizeTextMaxSize;
         public int resizeTextMinSize => _obj.resizeTextMinSize;
         public bool supportRichText => _obj.supportRichText;
-        public string text => _obj.text;
+        public virtual string text => _obj.text;
         public VerticalWrapMode verticalOverflow => _obj.verticalOverflow;
 
         #endregion

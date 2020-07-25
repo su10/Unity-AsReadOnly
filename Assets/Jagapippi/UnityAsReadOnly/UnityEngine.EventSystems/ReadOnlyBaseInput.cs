@@ -29,25 +29,25 @@ namespace Jagapippi.UnityAsReadOnly
 
         #region Properties
 
-        public Vector2 compositionCursorPos => _obj.compositionCursorPos;
-        public string compositionString => _obj.compositionString;
-        public IMECompositionMode imeCompositionMode => _obj.imeCompositionMode;
-        public Vector2 mousePosition => _obj.mousePosition;
-        public bool mousePresent => _obj.mousePresent;
-        public Vector2 mouseScrollDelta => _obj.mouseScrollDelta;
-        public int touchCount => _obj.touchCount;
-        public bool touchSupported => _obj.touchSupported;
+        public virtual Vector2 compositionCursorPos => _obj.compositionCursorPos;
+        public virtual string compositionString => _obj.compositionString;
+        public virtual IMECompositionMode imeCompositionMode => _obj.imeCompositionMode;
+        public virtual Vector2 mousePosition => _obj.mousePosition;
+        public virtual bool mousePresent => _obj.mousePresent;
+        public virtual Vector2 mouseScrollDelta => _obj.mouseScrollDelta;
+        public virtual int touchCount => _obj.touchCount;
+        public virtual bool touchSupported => _obj.touchSupported;
 
         #endregion
 
         #region Public Methods
 
-        public float GetAxisRaw(string axisName) => _obj.GetAxisRaw(axisName);
-        public bool GetButtonDown(string buttonName) => _obj.GetButtonDown(buttonName);
-        public bool GetMouseButton(int button) => _obj.GetMouseButton(button);
-        public bool GetMouseButtonDown(int button) => _obj.GetMouseButtonDown(button);
-        public bool GetMouseButtonUp(int button) => _obj.GetMouseButtonUp(button);
-        public Touch GetTouch(int index) => _obj.GetTouch(index);
+        public virtual float GetAxisRaw(string axisName) => _obj.GetAxisRaw(axisName);
+        public virtual bool GetButtonDown(string buttonName) => _obj.GetButtonDown(buttonName);
+        public virtual bool GetMouseButton(int button) => _obj.GetMouseButton(button);
+        public virtual bool GetMouseButtonDown(int button) => _obj.GetMouseButtonDown(button);
+        public virtual bool GetMouseButtonUp(int button) => _obj.GetMouseButtonUp(button);
+        public virtual Touch GetTouch(int index) => _obj.GetTouch(index);
 
         #endregion
     }
