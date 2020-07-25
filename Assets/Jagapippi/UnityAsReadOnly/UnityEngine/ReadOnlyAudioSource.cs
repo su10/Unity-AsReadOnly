@@ -33,7 +33,7 @@ namespace Jagapippi.UnityAsReadOnly
         AudioVelocityUpdateMode velocityUpdateMode { get; }
         float volume { get; }
         bool GetAmbisonicDecoderFloat(int index, out float value);
-        AnimationCurve GetCustomCurve(AudioSourceCurveType type);
+        IReadOnlyAnimationCurve GetCustomCurve(AudioSourceCurveType type);
         void GetOutputData(float[] samples, int channel);
         bool GetSpatializerFloat(int index, out float value);
         void GetSpectrumData(float[] samples, int channel, FFTWindow window);
@@ -97,7 +97,8 @@ namespace Jagapippi.UnityAsReadOnly
         #region Public Methods
 
         public bool GetAmbisonicDecoderFloat(int index, out float value) => _obj.GetAmbisonicDecoderFloat(index, out value);
-        public AnimationCurve GetCustomCurve(AudioSourceCurveType type) => _obj.GetCustomCurve(type);
+        public ReadOnlyAnimationCurve GetCustomCurve(AudioSourceCurveType type) => _obj.GetCustomCurve(type).AsReadOnly();
+        IReadOnlyAnimationCurve IReadOnlyAudioSource.GetCustomCurve(AudioSourceCurveType type) => this.GetCustomCurve(type);
         public void GetOutputData(float[] samples, int channel) => _obj.GetOutputData(samples, channel);
         public bool GetSpatializerFloat(int index, out float value) => _obj.GetSpatializerFloat(index, out value);
         public void GetSpectrumData(float[] samples, int channel, FFTWindow window) => _obj.GetSpectrumData(samples, channel, window);
