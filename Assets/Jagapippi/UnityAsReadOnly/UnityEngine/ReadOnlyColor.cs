@@ -38,13 +38,13 @@ namespace Jagapippi.UnityAsReadOnly
 
         #region Public Methods
 
-        public bool Equals(Color other) => (_color == other);
-        public bool Equals(ReadOnlyColor other) => (_color == other._color);
+        public bool Equals(Color other) => _color.Equals(other);
+        public bool Equals(ReadOnlyColor other) => _color.Equals(other._color);
 
         public override bool Equals(object other)
         {
-            if (other is Color color) return (_color == color);
-            if (other is ReadOnlyColor readOnlyColor) return (_color == readOnlyColor._color);
+            if (other is Color color) return _color.Equals(color);
+            if (other is ReadOnlyColor readOnlyColor) return _color.Equals(readOnlyColor._color);
             return false;
         }
 

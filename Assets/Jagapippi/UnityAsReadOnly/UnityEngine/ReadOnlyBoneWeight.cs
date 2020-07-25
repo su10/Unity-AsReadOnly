@@ -38,13 +38,13 @@ namespace Jagapippi.UnityAsReadOnly
         public static bool operator ==(BoneWeight lhs, ReadOnlyBoneWeight rhs) => (lhs == rhs._boneWeight);
         public static bool operator !=(BoneWeight lhs, ReadOnlyBoneWeight rhs) => !(lhs == rhs);
 
-        public bool Equals(BoneWeight other) => (_boneWeight == other);
-        public bool Equals(ReadOnlyBoneWeight other) => (_boneWeight == other._boneWeight);
+        public bool Equals(BoneWeight other) => _boneWeight.Equals(other);
+        public bool Equals(ReadOnlyBoneWeight other) => _boneWeight.Equals(other._boneWeight);
 
         public override bool Equals(object other)
         {
-            if (other is BoneWeight boneWeight) return (_boneWeight == boneWeight);
-            if (other is ReadOnlyBoneWeight readOnlyBoneWeight) return (_boneWeight == readOnlyBoneWeight._boneWeight);
+            if (other is BoneWeight boneWeight) return _boneWeight.Equals(boneWeight);
+            if (other is ReadOnlyBoneWeight readOnlyBoneWeight) return _boneWeight.Equals(readOnlyBoneWeight._boneWeight);
             return false;
         }
 
