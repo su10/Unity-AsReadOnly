@@ -16,7 +16,7 @@ namespace Jagapippi.UnityAsReadOnly
 
         #region Properties
 
-        public ReadOnlyAnimationClip[] animationClips => _obj.animationClips.Select(a => a.AsReadOnly()).ToArray();
+        public ReadOnlyAnimationClip[] animationClips => _obj.animationClips?.Select(a => a.AsReadOnly()).ToArray();
         IReadOnlyAnimationClip[] IReadOnlyRuntimeAnimatorController.animationClips => this.animationClips;
 
         #endregion

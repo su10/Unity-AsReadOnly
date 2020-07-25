@@ -29,7 +29,7 @@ namespace Jagapippi.UnityAsReadOnly
 
         #region Public Methods
 
-        public IEnumerable<ReadOnlyToggle> ActiveToggles() => _obj.ActiveToggles().Select(t => t.AsReadOnly());
+        public IEnumerable<ReadOnlyToggle> ActiveToggles() => _obj.ActiveToggles()?.Select(t => t.AsReadOnly());
         IEnumerable<IReadOnlyToggle> IReadOnlyToggleGroup.ActiveToggles() => this.ActiveToggles();
         public bool AnyTogglesOn() => _obj.AnyTogglesOn();
         // public void NotifyToggleOn(Toggle toggle) => _obj.NotifyToggleOn(toggle);

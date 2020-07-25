@@ -234,8 +234,9 @@ namespace Jagapippi.UnityAsReadOnly
         IReadOnlyTransform IReadOnlyAnimator.GetBoneTransform(HumanBodyBones humanBoneId) => this.GetBoneTransform(humanBoneId);
         public bool GetBool(string name) => _obj.GetBool(name);
         public bool GetBool(int id) => _obj.GetBool(id);
-        public ReadOnlyAnimatorClipInfo[] GetCurrentAnimatorClipInfo(int layerIndex) => _obj.GetCurrentAnimatorClipInfo(layerIndex).Select(c => c.AsReadOnly()).ToArray();
+        public ReadOnlyAnimatorClipInfo[] GetCurrentAnimatorClipInfo(int layerIndex) => _obj.GetCurrentAnimatorClipInfo(layerIndex)?.Select(c => c.AsReadOnly()).ToArray();
 
+        // TODO: Check API
         public void GetCurrentAnimatorClipInfo(int layerIndex, List<ReadOnlyAnimatorClipInfo> clips)
         {
             var list = new List<AnimatorClipInfo>();
@@ -258,8 +259,9 @@ namespace Jagapippi.UnityAsReadOnly
         public int GetLayerIndex(string layerName) => _obj.GetLayerIndex(layerName);
         public string GetLayerName(int layerIndex) => _obj.GetLayerName(layerIndex);
         public float GetLayerWeight(int layerIndex) => _obj.GetLayerWeight(layerIndex);
-        public ReadOnlyAnimatorClipInfo[] GetNextAnimatorClipInfo(int layerIndex) => _obj.GetNextAnimatorClipInfo(layerIndex).Select(c => c.AsReadOnly()).ToArray();
+        public ReadOnlyAnimatorClipInfo[] GetNextAnimatorClipInfo(int layerIndex) => _obj.GetNextAnimatorClipInfo(layerIndex)?.Select(c => c.AsReadOnly()).ToArray();
 
+        // TODO: Check API
         public void GetNextAnimatorClipInfo(int layerIndex, List<ReadOnlyAnimatorClipInfo> clips)
         {
             var list = new List<AnimatorClipInfo>();
