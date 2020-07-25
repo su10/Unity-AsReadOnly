@@ -10,7 +10,7 @@ namespace Jagapippi.UnityAsReadOnly
         Color color { get; }
         IReadOnlyMaterial defaultMaterial { get; }
         int depth { get; }
-        Texture mainTexture { get; }
+        IReadOnlyTexture mainTexture { get; }
         IReadOnlyMaterial material { get; }
         IReadOnlyMaterial materialForRendering { get; }
         bool raycastTarget { get; }
@@ -55,7 +55,8 @@ namespace Jagapippi.UnityAsReadOnly
         public virtual ReadOnlyMaterial defaultMaterial => _obj.defaultMaterial.AsReadOnly();
         IReadOnlyMaterial IReadOnlyGraphic.defaultMaterial => this.defaultMaterial;
         public int depth => _obj.depth;
-        public virtual Texture mainTexture => _obj.mainTexture;
+        public virtual ReadOnlyTexture mainTexture => _obj.mainTexture.AsReadOnly();
+        IReadOnlyTexture IReadOnlyGraphic.mainTexture => this.mainTexture;
         public virtual ReadOnlyMaterial material => _obj.material.AsReadOnly();
         IReadOnlyMaterial IReadOnlyGraphic.material => this.material;
         public virtual ReadOnlyMaterial materialForRendering => _obj.materialForRendering.AsReadOnly();

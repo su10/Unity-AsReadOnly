@@ -9,7 +9,7 @@ namespace Jagapippi.UnityAsReadOnly
         bool doubleSidedGI { get; }
         bool enableInstancing { get; }
         MaterialGlobalIlluminationFlags globalIlluminationFlags { get; }
-        Texture mainTexture { get; }
+        IReadOnlyTexture mainTexture { get; }
         Vector2 mainTextureOffset { get; }
         Vector2 mainTextureScale { get; }
         int passCount { get; }
@@ -44,8 +44,8 @@ namespace Jagapippi.UnityAsReadOnly
         bool GetShaderPassEnabled(string passName);
         string GetTag(string tag, bool searchFallbacks, string defaultValue);
         string GetTag(string tag, bool searchFallbacks);
-        Texture GetTexture(string name);
-        Texture GetTexture(int nameID);
+        IReadOnlyTexture GetTexture(string name);
+        IReadOnlyTexture GetTexture(int nameID);
         Vector2 GetTextureOffset(string name);
         Vector2 GetTextureOffset(int nameID);
         int[] GetTexturePropertyNameIDs();
@@ -115,7 +115,8 @@ namespace Jagapippi.UnityAsReadOnly
         public bool doubleSidedGI => _obj.doubleSidedGI;
         public bool enableInstancing => _obj.enableInstancing;
         public MaterialGlobalIlluminationFlags globalIlluminationFlags => _obj.globalIlluminationFlags;
-        public Texture mainTexture => _obj.mainTexture;
+        public ReadOnlyTexture mainTexture => _obj.mainTexture.AsReadOnly();
+        IReadOnlyTexture IReadOnlyMaterial.mainTexture => this.mainTexture;
         public Vector2 mainTextureOffset => _obj.mainTextureOffset;
         public Vector2 mainTextureScale => _obj.mainTextureScale;
         public int passCount => _obj.passCount;
@@ -156,8 +157,10 @@ namespace Jagapippi.UnityAsReadOnly
         public bool GetShaderPassEnabled(string passName) => _obj.GetShaderPassEnabled(passName);
         public string GetTag(string tag, bool searchFallbacks, string defaultValue) => _obj.GetTag(tag, searchFallbacks, defaultValue);
         public string GetTag(string tag, bool searchFallbacks) => _obj.GetTag(tag, searchFallbacks);
-        public Texture GetTexture(string name) => _obj.GetTexture(name);
-        public Texture GetTexture(int nameID) => _obj.GetTexture(nameID);
+        public ReadOnlyTexture GetTexture(string name) => _obj.GetTexture(name).AsReadOnly();
+        IReadOnlyTexture IReadOnlyMaterial.GetTexture(string name) => this.GetTexture(name);
+        public ReadOnlyTexture GetTexture(int nameID) => _obj.GetTexture(nameID).AsReadOnly();
+        IReadOnlyTexture IReadOnlyMaterial.GetTexture(int nameID) => this.GetTexture(nameID);
         public Vector2 GetTextureOffset(string name) => _obj.GetTextureOffset(name);
         public Vector2 GetTextureOffset(int nameID) => _obj.GetTextureOffset(nameID);
         public int[] GetTexturePropertyNameIDs() => _obj.GetTexturePropertyNameIDs();

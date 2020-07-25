@@ -17,7 +17,7 @@ namespace Jagapippi.UnityAsReadOnly
         HorizontalWrapMode horizontalOverflow { get; }
         int layoutPriority { get; }
         float lineSpacing { get; }
-        Texture mainTexture { get; }
+        IReadOnlyTexture mainTexture { get; }
         float minHeight { get; }
         float minWidth { get; }
         float pixelsPerUnit { get; }
@@ -59,7 +59,8 @@ namespace Jagapippi.UnityAsReadOnly
         public HorizontalWrapMode horizontalOverflow => _obj.horizontalOverflow;
         public int layoutPriority => _obj.layoutPriority;
         public float lineSpacing => _obj.lineSpacing;
-        public override Texture mainTexture => _obj.mainTexture;
+        public override ReadOnlyTexture mainTexture => _obj.mainTexture.AsReadOnly();
+        IReadOnlyTexture IReadOnlyText.mainTexture => this.mainTexture;
         public float minHeight => _obj.minHeight;
         public float minWidth => _obj.minWidth;
         public float pixelsPerUnit => _obj.pixelsPerUnit;

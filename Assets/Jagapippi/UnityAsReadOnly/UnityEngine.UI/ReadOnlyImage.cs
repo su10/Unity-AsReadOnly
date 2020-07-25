@@ -15,7 +15,7 @@ namespace Jagapippi.UnityAsReadOnly
         float flexibleWidth { get; }
         bool hasBorder { get; }
         int layoutPriority { get; }
-        Texture mainTexture { get; }
+        IReadOnlyTexture mainTexture { get; }
         IReadOnlyMaterial material { get; }
         float minHeight { get; }
         float minWidth { get; }
@@ -53,7 +53,8 @@ namespace Jagapippi.UnityAsReadOnly
         public float flexibleWidth => _obj.flexibleWidth;
         public bool hasBorder => _obj.hasBorder;
         public int layoutPriority => _obj.layoutPriority;
-        public override Texture mainTexture => _obj.mainTexture;
+        public override ReadOnlyTexture mainTexture => _obj.mainTexture.AsReadOnly();
+        IReadOnlyTexture IReadOnlyImage.mainTexture => this.mainTexture;
         public override ReadOnlyMaterial material => _obj.material.AsReadOnly();
         IReadOnlyMaterial IReadOnlyImage.material => this.material;
         public float minHeight => _obj.minHeight;

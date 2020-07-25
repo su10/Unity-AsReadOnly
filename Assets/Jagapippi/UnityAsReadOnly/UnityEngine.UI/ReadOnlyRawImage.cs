@@ -5,8 +5,8 @@ namespace Jagapippi.UnityAsReadOnly
 {
     public interface IReadOnlyRawImage
     {
-        Texture mainTexture { get; }
-        Texture texture { get; }
+        IReadOnlyTexture mainTexture { get; }
+        IReadOnlyTexture texture { get; }
         Rect uvRect { get; }
         // void SetNativeSize();
     }
@@ -19,8 +19,10 @@ namespace Jagapippi.UnityAsReadOnly
 
         #region Properties
 
-        public override Texture mainTexture => _obj.mainTexture;
-        public Texture texture => _obj.texture;
+        public override ReadOnlyTexture mainTexture => _obj.mainTexture.AsReadOnly();
+        IReadOnlyTexture IReadOnlyRawImage.mainTexture => this.mainTexture;
+        public ReadOnlyTexture texture => _obj.texture.AsReadOnly();
+        IReadOnlyTexture IReadOnlyRawImage.texture => this.texture;
         public Rect uvRect => _obj.uvRect;
 
         #endregion

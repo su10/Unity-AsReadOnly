@@ -40,8 +40,8 @@ namespace Jagapippi.UnityAsReadOnly
         float targetCameraAlpha { get; }
         string targetMaterialProperty { get; }
         IReadOnlyRenderer targetMaterialRenderer { get; }
-        RenderTexture targetTexture { get; }
-        Texture texture { get; }
+        IReadOnlyRenderTexture targetTexture { get; }
+        IReadOnlyTexture texture { get; }
         double time { get; }
         VideoTimeReference timeReference { get; }
         VideoTimeSource timeSource { get; }
@@ -111,8 +111,10 @@ namespace Jagapippi.UnityAsReadOnly
         public string targetMaterialProperty => _obj.targetMaterialProperty;
         public ReadOnlyRenderer targetMaterialRenderer => _obj.targetMaterialRenderer.AsReadOnly();
         IReadOnlyRenderer IReadOnlyVideoPlayer.targetMaterialRenderer => this.targetMaterialRenderer;
-        public RenderTexture targetTexture => _obj.targetTexture;
-        public Texture texture => _obj.texture;
+        public ReadOnlyRenderTexture targetTexture => _obj.targetTexture.AsReadOnly();
+        IReadOnlyRenderTexture IReadOnlyVideoPlayer.targetTexture => this.targetTexture;
+        public ReadOnlyTexture texture => _obj.texture.AsReadOnly();
+        IReadOnlyTexture IReadOnlyVideoPlayer.texture => this.texture;
         public double time => _obj.time;
         public VideoTimeReference timeReference => _obj.timeReference;
         public VideoTimeSource timeSource => _obj.timeSource;

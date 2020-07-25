@@ -14,7 +14,7 @@ namespace Jagapippi.UnityAsReadOnly
         float minWidth { get; }
         float noiseSpread { get; }
         IReadOnlyGameObject prototype { get; }
-        Texture2D prototypeTexture { get; }
+        IReadOnlyTexture2D prototypeTexture { get; }
         DetailRenderMode renderMode { get; }
         bool usePrototypeMesh { get; }
         bool Equals(object obj);
@@ -44,7 +44,8 @@ namespace Jagapippi.UnityAsReadOnly
         public float noiseSpread => _obj.noiseSpread;
         public ReadOnlyGameObject prototype => _obj.prototype.AsReadOnly();
         IReadOnlyGameObject IReadOnlyDetailPrototype.prototype => this.prototype;
-        public Texture2D prototypeTexture => _obj.prototypeTexture;
+        public ReadOnlyTexture2D prototypeTexture => _obj.prototypeTexture.AsReadOnly();
+        IReadOnlyTexture2D IReadOnlyDetailPrototype.prototypeTexture => this.prototypeTexture;
         public DetailRenderMode renderMode => _obj.renderMode;
         public bool usePrototypeMesh => _obj.usePrototypeMesh;
 

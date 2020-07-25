@@ -5,7 +5,7 @@ namespace Jagapippi.UnityAsReadOnly
 {
     public interface IReadOnlySprite
     {
-        Texture2D associatedAlphaSplitTexture { get; }
+        IReadOnlyTexture2D associatedAlphaSplitTexture { get; }
         Vector4 border { get; }
         Bounds bounds { get; }
         bool packed { get; }
@@ -14,7 +14,7 @@ namespace Jagapippi.UnityAsReadOnly
         Vector2 pivot { get; }
         float pixelsPerUnit { get; }
         Rect rect { get; }
-        Texture2D texture { get; }
+        IReadOnlyTexture2D texture { get; }
         Rect textureRect { get; }
         Vector2 textureRectOffset { get; }
         ushort[] triangles { get; }
@@ -35,7 +35,8 @@ namespace Jagapippi.UnityAsReadOnly
 
         #region Properties
 
-        public Texture2D associatedAlphaSplitTexture => _obj.associatedAlphaSplitTexture;
+        public ReadOnlyTexture2D associatedAlphaSplitTexture => _obj.associatedAlphaSplitTexture.AsReadOnly();
+        IReadOnlyTexture2D IReadOnlySprite.associatedAlphaSplitTexture => this.associatedAlphaSplitTexture;
         public Vector4 border => _obj.border;
         public Bounds bounds => _obj.bounds;
         public bool packed => _obj.packed;
@@ -44,7 +45,8 @@ namespace Jagapippi.UnityAsReadOnly
         public Vector2 pivot => _obj.pivot;
         public float pixelsPerUnit => _obj.pixelsPerUnit;
         public Rect rect => _obj.rect;
-        public Texture2D texture => _obj.texture;
+        public ReadOnlyTexture2D texture => _obj.texture.AsReadOnly();
+        IReadOnlyTexture2D IReadOnlySprite.texture => this.texture;
         public Rect textureRect => _obj.textureRect;
         public Vector2 textureRectOffset => _obj.textureRectOffset;
         public ushort[] triangles => _obj.triangles;

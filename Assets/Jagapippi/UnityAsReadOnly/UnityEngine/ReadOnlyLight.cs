@@ -11,7 +11,7 @@ namespace Jagapippi.UnityAsReadOnly
         Color color { get; }
         float colorTemperature { get; }
         int commandBufferCount { get; }
-        Texture cookie { get; }
+        IReadOnlyTexture cookie { get; }
         float cookieSize { get; }
         int cullingMask { get; }
         Flare flare { get; }
@@ -58,7 +58,8 @@ namespace Jagapippi.UnityAsReadOnly
         public Color color => _obj.color;
         public float colorTemperature => _obj.colorTemperature;
         public int commandBufferCount => _obj.commandBufferCount;
-        public Texture cookie => _obj.cookie;
+        public ReadOnlyTexture cookie => _obj.cookie.AsReadOnly();
+        IReadOnlyTexture IReadOnlyLight.cookie => this.cookie;
         public float cookieSize => _obj.cookieSize;
         public int cullingMask => _obj.cullingMask;
         public Flare flare => _obj.flare;
