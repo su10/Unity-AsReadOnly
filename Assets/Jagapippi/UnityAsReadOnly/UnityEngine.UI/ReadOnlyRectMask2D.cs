@@ -9,6 +9,7 @@ namespace Jagapippi.UnityAsReadOnly
         IReadOnlyRectTransform rectTransform { get; }
         // void AddClippable(IClippable clippable);
         bool IsRaycastLocationValid(Vector2 sp, Camera eventCamera);
+        bool IsRaycastLocationValid(Vector2 sp, ReadOnlyCamera eventCamera);
         // void PerformClipping();
         // void RemoveClippable(IClippable clippable);
     }
@@ -31,6 +32,7 @@ namespace Jagapippi.UnityAsReadOnly
 
         // public void AddClippable(IClippable clippable) => _obj.AddClippable(clippable);
         public virtual bool IsRaycastLocationValid(Vector2 sp, Camera eventCamera) => _obj.IsRaycastLocationValid(sp, eventCamera);
+        public virtual bool IsRaycastLocationValid(Vector2 sp, ReadOnlyCamera eventCamera) => _obj.IsRaycastLocationValid(sp, eventCamera._obj);
         // public void PerformClipping() => _obj.PerformClipping();
         // public void RemoveClippable(IClippable clippable) => _obj.RemoveClippable(clippable);
 

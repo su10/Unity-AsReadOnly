@@ -14,7 +14,7 @@ namespace Jagapippi.UnityAsReadOnly
 
     public class ReadOnlyObject<T> : IReadOnlyObject where T : Object
     {
-        protected readonly T _obj;
+        protected internal readonly T _obj;
 
         protected ReadOnlyObject(T obj)
         {

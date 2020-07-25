@@ -21,7 +21,7 @@ namespace {Namespace}
 
     public sealed class ReadOnly{ClassName} : IReadOnly{ClassName}
     {{
-        private readonly {ClassName} _obj;
+        internal readonly {ClassName} _obj;
 
         public ReadOnly{ClassName}({ClassName} obj)
         {{

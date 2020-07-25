@@ -23,7 +23,7 @@ namespace Jagapippi.UnityAsReadOnly
 
     public sealed class ReadOnlyDetailPrototype : IReadOnlyDetailPrototype
     {
-        private readonly DetailPrototype _obj;
+        internal readonly DetailPrototype _obj;
 
         public ReadOnlyDetailPrototype(DetailPrototype obj)
         {

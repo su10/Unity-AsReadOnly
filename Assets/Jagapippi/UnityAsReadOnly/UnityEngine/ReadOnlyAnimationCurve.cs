@@ -22,7 +22,7 @@ namespace Jagapippi.UnityAsReadOnly
 
     public class ReadOnlyAnimationCurve<T> : IReadOnlyAnimationCurve, IEquatable<AnimationCurve>, IEquatable<ReadOnlyAnimationCurve> where T : AnimationCurve
     {
-        private readonly T _obj;
+        protected internal readonly T _obj;
 
         public ReadOnlyAnimationCurve(T obj)
         {

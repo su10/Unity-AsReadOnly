@@ -25,6 +25,7 @@ namespace Jagapippi.UnityAsReadOnly
         // void OnRebuildRequested();
         Vector2 PixelAdjustPoint(Vector2 point);
         bool Raycast(Vector2 sp, Camera eventCamera);
+        bool Raycast(Vector2 sp, ReadOnlyCamera eventCamera);
         // void Rebuild(CanvasUpdate update);
         // void RegisterDirtyLayoutCallback(UnityAction action);
         // void RegisterDirtyMaterialCallback(UnityAction action);
@@ -79,6 +80,7 @@ namespace Jagapippi.UnityAsReadOnly
         // public void OnRebuildRequested() => _obj.OnRebuildRequested();
         public Vector2 PixelAdjustPoint(Vector2 point) => _obj.PixelAdjustPoint(point);
         public virtual bool Raycast(Vector2 sp, Camera eventCamera) => _obj.Raycast(sp, eventCamera);
+        public virtual bool Raycast(Vector2 sp, ReadOnlyCamera eventCamera) => _obj.Raycast(sp, eventCamera._obj);
         // public void Rebuild(CanvasUpdate update) => _obj.Rebuild(update);
         // public void RegisterDirtyLayoutCallback(UnityAction action) => _obj.RegisterDirtyLayoutCallback(action);
         // public void RegisterDirtyMaterialCallback(UnityAction action) => _obj.RegisterDirtyMaterialCallback(action);

@@ -4,7 +4,7 @@ namespace Jagapippi.UnityAsReadOnly
 {
     public readonly struct ReadOnlyAnimatorClipInfo
     {
-        private readonly AnimatorClipInfo _info;
+        internal readonly AnimatorClipInfo _info;
 
         public ReadOnlyAnimatorClipInfo(AnimatorClipInfo info)
         {

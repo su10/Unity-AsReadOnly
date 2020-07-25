@@ -17,9 +17,9 @@ namespace Jagapippi.UnityAsReadOnly
 
     public class ReadOnlyGradient<T> : IReadOnlyGradient, IEquatable<Gradient>, IEquatable<ReadOnlyGradient> where T : Gradient
     {
-        private readonly T _obj;
+        protected internal readonly T _obj;
 
-        public ReadOnlyGradient(T obj)
+        protected ReadOnlyGradient(T obj)
         {
             if (obj.IsTrulyNull()) throw new ArgumentNullException(nameof(obj));
 

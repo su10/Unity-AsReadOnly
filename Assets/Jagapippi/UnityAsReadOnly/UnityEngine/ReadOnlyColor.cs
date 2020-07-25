@@ -5,7 +5,7 @@ namespace Jagapippi.UnityAsReadOnly
 {
     public readonly struct ReadOnlyColor : IEquatable<Color>, IEquatable<ReadOnlyColor>
     {
-        private readonly Color _color;
+        internal readonly Color _color;
 
         public ReadOnlyColor(float r, float g, float b, float a)
         {

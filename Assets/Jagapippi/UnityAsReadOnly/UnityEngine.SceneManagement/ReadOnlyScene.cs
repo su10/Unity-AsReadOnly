@@ -5,7 +5,7 @@ namespace Jagapippi.UnityAsReadOnly
 {
     public readonly struct ReadOnlyScene
     {
-        private readonly Scene _scene;
+        internal readonly Scene _scene;
 
         public ReadOnlyScene(Scene scene)
         {

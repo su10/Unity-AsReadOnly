@@ -30,7 +30,7 @@ namespace Jagapippi.UnityAsReadOnly
 
     public class ReadOnlyTextGenerator : IReadOnlyTextGenerator
     {
-        private readonly TextGenerator _obj;
+        protected internal readonly TextGenerator _obj;
 
         public ReadOnlyTextGenerator(TextGenerator obj)
         {

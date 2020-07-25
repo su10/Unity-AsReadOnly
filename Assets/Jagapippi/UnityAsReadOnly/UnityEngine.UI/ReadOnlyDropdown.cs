@@ -74,7 +74,7 @@ namespace Jagapippi.UnityAsReadOnly
 
         public class OptionData
         {
-            private readonly Dropdown.OptionData _data;
+            protected internal readonly Dropdown.OptionData _data;
 
             public OptionData(Dropdown.OptionData data)
             {

@@ -4,7 +4,7 @@ namespace Jagapippi.UnityAsReadOnly
 {
     public readonly struct ReadOnlyTouch
     {
-        private readonly Touch _touch;
+        internal readonly Touch _touch;
 
         public ReadOnlyTouch(Touch touch)
         {

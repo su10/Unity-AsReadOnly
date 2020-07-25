@@ -30,6 +30,7 @@ namespace Jagapippi.UnityAsReadOnly
         // void CalculateLayoutInputHorizontal();
         // void CalculateLayoutInputVertical();
         bool IsRaycastLocationValid(Vector2 screenPoint, Camera eventCamera);
+        bool IsRaycastLocationValid(Vector2 screenPoint, ReadOnlyCamera eventCamera);
         // void OnAfterDeserialize();
         // void OnBeforeSerialize();
         // void SetNativeSize();
@@ -77,6 +78,7 @@ namespace Jagapippi.UnityAsReadOnly
         // public void CalculateLayoutInputHorizontal() => _obj.CalculateLayoutInputHorizontal();
         // public void CalculateLayoutInputVertical() => _obj.CalculateLayoutInputVertical();
         public bool IsRaycastLocationValid(Vector2 screenPoint, Camera eventCamera) => _obj.IsRaycastLocationValid(screenPoint, eventCamera);
+        public bool IsRaycastLocationValid(Vector2 screenPoint, ReadOnlyCamera eventCamera) => _obj.IsRaycastLocationValid(screenPoint, eventCamera._obj);
         // public void OnAfterDeserialize() => _obj.OnAfterDeserialize();
         // public void OnBeforeSerialize() => _obj.OnBeforeSerialize();
         // public void SetNativeSize() => _obj.SetNativeSize();

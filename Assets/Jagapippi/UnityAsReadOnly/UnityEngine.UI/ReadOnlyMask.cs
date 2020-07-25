@@ -10,6 +10,7 @@ namespace Jagapippi.UnityAsReadOnly
         bool showMaskGraphic { get; }
         IReadOnlyMaterial GetModifiedMaterial(Material baseMaterial);
         bool IsRaycastLocationValid(Vector2 sp, Camera eventCamera);
+        bool IsRaycastLocationValid(Vector2 sp, ReadOnlyCamera eventCamera);
         bool MaskEnabled();
     }
 
@@ -34,6 +35,7 @@ namespace Jagapippi.UnityAsReadOnly
         public virtual ReadOnlyMaterial GetModifiedMaterial(Material baseMaterial) => _obj.GetModifiedMaterial(baseMaterial).AsReadOnly();
         IReadOnlyMaterial IReadOnlyMask.GetModifiedMaterial(Material baseMaterial) => this.GetModifiedMaterial(baseMaterial);
         public virtual bool IsRaycastLocationValid(Vector2 sp, Camera eventCamera) => _obj.IsRaycastLocationValid(sp, eventCamera);
+        public virtual bool IsRaycastLocationValid(Vector2 sp, ReadOnlyCamera eventCamera) => _obj.IsRaycastLocationValid(sp, eventCamera._obj);
         public virtual bool MaskEnabled() => _obj.MaskEnabled();
 
         #endregion

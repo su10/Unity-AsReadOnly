@@ -5,7 +5,7 @@ namespace Jagapippi.UnityAsReadOnly
 {
     public readonly struct ReadOnlyBoneWeight : IEquatable<BoneWeight>, IEquatable<ReadOnlyBoneWeight>
     {
-        private readonly BoneWeight _boneWeight;
+        internal readonly BoneWeight _boneWeight;
 
         public ReadOnlyBoneWeight(BoneWeight boneWeight)
         {
