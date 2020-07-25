@@ -75,7 +75,7 @@ namespace Jagapippi.UnityAsReadOnly
 
     public static class ObjectExtensions
     {
-        public static ReadOnlyObject AsReadOnly(this Object self) => new ReadOnlyObject(self);
+        public static ReadOnlyObject AsReadOnly(this Object self) => self.IsTrulyNull() ? null : new ReadOnlyObject(self);
         internal static bool IsTrulyNull(this Object self) => ReferenceEquals(self, null);
     }
 }

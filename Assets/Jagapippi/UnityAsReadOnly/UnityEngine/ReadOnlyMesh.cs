@@ -194,6 +194,6 @@ namespace Jagapippi.UnityAsReadOnly
 
     public static class MeshExtensions
     {
-        public static ReadOnlyMesh AsReadOnly(this Mesh self) => new ReadOnlyMesh(self);
+        public static ReadOnlyMesh AsReadOnly(this Mesh self) => self.IsTrulyNull() ? null : new ReadOnlyMesh(self);
     }
 }

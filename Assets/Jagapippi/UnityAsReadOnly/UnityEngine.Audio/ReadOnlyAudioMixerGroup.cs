@@ -15,7 +15,7 @@ namespace Jagapippi.UnityAsReadOnly
 
         #region Properties
 
-        public ReadOnlyAudioMixer audioMixer => _obj.audioMixer.IsTrulyNull() ? null : _obj.audioMixer.AsReadOnly();
+        public ReadOnlyAudioMixer audioMixer => _obj.audioMixer.AsReadOnly();
         IReadOnlyAudioMixer IReadOnlyAudioMixerGroup.audioMixer => this.audioMixer;
 
         #endregion
@@ -34,6 +34,6 @@ namespace Jagapippi.UnityAsReadOnly
 
     public static class AudioMixerGroupExtensions
     {
-        public static ReadOnlyAudioMixerGroup AsReadOnly(this AudioMixerGroup self) => new ReadOnlyAudioMixerGroup(self);
+        public static ReadOnlyAudioMixerGroup AsReadOnly(this AudioMixerGroup self) => self.IsTrulyNull() ? null : new ReadOnlyAudioMixerGroup(self);
     }
 }

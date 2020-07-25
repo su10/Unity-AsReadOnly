@@ -48,6 +48,6 @@ namespace Jagapippi.UnityAsReadOnly
 
     public static class MaskableGraphicExtensions
     {
-        public static ReadOnlyMaskableGraphic AsReadOnly(this MaskableGraphic self) => new ReadOnlyMaskableGraphic(self);
+        public static ReadOnlyMaskableGraphic AsReadOnly(this MaskableGraphic self) => self.IsTrulyNull() ? null : new ReadOnlyMaskableGraphic(self);
     }
 }

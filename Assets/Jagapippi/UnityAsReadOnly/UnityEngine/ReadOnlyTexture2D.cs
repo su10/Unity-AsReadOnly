@@ -119,6 +119,6 @@ namespace Jagapippi.UnityAsReadOnly
 
     public static class Texture2DExtensions
     {
-        public static ReadOnlyTexture2D AsReadOnly(this Texture2D self) => new ReadOnlyTexture2D(self);
+        public static ReadOnlyTexture2D AsReadOnly(this Texture2D self) => self.IsTrulyNull() ? null : new ReadOnlyTexture2D(self);
     }
 }

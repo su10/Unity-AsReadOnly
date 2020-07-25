@@ -35,6 +35,6 @@ namespace Jagapippi.UnityAsReadOnly
 
     public static class UIBehaviourExtensions
     {
-        public static ReadOnlyUIBehaviour AsReadOnly(this UIBehaviour self) => new ReadOnlyUIBehaviour(self);
+        public static ReadOnlyUIBehaviour AsReadOnly(this UIBehaviour self) => self.IsTrulyNull() ? null : new ReadOnlyUIBehaviour(self);
     }
 }

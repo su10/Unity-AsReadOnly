@@ -91,7 +91,7 @@ namespace Jagapippi.UnityAsReadOnly
         public InputField.SubmitEvent onEndEdit => _obj.onEndEdit;
         public InputField.OnValidateInput onValidateInput => _obj.onValidateInput;
         public InputField.OnChangeEvent onValueChanged => _obj.onValueChanged;
-        public ReadOnlyGraphic placeholder => _obj.placeholder.IsTrulyNull() ? null : _obj.placeholder.AsReadOnly();
+        public ReadOnlyGraphic placeholder => _obj.placeholder.AsReadOnly();
         IReadOnlyGraphic IReadOnlyInputField.placeholder => this.placeholder;
         public float preferredHeight => _obj.preferredHeight;
         public float preferredWidth => _obj.preferredWidth;
@@ -101,7 +101,7 @@ namespace Jagapippi.UnityAsReadOnly
         public int selectionFocusPosition => _obj.selectionFocusPosition;
         public bool shouldHideMobileInput => _obj.shouldHideMobileInput;
         public string text => _obj.text;
-        public ReadOnlyText textComponent => _obj.textComponent.IsTrulyNull() ? null : _obj.textComponent.AsReadOnly();
+        public ReadOnlyText textComponent => _obj.textComponent.AsReadOnly();
         IReadOnlyText IReadOnlyInputField.textComponent => this.textComponent;
         public ReadOnlyTouchScreenKeyboard touchScreenKeyboard => _obj.touchScreenKeyboard?.AsReadOnly();
         IReadOnlyTouchScreenKeyboard IReadOnlyInputField.touchScreenKeyboard => this.touchScreenKeyboard;
@@ -144,6 +144,6 @@ namespace Jagapippi.UnityAsReadOnly
 
     public static class InputFieldExtensions
     {
-        public static ReadOnlyInputField AsReadOnly(this InputField self) => new ReadOnlyInputField(self);
+        public static ReadOnlyInputField AsReadOnly(this InputField self) => self.IsTrulyNull() ? null : new ReadOnlyInputField(self);
     }
 }

@@ -34,17 +34,17 @@ namespace Jagapippi.UnityAsReadOnly
 
         #region Properties
 
-        public ReadOnlyImage captionImage => _obj.captionImage.IsTrulyNull() ? null : _obj.captionImage.AsReadOnly();
+        public ReadOnlyImage captionImage => _obj.captionImage.AsReadOnly();
         IReadOnlyImage IReadOnlyDropdown.captionImage => this.captionImage;
-        public ReadOnlyText captionText => _obj.captionText.IsTrulyNull() ? null : _obj.captionText.AsReadOnly();
+        public ReadOnlyText captionText => _obj.captionText.AsReadOnly();
         IReadOnlyText IReadOnlyDropdown.captionText => this.captionText;
-        public ReadOnlyImage itemImage => _obj.itemImage.IsTrulyNull() ? null : _obj.itemImage.AsReadOnly();
+        public ReadOnlyImage itemImage => _obj.itemImage.AsReadOnly();
         IReadOnlyImage IReadOnlyDropdown.itemImage => this.itemImage;
-        public ReadOnlyText itemText => _obj.itemText.IsTrulyNull() ? null : _obj.itemText.AsReadOnly();
+        public ReadOnlyText itemText => _obj.itemText.AsReadOnly();
         IReadOnlyText IReadOnlyDropdown.itemText => this.itemText;
         // public Dropdown.DropdownEvent onValueChanged => _obj.onValueChanged;
         public List<ReadOnlyDropdown.OptionData> options => _obj.options?.Select(o => o.AsReadOnly()).ToList();
-        public ReadOnlyRectTransform template => _obj.template.IsTrulyNull() ? null : _obj.template.AsReadOnly();
+        public ReadOnlyRectTransform template => _obj.template.AsReadOnly();
         IReadOnlyRectTransform IReadOnlyDropdown.template => this.template;
         public int value => _obj.value;
 
@@ -82,13 +82,13 @@ namespace Jagapippi.UnityAsReadOnly
             }
 
             public string text => _data.text;
-            public ReadOnlySprite image => _data.image.IsTrulyNull() ? null : _data.image.AsReadOnly();
+            public ReadOnlySprite image => _data.image.AsReadOnly();
         }
     }
 
     public static class DropdownExtensions
     {
-        public static ReadOnlyDropdown AsReadOnly(this Dropdown self) => new ReadOnlyDropdown(self);
-        public static ReadOnlyDropdown.OptionData AsReadOnly(this Dropdown.OptionData self) => new ReadOnlyDropdown.OptionData(self);
+        public static ReadOnlyDropdown AsReadOnly(this Dropdown self) => self.IsTrulyNull() ? null : new ReadOnlyDropdown(self);
+        public static ReadOnlyDropdown.OptionData AsReadOnly(this Dropdown.OptionData self) => (self == null) ? null : new ReadOnlyDropdown.OptionData(self);
     }
 }

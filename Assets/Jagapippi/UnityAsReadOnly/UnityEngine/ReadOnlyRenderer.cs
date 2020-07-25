@@ -59,16 +59,16 @@ namespace Jagapippi.UnityAsReadOnly
         public bool isVisible => _obj.isVisible;
         public int lightmapIndex => _obj.lightmapIndex;
         public Vector4 lightmapScaleOffset => _obj.lightmapScaleOffset;
-        public ReadOnlyGameObject lightProbeProxyVolumeOverride => _obj.lightProbeProxyVolumeOverride.IsTrulyNull() ? null : _obj.lightProbeProxyVolumeOverride.AsReadOnly();
+        public ReadOnlyGameObject lightProbeProxyVolumeOverride => _obj.lightProbeProxyVolumeOverride.AsReadOnly();
         IReadOnlyGameObject IReadOnlyRenderer.lightProbeProxyVolumeOverride => this.lightProbeProxyVolumeOverride;
         public LightProbeUsage lightProbeUsage => _obj.lightProbeUsage;
         public Matrix4x4 localToWorldMatrix => _obj.localToWorldMatrix;
-        public ReadOnlyMaterial material => _obj.material.IsTrulyNull() ? null : _obj.material.AsReadOnly();
+        public ReadOnlyMaterial material => _obj.material.AsReadOnly();
         IReadOnlyMaterial IReadOnlyRenderer.material => this.material;
         public ReadOnlyMaterial[] materials => _obj.materials?.Select(m => m.AsReadOnly()).ToArray();
         IReadOnlyMaterial[] IReadOnlyRenderer.materials => this.materials;
         public MotionVectorGenerationMode motionVectorGenerationMode => _obj.motionVectorGenerationMode;
-        public ReadOnlyTransform probeAnchor => _obj.probeAnchor.IsTrulyNull() ? null : _obj.probeAnchor.AsReadOnly();
+        public ReadOnlyTransform probeAnchor => _obj.probeAnchor.AsReadOnly();
         IReadOnlyTransform IReadOnlyRenderer.probeAnchor => this.probeAnchor;
         public int realtimeLightmapIndex => _obj.realtimeLightmapIndex;
         public Vector4 realtimeLightmapScaleOffset => _obj.realtimeLightmapScaleOffset;
@@ -77,7 +77,7 @@ namespace Jagapippi.UnityAsReadOnly
         public int rendererPriority => _obj.rendererPriority;
         public uint renderingLayerMask => _obj.renderingLayerMask;
         public ShadowCastingMode shadowCastingMode => _obj.shadowCastingMode;
-        public ReadOnlyMaterial sharedMaterial => _obj.sharedMaterial.IsTrulyNull() ? null : _obj.sharedMaterial.AsReadOnly();
+        public ReadOnlyMaterial sharedMaterial => _obj.sharedMaterial.AsReadOnly();
         IReadOnlyMaterial IReadOnlyRenderer.sharedMaterial => this.sharedMaterial;
         public ReadOnlyMaterial[] sharedMaterials => _obj.sharedMaterials?.Select(m => m.AsReadOnly()).ToArray();
         IReadOnlyMaterial[] IReadOnlyRenderer.sharedMaterials => this.sharedMaterials;
@@ -139,6 +139,6 @@ namespace Jagapippi.UnityAsReadOnly
 
     public static class RendererExtensions
     {
-        public static ReadOnlyRenderer AsReadOnly(this Renderer self) => new ReadOnlyRenderer(self);
+        public static ReadOnlyRenderer AsReadOnly(this Renderer self) => self.IsTrulyNull() ? null : new ReadOnlyRenderer(self);
     }
 }

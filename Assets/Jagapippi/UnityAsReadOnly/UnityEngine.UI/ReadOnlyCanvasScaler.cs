@@ -52,6 +52,6 @@ namespace Jagapippi.UnityAsReadOnly
 
     public static class CanvasScalerExtensions
     {
-        public static ReadOnlyCanvasScaler AsReadOnly(this CanvasScaler self) => new ReadOnlyCanvasScaler(self);
+        public static ReadOnlyCanvasScaler AsReadOnly(this CanvasScaler self) => self.IsTrulyNull() ? null : new ReadOnlyCanvasScaler(self);
     }
 }

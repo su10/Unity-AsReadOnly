@@ -45,6 +45,6 @@ namespace Jagapippi.UnityAsReadOnly
 
     public static class MotionExtensions
     {
-        public static ReadOnlyMotion AsReadOnly(this Motion self) => new ReadOnlyMotion(self);
+        public static ReadOnlyMotion AsReadOnly(this Motion self) => self.IsTrulyNull() ? null : new ReadOnlyMotion(self);
     }
 }

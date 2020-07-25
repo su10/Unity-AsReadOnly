@@ -72,7 +72,7 @@ namespace Jagapippi.UnityAsReadOnly
 
     public static class TextGeneratorExtensions
     {
-        public static ReadOnlyTextGenerator AsReadOnly(this TextGenerator self) => new ReadOnlyTextGenerator(self);
+        public static ReadOnlyTextGenerator AsReadOnly(this TextGenerator self) => self.IsTrulyNull() ? null : new ReadOnlyTextGenerator(self);
         internal static bool IsTrulyNull(this TextGenerator self) => ReferenceEquals(self, null);
     }
 }

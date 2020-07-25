@@ -80,6 +80,6 @@ namespace Jagapippi.UnityAsReadOnly
 
     public static class CanvasRendererExtensions
     {
-        public static ReadOnlyCanvasRenderer AsReadOnly(this CanvasRenderer self) => new ReadOnlyCanvasRenderer(self);
+        public static ReadOnlyCanvasRenderer AsReadOnly(this CanvasRenderer self) => self.IsTrulyNull() ? null : new ReadOnlyCanvasRenderer(self);
     }
 }

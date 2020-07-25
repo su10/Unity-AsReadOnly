@@ -55,46 +55,16 @@ namespace Jagapippi.UnityAsReadOnly
 
         #region Public Methods
 
-        public ReadOnlySelectable FindSelectable(Vector3 dir)
-        {
-            var selectable = _obj.FindSelectable(dir);
-            return selectable.IsTrulyNull() ? null : selectable.AsReadOnly();
-        }
-
+        public ReadOnlySelectable FindSelectable(Vector3 dir) => _obj.FindSelectable(dir).AsReadOnly();
         IReadOnlySelectable IReadOnlySelectable.FindSelectable(Vector3 dir) => this.FindSelectable(dir);
-
-        public virtual ReadOnlySelectable FindSelectableOnDown()
-        {
-            var selectable = _obj.FindSelectableOnDown();
-            return selectable.IsTrulyNull() ? null : selectable.AsReadOnly();
-        }
-
+        public virtual ReadOnlySelectable FindSelectableOnDown() => _obj.FindSelectableOnDown().AsReadOnly();
         IReadOnlySelectable IReadOnlySelectable.FindSelectableOnDown() => this.FindSelectableOnDown();
-
-        public virtual ReadOnlySelectable FindSelectableOnLeft()
-        {
-            var selectable = _obj.FindSelectableOnLeft();
-            return selectable.IsTrulyNull() ? null : selectable.AsReadOnly();
-        }
-
+        public virtual ReadOnlySelectable FindSelectableOnLeft() => _obj.FindSelectableOnLeft().AsReadOnly();
         IReadOnlySelectable IReadOnlySelectable.FindSelectableOnLeft() => this.FindSelectableOnLeft();
-
-        public virtual ReadOnlySelectable FindSelectableOnRight()
-        {
-            var selectable = _obj.FindSelectableOnRight();
-            return selectable.IsTrulyNull() ? null : selectable.AsReadOnly();
-        }
-
+        public virtual ReadOnlySelectable FindSelectableOnRight() => _obj.FindSelectableOnRight().AsReadOnly();
         IReadOnlySelectable IReadOnlySelectable.FindSelectableOnRight() => this.FindSelectableOnRight();
-
-        public virtual ReadOnlySelectable FindSelectableOnUp()
-        {
-            var selectable = _obj.FindSelectableOnUp();
-            return selectable.IsTrulyNull() ? null : selectable.AsReadOnly();
-        }
-
+        public virtual ReadOnlySelectable FindSelectableOnUp() => _obj.FindSelectableOnUp().AsReadOnly();
         IReadOnlySelectable IReadOnlySelectable.FindSelectableOnUp() => this.FindSelectableOnUp();
-
         public virtual bool IsInteractable() => _obj.IsInteractable();
         // public void OnDeselect(BaseEventData eventData) => _obj.OnDeselect(eventData);
         // public void OnMove(AxisEventData eventData) => _obj.OnMove(eventData);
@@ -117,7 +87,6 @@ namespace Jagapippi.UnityAsReadOnly
 
     public static class SelectableExtensions
     {
-        public static ReadOnlySelectable AsReadOnly(this Selectable self) => new ReadOnlySelectable(self);
-        internal static bool IsTrulyNull(this Selectable self) => ReferenceEquals(self, null);
+        public static ReadOnlySelectable AsReadOnly(this Selectable self) => self.IsTrulyNull() ? null : new ReadOnlySelectable(self);
     }
 }

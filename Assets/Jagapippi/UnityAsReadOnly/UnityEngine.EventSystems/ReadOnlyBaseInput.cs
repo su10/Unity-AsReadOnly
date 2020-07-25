@@ -61,6 +61,6 @@ namespace Jagapippi.UnityAsReadOnly
 
     public static class BaseInputExtensions
     {
-        public static ReadOnlyBaseInput AsReadOnly(this BaseInput self) => new ReadOnlyBaseInput(self);
+        public static ReadOnlyBaseInput AsReadOnly(this BaseInput self) => self.IsTrulyNull() ? null : new ReadOnlyBaseInput(self);
     }
 }

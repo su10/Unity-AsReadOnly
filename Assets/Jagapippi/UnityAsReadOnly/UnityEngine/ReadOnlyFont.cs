@@ -54,6 +54,6 @@ namespace Jagapippi.UnityAsReadOnly
 
     public static class FontExtensions
     {
-        public static ReadOnlyFont AsReadOnly(this Font self) => new ReadOnlyFont(self);
+        public static ReadOnlyFont AsReadOnly(this Font self) => self.IsTrulyNull() ? null : new ReadOnlyFont(self);
     }
 }

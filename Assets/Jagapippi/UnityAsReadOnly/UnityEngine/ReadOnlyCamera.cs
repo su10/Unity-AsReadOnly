@@ -236,6 +236,6 @@ namespace Jagapippi.UnityAsReadOnly
 
     public static class CameraExtensions
     {
-        public static ReadOnlyCamera AsReadOnly(this Camera self) => new ReadOnlyCamera(self);
+        public static ReadOnlyCamera AsReadOnly(this Camera self) => self.IsTrulyNull() ? null : new ReadOnlyCamera(self);
     }
 }

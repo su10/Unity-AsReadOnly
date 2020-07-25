@@ -66,6 +66,6 @@ namespace Jagapippi.UnityAsReadOnly
 
     public static class SpriteExtensions
     {
-        public static ReadOnlySprite AsReadOnly(this Sprite self) => new ReadOnlySprite(self);
+        public static ReadOnlySprite AsReadOnly(this Sprite self) => self.IsTrulyNull() ? null : new ReadOnlySprite(self);
     }
 }

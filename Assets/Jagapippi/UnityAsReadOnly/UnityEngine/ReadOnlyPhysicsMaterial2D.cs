@@ -28,6 +28,6 @@ namespace Jagapippi.UnityAsReadOnly
 
     public static class PhysicsMaterial2DExtensions
     {
-        public static ReadOnlyPhysicsMaterial2D AsReadOnly(this PhysicsMaterial2D self) => new ReadOnlyPhysicsMaterial2D(self);
+        public static ReadOnlyPhysicsMaterial2D AsReadOnly(this PhysicsMaterial2D self) => self.IsTrulyNull() ? null : new ReadOnlyPhysicsMaterial2D(self);
     }
 }

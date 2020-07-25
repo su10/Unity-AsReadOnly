@@ -35,7 +35,7 @@ namespace Jagapippi.UnityAsReadOnly
         #region Properties
 
         public Scrollbar.Direction direction => _obj.direction;
-        public ReadOnlyRectTransform handleRect => _obj.handleRect.IsTrulyNull() ? null : _obj.handleRect.AsReadOnly();
+        public ReadOnlyRectTransform handleRect => _obj.handleRect.AsReadOnly();
         IReadOnlyRectTransform IReadOnlyScrollbar.handleRect => this.handleRect;
         public int numberOfSteps => _obj.numberOfSteps;
         // public Scrollbar.ScrollEvent onValueChanged => _obj.onValueChanged;
@@ -46,38 +46,14 @@ namespace Jagapippi.UnityAsReadOnly
 
         #region Public Methods
 
-        public override ReadOnlySelectable FindSelectableOnDown()
-        {
-            var selectable = _obj.FindSelectableOnDown();
-            return selectable.IsTrulyNull() ? null : selectable.AsReadOnly();
-        }
-
+        public override ReadOnlySelectable FindSelectableOnDown() => _obj.FindSelectableOnDown().AsReadOnly();
         IReadOnlySelectable IReadOnlyScrollbar.FindSelectableOnDown() => this.FindSelectableOnDown();
-
-        public override ReadOnlySelectable FindSelectableOnLeft()
-        {
-            var selectable = _obj.FindSelectableOnLeft();
-            return selectable.IsTrulyNull() ? null : selectable.AsReadOnly();
-        }
-
+        public override ReadOnlySelectable FindSelectableOnLeft() => _obj.FindSelectableOnLeft().AsReadOnly();
         IReadOnlySelectable IReadOnlyScrollbar.FindSelectableOnLeft() => this.FindSelectableOnLeft();
-
-        public override ReadOnlySelectable FindSelectableOnRight()
-        {
-            var selectable = _obj.FindSelectableOnRight();
-            return selectable.IsTrulyNull() ? null : selectable.AsReadOnly();
-        }
-
+        public override ReadOnlySelectable FindSelectableOnRight() => _obj.FindSelectableOnRight().AsReadOnly();
         IReadOnlySelectable IReadOnlyScrollbar.FindSelectableOnRight() => this.FindSelectableOnRight();
-
-        public override ReadOnlySelectable FindSelectableOnUp()
-        {
-            var selectable = _obj.FindSelectableOnUp();
-            return selectable.IsTrulyNull() ? null : selectable.AsReadOnly();
-        }
-
+        public override ReadOnlySelectable FindSelectableOnUp() => _obj.FindSelectableOnUp().AsReadOnly();
         IReadOnlySelectable IReadOnlyScrollbar.FindSelectableOnUp() => this.FindSelectableOnUp();
-
         // public void GraphicUpdateComplete() => _obj.GraphicUpdateComplete();
         // public void LayoutComplete() => _obj.LayoutComplete();
         // public void OnBeginDrag(PointerEventData eventData) => _obj.OnBeginDrag(eventData);
@@ -101,6 +77,6 @@ namespace Jagapippi.UnityAsReadOnly
 
     public static class ScrollbarExtensions
     {
-        public static ReadOnlyScrollbar AsReadOnly(this Scrollbar self) => new ReadOnlyScrollbar(self);
+        public static ReadOnlyScrollbar AsReadOnly(this Scrollbar self) => self.IsTrulyNull() ? null : new ReadOnlyScrollbar(self);
     }
 }

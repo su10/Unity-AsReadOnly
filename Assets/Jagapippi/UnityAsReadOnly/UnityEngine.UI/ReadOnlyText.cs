@@ -94,6 +94,6 @@ namespace Jagapippi.UnityAsReadOnly
 
     public static class TextExtensions
     {
-        public static ReadOnlyText AsReadOnly(this Text self) => new ReadOnlyText(self);
+        public static ReadOnlyText AsReadOnly(this Text self) => self.IsTrulyNull() ? null : new ReadOnlyText(self);
     }
 }

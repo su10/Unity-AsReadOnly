@@ -39,7 +39,7 @@ namespace {Namespace}
 
     public static class {ClassName}Extensions
     {{
-        public static ReadOnly{ClassName} AsReadOnly(this {ClassName} self) => new ReadOnly{ClassName}(self);
+        public static ReadOnly{ClassName} AsReadOnly(this {ClassName} self) => self.IsTrulyNull() ? null : new ReadOnly{ClassName}(self);
     }}
 }}";
 
@@ -86,7 +86,7 @@ namespace {Namespace}
 
     public static class {ClassName}Extensions
     {{
-        public static ReadOnly{ClassName} AsReadOnly(this {ClassName} self) => new ReadOnly{ClassName}(self);
+        public static ReadOnly{ClassName} AsReadOnly(this {ClassName} self) => self.IsTrulyNull() ? null : new ReadOnly{ClassName}(self);
     }}
 }}";
 
@@ -142,7 +142,7 @@ namespace {Namespace}
 
     public static class {ClassName}Extensions
     {{
-        public static ReadOnly{ClassName} AsReadOnly(this {ClassName} self) => new ReadOnly{ClassName}(self);
+        public static ReadOnly{ClassName} AsReadOnly(this {ClassName} self) => self.IsTrulyNull() ? null : new ReadOnly{ClassName}(self);
     }}
 }}";
 

@@ -21,9 +21,9 @@ namespace Jagapippi.UnityAsReadOnly
 
         #region Properties
 
-        public ReadOnlyGraphic graphic => _obj.graphic.IsTrulyNull() ? null : _obj.graphic.AsReadOnly();
+        public ReadOnlyGraphic graphic => _obj.graphic.AsReadOnly();
         IReadOnlyGraphic IReadOnlyMask.graphic => this.graphic;
-        public ReadOnlyRectTransform rectTransform => _obj.graphic.IsTrulyNull() ? null : _obj.rectTransform.AsReadOnly();
+        public ReadOnlyRectTransform rectTransform => _obj.rectTransform.AsReadOnly();
         IReadOnlyRectTransform IReadOnlyMask.rectTransform => this.rectTransform;
         public bool showMaskGraphic => _obj.showMaskGraphic;
 
@@ -31,14 +31,8 @@ namespace Jagapippi.UnityAsReadOnly
 
         #region Public Methods
 
-        public virtual ReadOnlyMaterial GetModifiedMaterial(Material baseMaterial)
-        {
-            var material = _obj.GetModifiedMaterial(baseMaterial);
-            return material.IsTrulyNull() ? null : material.AsReadOnly();
-        }
-
+        public virtual ReadOnlyMaterial GetModifiedMaterial(Material baseMaterial) => _obj.GetModifiedMaterial(baseMaterial).AsReadOnly();
         IReadOnlyMaterial IReadOnlyMask.GetModifiedMaterial(Material baseMaterial) => this.GetModifiedMaterial(baseMaterial);
-
         public virtual bool IsRaycastLocationValid(Vector2 sp, Camera eventCamera) => _obj.IsRaycastLocationValid(sp, eventCamera);
         public virtual bool MaskEnabled() => _obj.MaskEnabled();
 
@@ -54,6 +48,6 @@ namespace Jagapippi.UnityAsReadOnly
 
     public static class MaskExtensions
     {
-        public static ReadOnlyMask AsReadOnly(this Mask self) => new ReadOnlyMask(self);
+        public static ReadOnlyMask AsReadOnly(this Mask self) => self.IsTrulyNull() ? null : new ReadOnlyMask(self);
     }
 }

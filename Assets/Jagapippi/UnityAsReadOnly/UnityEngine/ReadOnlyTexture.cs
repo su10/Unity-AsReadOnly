@@ -66,6 +66,6 @@ namespace Jagapippi.UnityAsReadOnly
 
     public static class TextureExtensions
     {
-        public static ReadOnlyTexture AsReadOnly(this Texture self) => new ReadOnlyTexture(self);
+        public static ReadOnlyTexture AsReadOnly(this Texture self) => self.IsTrulyNull() ? null : new ReadOnlyTexture(self);
     }
 }

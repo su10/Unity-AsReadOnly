@@ -49,6 +49,6 @@ namespace Jagapippi.UnityAsReadOnly
 
     public static class TextMeshExtensions
     {
-        public static ReadOnlyTextMesh AsReadOnly(this TextMesh self) => new ReadOnlyTextMesh(self);
+        public static ReadOnlyTextMesh AsReadOnly(this TextMesh self) => self.IsTrulyNull() ? null : new ReadOnlyTextMesh(self);
     }
 }

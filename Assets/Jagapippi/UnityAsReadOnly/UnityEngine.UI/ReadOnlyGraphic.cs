@@ -103,6 +103,6 @@ namespace Jagapippi.UnityAsReadOnly
 
     public static class GraphicExtensions
     {
-        public static ReadOnlyGraphic AsReadOnly(this Graphic self) => new ReadOnlyGraphic(self);
+        public static ReadOnlyGraphic AsReadOnly(this Graphic self) => self.IsTrulyNull() ? null : new ReadOnlyGraphic(self);
     }
 }

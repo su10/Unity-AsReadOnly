@@ -49,6 +49,6 @@ namespace Jagapippi.UnityAsReadOnly
 
     public static class ToggleGroupExtensions
     {
-        public static ReadOnlyToggleGroup AsReadOnly(this ToggleGroup self) => new ReadOnlyToggleGroup(self);
+        public static ReadOnlyToggleGroup AsReadOnly(this ToggleGroup self) => self.IsTrulyNull() ? null : new ReadOnlyToggleGroup(self);
     }
 }

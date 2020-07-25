@@ -66,6 +66,6 @@ namespace Jagapippi.UnityAsReadOnly
 
     public static class MonoBehaviourExtensions
     {
-        public static ReadOnlyMonoBehaviour AsReadOnly(this MonoBehaviour self) => new ReadOnlyMonoBehaviour(self);
+        public static ReadOnlyMonoBehaviour AsReadOnly(this MonoBehaviour self) => self.IsTrulyNull() ? null : new ReadOnlyMonoBehaviour(self);
     }
 }

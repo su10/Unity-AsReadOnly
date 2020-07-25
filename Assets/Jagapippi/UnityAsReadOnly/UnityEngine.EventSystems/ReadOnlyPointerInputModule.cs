@@ -35,6 +35,6 @@ namespace Jagapippi.UnityAsReadOnly
 
     public static class PointerInputModuleExtensions
     {
-        public static ReadOnlyPointerInputModule AsReadOnly(this PointerInputModule self) => new ReadOnlyPointerInputModule(self);
+        public static ReadOnlyPointerInputModule AsReadOnly(this PointerInputModule self) => self.IsTrulyNull() ? null : new ReadOnlyPointerInputModule(self);
     }
 }

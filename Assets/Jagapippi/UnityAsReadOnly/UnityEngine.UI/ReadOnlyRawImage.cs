@@ -41,6 +41,6 @@ namespace Jagapippi.UnityAsReadOnly
 
     public static class RawImageExtensions
     {
-        public static ReadOnlyRawImage AsReadOnly(this RawImage self) => new ReadOnlyRawImage(self);
+        public static ReadOnlyRawImage AsReadOnly(this RawImage self) => self.IsTrulyNull() ? null : new ReadOnlyRawImage(self);
     }
 }

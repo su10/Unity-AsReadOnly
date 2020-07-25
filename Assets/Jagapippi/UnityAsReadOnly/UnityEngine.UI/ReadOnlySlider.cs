@@ -36,9 +36,9 @@ namespace Jagapippi.UnityAsReadOnly
         #region Properties
 
         public Slider.Direction direction => _obj.direction;
-        public ReadOnlyRectTransform fillRect => _obj.fillRect.IsTrulyNull() ? null : _obj.fillRect.AsReadOnly();
+        public ReadOnlyRectTransform fillRect => _obj.fillRect.AsReadOnly();
         IReadOnlyRectTransform IReadOnlySlider.fillRect => this.fillRect;
-        public ReadOnlyRectTransform handleRect => _obj.handleRect.IsTrulyNull() ? null : _obj.handleRect.AsReadOnly();
+        public ReadOnlyRectTransform handleRect => _obj.handleRect.AsReadOnly();
         IReadOnlyRectTransform IReadOnlySlider.handleRect => this.handleRect;
         public float maxValue => _obj.maxValue;
         public float minValue => _obj.minValue;
@@ -51,38 +51,14 @@ namespace Jagapippi.UnityAsReadOnly
 
         #region Public Methods
 
-        public override ReadOnlySelectable FindSelectableOnDown()
-        {
-            var selectable = _obj.FindSelectableOnDown();
-            return selectable.IsTrulyNull() ? null : selectable.AsReadOnly();
-        }
-
+        public override ReadOnlySelectable FindSelectableOnDown() => _obj.FindSelectableOnDown().AsReadOnly();
         IReadOnlySelectable IReadOnlySlider.FindSelectableOnDown() => this.FindSelectableOnDown();
-
-        public override ReadOnlySelectable FindSelectableOnLeft()
-        {
-            var selectable = _obj.FindSelectableOnLeft();
-            return selectable.IsTrulyNull() ? null : selectable.AsReadOnly();
-        }
-
+        public override ReadOnlySelectable FindSelectableOnLeft() => _obj.FindSelectableOnLeft().AsReadOnly();
         IReadOnlySelectable IReadOnlySlider.FindSelectableOnLeft() => this.FindSelectableOnLeft();
-
-        public override ReadOnlySelectable FindSelectableOnRight()
-        {
-            var selectable = _obj.FindSelectableOnRight();
-            return selectable.IsTrulyNull() ? null : selectable.AsReadOnly();
-        }
-
+        public override ReadOnlySelectable FindSelectableOnRight() => _obj.FindSelectableOnRight().AsReadOnly();
         IReadOnlySelectable IReadOnlySlider.FindSelectableOnRight() => this.FindSelectableOnRight();
-
-        public override ReadOnlySelectable FindSelectableOnUp()
-        {
-            var selectable = _obj.FindSelectableOnUp();
-            return selectable.IsTrulyNull() ? null : selectable.AsReadOnly();
-        }
-
+        public override ReadOnlySelectable FindSelectableOnUp() => _obj.FindSelectableOnUp().AsReadOnly();
         IReadOnlySelectable IReadOnlySlider.FindSelectableOnUp() => this.FindSelectableOnUp();
-
         // public void GraphicUpdateComplete() => _obj.GraphicUpdateComplete();
         // public void LayoutComplete() => _obj.LayoutComplete();
         // public void OnDrag(PointerEventData eventData) => _obj.OnDrag(eventData);
@@ -104,6 +80,6 @@ namespace Jagapippi.UnityAsReadOnly
 
     public static class SliderExtensions
     {
-        public static ReadOnlySlider AsReadOnly(this Slider self) => new ReadOnlySlider(self);
+        public static ReadOnlySlider AsReadOnly(this Slider self) => self.IsTrulyNull() ? null : new ReadOnlySlider(self);
     }
 }

@@ -38,6 +38,6 @@ namespace Jagapippi.UnityAsReadOnly
 
     public static class MeshColliderExtensions
     {
-        public static ReadOnlyMeshCollider AsReadOnly(this MeshCollider self) => new ReadOnlyMeshCollider(self);
+        public static ReadOnlyMeshCollider AsReadOnly(this MeshCollider self) => self.IsTrulyNull() ? null : new ReadOnlyMeshCollider(self);
     }
 }

@@ -44,6 +44,6 @@ namespace Jagapippi.UnityAsReadOnly
 
     public static class SpriteRendererExtensions
     {
-        public static ReadOnlySpriteRenderer AsReadOnly(this SpriteRenderer self) => new ReadOnlySpriteRenderer(self);
+        public static ReadOnlySpriteRenderer AsReadOnly(this SpriteRenderer self) => self.IsTrulyNull() ? null : new ReadOnlySpriteRenderer(self);
     }
 }

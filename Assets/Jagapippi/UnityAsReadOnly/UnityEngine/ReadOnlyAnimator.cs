@@ -337,6 +337,6 @@ namespace Jagapippi.UnityAsReadOnly
 
     public static class AnimatorExtensions
     {
-        public static ReadOnlyAnimator AsReadOnly(this Animator self) => new ReadOnlyAnimator(self);
+        public static ReadOnlyAnimator AsReadOnly(this Animator self) => self.IsTrulyNull() ? null : new ReadOnlyAnimator(self);
     }
 }

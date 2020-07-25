@@ -55,7 +55,7 @@ namespace Jagapippi.UnityAsReadOnly
 
     public static class GradientExtensions
     {
-        public static ReadOnlyGradient AsReadOnly(this Gradient self) => new ReadOnlyGradient(self);
+        public static ReadOnlyGradient AsReadOnly(this Gradient self) => self.IsTrulyNull() ? null : new ReadOnlyGradient(self);
         internal static bool IsTrulyNull(this Gradient self) => ReferenceEquals(self, null);
     }
 }

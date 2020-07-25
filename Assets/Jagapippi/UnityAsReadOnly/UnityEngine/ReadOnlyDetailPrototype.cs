@@ -60,7 +60,7 @@ namespace Jagapippi.UnityAsReadOnly
 
     public static class DetailPrototypeExtensions
     {
-        public static ReadOnlyDetailPrototype AsReadOnly(this DetailPrototype self) => new ReadOnlyDetailPrototype(self);
+        public static ReadOnlyDetailPrototype AsReadOnly(this DetailPrototype self) => self.IsTrulyNull() ? null : new ReadOnlyDetailPrototype(self);
         internal static bool IsTrulyNull(this DetailPrototype self) => ReferenceEquals(self, null);
     }
 }

@@ -23,9 +23,9 @@ namespace Jagapippi.UnityAsReadOnly
 
         #region Properties
 
-        public ReadOnlyBaseInput input => _obj.input.IsTrulyNull() ? null : _obj.input.AsReadOnly();
+        public ReadOnlyBaseInput input => _obj.input.AsReadOnly();
         IReadOnlyBaseInput IReadOnlyBaseInputModule.input => this.input;
-        public ReadOnlyBaseInput inputOverride => _obj.inputOverride.IsTrulyNull() ? null : _obj.inputOverride.AsReadOnly();
+        public ReadOnlyBaseInput inputOverride => _obj.inputOverride.AsReadOnly();
         IReadOnlyBaseInput IReadOnlyBaseInputModule.inputOverride => this.inputOverride;
 
         #endregion
@@ -52,6 +52,6 @@ namespace Jagapippi.UnityAsReadOnly
 
     public static class BaseInputModuleExtensions
     {
-        public static ReadOnlyBaseInputModule AsReadOnly(this BaseInputModule self) => new ReadOnlyBaseInputModule(self);
+        public static ReadOnlyBaseInputModule AsReadOnly(this BaseInputModule self) => self.IsTrulyNull() ? null : new ReadOnlyBaseInputModule(self);
     }
 }

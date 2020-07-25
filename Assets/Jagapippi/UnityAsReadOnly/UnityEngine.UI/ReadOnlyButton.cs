@@ -38,6 +38,6 @@ namespace Jagapippi.UnityAsReadOnly
 
     public static class ButtonExtensions
     {
-        public static ReadOnlyButton AsReadOnly(this Button self) => new ReadOnlyButton(self);
+        public static ReadOnlyButton AsReadOnly(this Button self) => self.IsTrulyNull() ? null : new ReadOnlyButton(self);
     }
 }

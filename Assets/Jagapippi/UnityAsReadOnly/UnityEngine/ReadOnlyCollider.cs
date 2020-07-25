@@ -55,6 +55,6 @@ namespace Jagapippi.UnityAsReadOnly
 
     public static class ColliderExtensions
     {
-        public static ReadOnlyCollider AsReadOnly(this Collider self) => new ReadOnlyCollider(self);
+        public static ReadOnlyCollider AsReadOnly(this Collider self) => self.IsTrulyNull() ? null : new ReadOnlyCollider(self);
     }
 }

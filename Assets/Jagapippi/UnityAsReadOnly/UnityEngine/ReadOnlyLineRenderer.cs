@@ -73,6 +73,6 @@ namespace Jagapippi.UnityAsReadOnly
 
     public static class LineRendererExtensions
     {
-        public static ReadOnlyLineRenderer AsReadOnly(this LineRenderer self) => new ReadOnlyLineRenderer(self);
+        public static ReadOnlyLineRenderer AsReadOnly(this LineRenderer self) => self.IsTrulyNull() ? null : new ReadOnlyLineRenderer(self);
     }
 }

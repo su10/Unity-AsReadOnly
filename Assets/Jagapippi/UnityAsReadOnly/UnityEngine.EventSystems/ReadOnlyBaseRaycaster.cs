@@ -20,7 +20,7 @@ namespace Jagapippi.UnityAsReadOnly
 
         #region Properties
 
-        public virtual ReadOnlyCamera eventCamera => _obj.eventCamera.IsTrulyNull() ? null : _obj.eventCamera.AsReadOnly();
+        public virtual ReadOnlyCamera eventCamera => _obj.eventCamera.AsReadOnly();
         IReadOnlyCamera IReadOnlyBaseRaycaster.eventCamera => this.eventCamera;
         public virtual int renderOrderPriority => _obj.renderOrderPriority;
         public virtual int sortOrderPriority => _obj.sortOrderPriority;
@@ -44,6 +44,6 @@ namespace Jagapippi.UnityAsReadOnly
 
     public static class BaseRaycasterExtensions
     {
-        public static ReadOnlyBaseRaycaster AsReadOnly(this BaseRaycaster self) => new ReadOnlyBaseRaycaster(self);
+        public static ReadOnlyBaseRaycaster AsReadOnly(this BaseRaycaster self) => self.IsTrulyNull() ? null : new ReadOnlyBaseRaycaster(self);
     }
 }

@@ -104,12 +104,12 @@ namespace Jagapippi.UnityAsReadOnly
         public bool sendFrameReadyEvents => _obj.sendFrameReadyEvents;
         public bool skipOnDrop => _obj.skipOnDrop;
         public VideoSource source => _obj.source;
-        public ReadOnlyCamera targetCamera => _obj.targetCamera.IsTrulyNull() ? null : _obj.targetCamera.AsReadOnly();
+        public ReadOnlyCamera targetCamera => _obj.targetCamera.AsReadOnly();
         IReadOnlyCamera IReadOnlyVideoPlayer.targetCamera => this.targetCamera;
         public Video3DLayout targetCamera3DLayout => _obj.targetCamera3DLayout;
         public float targetCameraAlpha => _obj.targetCameraAlpha;
         public string targetMaterialProperty => _obj.targetMaterialProperty;
-        public ReadOnlyRenderer targetMaterialRenderer => _obj.targetMaterialRenderer.IsTrulyNull() ? null : _obj.targetMaterialRenderer.AsReadOnly();
+        public ReadOnlyRenderer targetMaterialRenderer => _obj.targetMaterialRenderer.AsReadOnly();
         IReadOnlyRenderer IReadOnlyVideoPlayer.targetMaterialRenderer => this.targetMaterialRenderer;
         public RenderTexture targetTexture => _obj.targetTexture;
         public Texture texture => _obj.texture;
@@ -130,15 +130,8 @@ namespace Jagapippi.UnityAsReadOnly
         public uint GetAudioSampleRate(ushort trackIndex) => _obj.GetAudioSampleRate(trackIndex);
         public bool GetDirectAudioMute(ushort trackIndex) => _obj.GetDirectAudioMute(trackIndex);
         public float GetDirectAudioVolume(ushort trackIndex) => _obj.GetDirectAudioVolume(trackIndex);
-
-        public ReadOnlyAudioSource GetTargetAudioSource(ushort trackIndex)
-        {
-            var audioSource = _obj.GetTargetAudioSource(trackIndex);
-            return audioSource.IsTrulyNull() ? null : audioSource.AsReadOnly();
-        }
-
+        public ReadOnlyAudioSource GetTargetAudioSource(ushort trackIndex) => _obj.GetTargetAudioSource(trackIndex).AsReadOnly();
         IReadOnlyAudioSource IReadOnlyVideoPlayer.GetTargetAudioSource(ushort trackIndex) => this.GetTargetAudioSource(trackIndex);
-
         public bool IsAudioTrackEnabled(ushort trackIndex) => _obj.IsAudioTrackEnabled(trackIndex);
         // public void Pause() => _obj.Pause();
         // public void Play() => _obj.Play();
@@ -154,6 +147,6 @@ namespace Jagapippi.UnityAsReadOnly
 
     public static class VideoPlayerExtensions
     {
-        public static ReadOnlyVideoPlayer AsReadOnly(this VideoPlayer self) => new ReadOnlyVideoPlayer(self);
+        public static ReadOnlyVideoPlayer AsReadOnly(this VideoPlayer self) => self.IsTrulyNull() ? null : new ReadOnlyVideoPlayer(self);
     }
 }

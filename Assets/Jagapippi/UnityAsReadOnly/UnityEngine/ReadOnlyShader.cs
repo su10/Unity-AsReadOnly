@@ -30,6 +30,6 @@ namespace Jagapippi.UnityAsReadOnly
 
     public static class ShaderExtensions
     {
-        public static ReadOnlyShader AsReadOnly(this Shader self) => new ReadOnlyShader(self);
+        public static ReadOnlyShader AsReadOnly(this Shader self) => self.IsTrulyNull() ? null : new ReadOnlyShader(self);
     }
 }

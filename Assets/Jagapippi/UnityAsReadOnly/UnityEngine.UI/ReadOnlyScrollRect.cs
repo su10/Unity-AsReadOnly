@@ -56,7 +56,7 @@ namespace Jagapippi.UnityAsReadOnly
 
         #region Properties
 
-        public ReadOnlyRectTransform content => _obj.content.IsTrulyNull() ? null : _obj.content.AsReadOnly();
+        public ReadOnlyRectTransform content => _obj.content.AsReadOnly();
         IReadOnlyRectTransform IReadOnlyScrollRect.content => this.content;
         public float decelerationRate => _obj.decelerationRate;
         public float elasticity => _obj.elasticity;
@@ -64,7 +64,7 @@ namespace Jagapippi.UnityAsReadOnly
         public virtual float flexibleWidth => _obj.flexibleWidth;
         public bool horizontal => _obj.horizontal;
         public float horizontalNormalizedPosition => _obj.horizontalNormalizedPosition;
-        public ReadOnlyScrollbar horizontalScrollbar => _obj.horizontalScrollbar.IsTrulyNull() ? null : _obj.horizontalScrollbar.AsReadOnly();
+        public ReadOnlyScrollbar horizontalScrollbar => _obj.horizontalScrollbar.AsReadOnly();
         IReadOnlyScrollbar IReadOnlyScrollRect.horizontalScrollbar => this.horizontalScrollbar;
         public float horizontalScrollbarSpacing => _obj.horizontalScrollbarSpacing;
         public ScrollRect.ScrollbarVisibility horizontalScrollbarVisibility => _obj.horizontalScrollbarVisibility;
@@ -81,11 +81,11 @@ namespace Jagapippi.UnityAsReadOnly
         public Vector2 velocity => _obj.velocity;
         public bool vertical => _obj.vertical;
         public float verticalNormalizedPosition => _obj.verticalNormalizedPosition;
-        public ReadOnlyScrollbar verticalScrollbar => _obj.verticalScrollbar.IsTrulyNull() ? null : _obj.verticalScrollbar.AsReadOnly();
+        public ReadOnlyScrollbar verticalScrollbar => _obj.verticalScrollbar.AsReadOnly();
         IReadOnlyScrollbar IReadOnlyScrollRect.verticalScrollbar => this.verticalScrollbar;
         public float verticalScrollbarSpacing => _obj.verticalScrollbarSpacing;
         public ScrollRect.ScrollbarVisibility verticalScrollbarVisibility => _obj.verticalScrollbarVisibility;
-        public ReadOnlyRectTransform viewport => _obj.viewport.IsTrulyNull() ? null : _obj.viewport.AsReadOnly();
+        public ReadOnlyRectTransform viewport => _obj.viewport.AsReadOnly();
         IReadOnlyRectTransform IReadOnlyScrollRect.viewport => this.viewport;
 
         #endregion
@@ -119,6 +119,6 @@ namespace Jagapippi.UnityAsReadOnly
 
     public static class ScrollRectExtensions
     {
-        public static ReadOnlyScrollRect AsReadOnly(this ScrollRect self) => new ReadOnlyScrollRect(self);
+        public static ReadOnlyScrollRect AsReadOnly(this ScrollRect self) => self.IsTrulyNull() ? null : new ReadOnlyScrollRect(self);
     }
 }

@@ -59,6 +59,6 @@ namespace Jagapippi.UnityAsReadOnly
 
     public static class AnimationClipExtensions
     {
-        public static ReadOnlyAnimationClip AsReadOnly(this AnimationClip self) => new ReadOnlyAnimationClip(self);
+        public static ReadOnlyAnimationClip AsReadOnly(this AnimationClip self) => self.IsTrulyNull() ? null : new ReadOnlyAnimationClip(self);
     }
 }

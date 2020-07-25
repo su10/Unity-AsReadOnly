@@ -35,6 +35,6 @@ namespace Jagapippi.UnityAsReadOnly
 
     public static class SphereColliderExtensions
     {
-        public static ReadOnlySphereCollider AsReadOnly(this SphereCollider self) => new ReadOnlySphereCollider(self);
+        public static ReadOnlySphereCollider AsReadOnly(this SphereCollider self) => self.IsTrulyNull() ? null : new ReadOnlySphereCollider(self);
     }
 }

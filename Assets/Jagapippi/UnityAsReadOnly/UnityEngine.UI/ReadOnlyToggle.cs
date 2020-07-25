@@ -21,7 +21,7 @@ namespace Jagapippi.UnityAsReadOnly
 
         #region Properties
 
-        public ReadOnlyToggleGroup group => _obj.group.IsTrulyNull() ? null : _obj.group.AsReadOnly();
+        public ReadOnlyToggleGroup group => _obj.group.AsReadOnly();
         IReadOnlyToggleGroup IReadOnlyToggle.group => this.group;
         public bool isOn => _obj.isOn;
 
@@ -47,6 +47,6 @@ namespace Jagapippi.UnityAsReadOnly
 
     public static class ToggleExtensions
     {
-        public static ReadOnlyToggle AsReadOnly(this Toggle self) => new ReadOnlyToggle(self);
+        public static ReadOnlyToggle AsReadOnly(this Toggle self) => self.IsTrulyNull() ? null : new ReadOnlyToggle(self);
     }
 }

@@ -52,6 +52,7 @@ namespace Jagapippi.UnityAsReadOnly
 
     public static class TouchScreenKeyboardExtensions
     {
-        public static ReadOnlyTouchScreenKeyboard AsReadOnly(this TouchScreenKeyboard self) => new ReadOnlyTouchScreenKeyboard(self);
+        public static ReadOnlyTouchScreenKeyboard AsReadOnly(this TouchScreenKeyboard self) => self.IsTrulyNull() ? null : new ReadOnlyTouchScreenKeyboard(self);
+        internal static bool IsTrulyNull(this TouchScreenKeyboard self) => ReferenceEquals(self, null);
     }
 }

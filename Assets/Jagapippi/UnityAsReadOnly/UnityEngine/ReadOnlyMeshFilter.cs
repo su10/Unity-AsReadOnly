@@ -16,9 +16,9 @@ namespace Jagapippi.UnityAsReadOnly
 
         #region Properties
 
-        public ReadOnlyMesh mesh => _obj.mesh.IsTrulyNull() ? null : _obj.mesh.AsReadOnly();
+        public ReadOnlyMesh mesh => _obj.mesh.AsReadOnly();
         IReadOnlyMesh IReadOnlyMeshFilter.mesh => this.mesh;
-        public ReadOnlyMesh sharedMesh => _obj.sharedMesh.IsTrulyNull() ? null : _obj.sharedMesh.AsReadOnly();
+        public ReadOnlyMesh sharedMesh => _obj.sharedMesh.AsReadOnly();
         IReadOnlyMesh IReadOnlyMeshFilter.sharedMesh => this.sharedMesh;
 
         #endregion
@@ -30,6 +30,6 @@ namespace Jagapippi.UnityAsReadOnly
 
     public static class MeshFilterExtensions
     {
-        public static ReadOnlyMeshFilter AsReadOnly(this MeshFilter self) => new ReadOnlyMeshFilter(self);
+        public static ReadOnlyMeshFilter AsReadOnly(this MeshFilter self) => self.IsTrulyNull() ? null : new ReadOnlyMeshFilter(self);
     }
 }

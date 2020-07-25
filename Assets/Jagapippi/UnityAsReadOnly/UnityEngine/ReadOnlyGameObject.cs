@@ -66,7 +66,7 @@ namespace Jagapippi.UnityAsReadOnly
 
         public bool activeInHierarchy => _obj.activeInHierarchy;
         public bool activeSelf => _obj.activeSelf;
-        public ReadOnlyGameObject gameObject => _obj.gameObject.IsTrulyNull() ? null : _obj.gameObject.AsReadOnly();
+        public ReadOnlyGameObject gameObject => _obj.gameObject.AsReadOnly();
         IReadOnlyGameObject IReadOnlyGameObject.gameObject => this.gameObject;
 #if UNITY_EDITOR
         public bool isStatic => _obj.isStatic;
@@ -74,7 +74,7 @@ namespace Jagapippi.UnityAsReadOnly
         public int layer => _obj.layer;
         public ReadOnlyScene scene => _obj.scene.AsReadOnly();
         public string tag => _obj.tag;
-        public ReadOnlyTransform transform => _obj.transform.IsTrulyNull() ? null : _obj.transform.AsReadOnly();
+        public ReadOnlyTransform transform => _obj.transform.AsReadOnly();
         IReadOnlyTransform IReadOnlyGameObject.transform => this.transform;
 
         #endregion
@@ -127,6 +127,6 @@ namespace Jagapippi.UnityAsReadOnly
 
     public static class GameObjectExtensions
     {
-        public static ReadOnlyGameObject AsReadOnly(this GameObject self) => new ReadOnlyGameObject(self);
+        public static ReadOnlyGameObject AsReadOnly(this GameObject self) => self.IsTrulyNull() ? null : new ReadOnlyGameObject(self);
     }
 }

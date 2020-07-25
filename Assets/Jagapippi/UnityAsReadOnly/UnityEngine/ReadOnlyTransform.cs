@@ -89,11 +89,11 @@ namespace Jagapippi.UnityAsReadOnly
         public Vector3 localScale => _obj.localScale;
         public Matrix4x4 localToWorldMatrix => _obj.localToWorldMatrix;
         public Vector3 lossyScale => _obj.lossyScale;
-        public ReadOnlyTransform parent => _obj.parent.IsTrulyNull() ? null : _obj.parent.AsReadOnly();
+        public ReadOnlyTransform parent => _obj.parent.AsReadOnly();
         IReadOnlyTransform IReadOnlyTransform.parent => this.parent;
         public Vector3 position => _obj.position;
         public Vector3 right => _obj.right;
-        public ReadOnlyTransform root => _obj.root.IsTrulyNull() ? null : _obj.root.AsReadOnly();
+        public ReadOnlyTransform root => _obj.root.AsReadOnly();
         IReadOnlyTransform IReadOnlyTransform.root => this.root;
         public Quaternion rotation => _obj.rotation;
         public Vector3 up => _obj.up;
@@ -105,20 +105,9 @@ namespace Jagapippi.UnityAsReadOnly
 
         // public void DetachChildren() => _obj.DetachChildren();
 
-        public ReadOnlyTransform Find(string n)
-        {
-            var transform = _obj.Find(n);
-            return transform.IsTrulyNull() ? null : transform.AsReadOnly();
-        }
-
+        public ReadOnlyTransform Find(string n) => _obj.Find(n).AsReadOnly();
         IReadOnlyTransform IReadOnlyTransform.Find(string n) => this.Find(n);
-
-        public ReadOnlyTransform GetChild(int index)
-        {
-            var transform = _obj.GetChild(index);
-            return transform.IsTrulyNull() ? null : transform.AsReadOnly();
-        }
-
+        public ReadOnlyTransform GetChild(int index) => _obj.GetChild(index).AsReadOnly();
         IReadOnlyTransform IReadOnlyTransform.GetChild(int index) => this.GetChild(index);
         public IEnumerator<ReadOnlyTransform> GetEnumerator() => new Enumerator<ReadOnlyTransform<T>, ReadOnlyTransform>(this);
         IEnumerator IEnumerable.GetEnumerator() => this.GetEnumerator();
@@ -199,6 +188,6 @@ namespace Jagapippi.UnityAsReadOnly
 
     public static class TransformExtensions
     {
-        public static ReadOnlyTransform AsReadOnly(this Transform self) => new ReadOnlyTransform(self);
+        public static ReadOnlyTransform AsReadOnly(this Transform self) => self.IsTrulyNull() ? null : new ReadOnlyTransform(self);
     }
 }

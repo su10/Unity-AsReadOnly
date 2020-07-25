@@ -53,6 +53,6 @@ namespace Jagapippi.UnityAsReadOnly
 
     public static class RectTransformExtensions
     {
-        public static ReadOnlyRectTransform AsReadOnly(this RectTransform self) => new ReadOnlyRectTransform(self);
+        public static ReadOnlyRectTransform AsReadOnly(this RectTransform self) => self.IsTrulyNull() ? null : new ReadOnlyRectTransform(self);
     }
 }

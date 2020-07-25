@@ -35,6 +35,6 @@ namespace Jagapippi.UnityAsReadOnly
 
     public static class BoxColliderExtensions
     {
-        public static ReadOnlyBoxCollider AsReadOnly(this BoxCollider self) => new ReadOnlyBoxCollider(self);
+        public static ReadOnlyBoxCollider AsReadOnly(this BoxCollider self) => self.IsTrulyNull() ? null : new ReadOnlyBoxCollider(self);
     }
 }

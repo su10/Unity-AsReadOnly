@@ -39,6 +39,6 @@ namespace Jagapippi.UnityAsReadOnly
 
     public static class CapsuleColliderExtensions
     {
-        public static ReadOnlyCapsuleCollider AsReadOnly(this CapsuleCollider self) => new ReadOnlyCapsuleCollider(self);
+        public static ReadOnlyCapsuleCollider AsReadOnly(this CapsuleCollider self) => self.IsTrulyNull() ? null : new ReadOnlyCapsuleCollider(self);
     }
 }

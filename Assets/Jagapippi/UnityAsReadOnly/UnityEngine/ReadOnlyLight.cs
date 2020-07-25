@@ -100,6 +100,6 @@ namespace Jagapippi.UnityAsReadOnly
 
     public static class LightExtensions
     {
-        public static ReadOnlyLight AsReadOnly(this Light self) => new ReadOnlyLight(self);
+        public static ReadOnlyLight AsReadOnly(this Light self) => self.IsTrulyNull() ? null : new ReadOnlyLight(self);
     }
 }

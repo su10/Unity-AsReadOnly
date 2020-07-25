@@ -45,14 +45,14 @@ namespace Jagapippi.UnityAsReadOnly
         public float referencePixelsPerUnit => _obj.referencePixelsPerUnit;
         public RenderMode renderMode => _obj.renderMode;
         public int renderOrder => _obj.renderOrder;
-        public ReadOnlyCanvas rootCanvas => _obj.rootCanvas.IsTrulyNull() ? null : _obj.rootCanvas.AsReadOnly();
+        public ReadOnlyCanvas rootCanvas => _obj.rootCanvas.AsReadOnly();
         IReadOnlyCanvas IReadOnlyCanvas.rootCanvas => this.rootCanvas;
         public float scaleFactor => _obj.scaleFactor;
         public int sortingLayerID => _obj.sortingLayerID;
         public string sortingLayerName => _obj.sortingLayerName;
         public int sortingOrder => _obj.sortingOrder;
         public int targetDisplay => _obj.targetDisplay;
-        public ReadOnlyCamera worldCamera => _obj.worldCamera.IsTrulyNull() ? null : _obj.worldCamera.AsReadOnly();
+        public ReadOnlyCamera worldCamera => _obj.worldCamera.AsReadOnly();
         IReadOnlyCamera IReadOnlyCanvas.worldCamera => this.worldCamera;
 
         #endregion
@@ -64,6 +64,6 @@ namespace Jagapippi.UnityAsReadOnly
 
     public static class CanvasExtensions
     {
-        public static ReadOnlyCanvas AsReadOnly(this Canvas self) => new ReadOnlyCanvas(self);
+        public static ReadOnlyCanvas AsReadOnly(this Canvas self) => self.IsTrulyNull() ? null : new ReadOnlyCanvas(self);
     }
 }

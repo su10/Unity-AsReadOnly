@@ -58,6 +58,6 @@ namespace Jagapippi.UnityAsReadOnly
 
     public static class StandaloneInputModuleExtensions
     {
-        public static ReadOnlyStandaloneInputModule AsReadOnly(this StandaloneInputModule self) => new ReadOnlyStandaloneInputModule(self);
+        public static ReadOnlyStandaloneInputModule AsReadOnly(this StandaloneInputModule self) => self.IsTrulyNull() ? null : new ReadOnlyStandaloneInputModule(self);
     }
 }

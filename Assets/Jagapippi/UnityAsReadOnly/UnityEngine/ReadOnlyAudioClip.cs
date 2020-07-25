@@ -51,6 +51,6 @@ namespace Jagapippi.UnityAsReadOnly
 
     public static class AudioClipExtensions
     {
-        public static ReadOnlyAudioClip AsReadOnly(this AudioClip self) => new ReadOnlyAudioClip(self);
+        public static ReadOnlyAudioClip AsReadOnly(this AudioClip self) => self.IsTrulyNull() ? null : new ReadOnlyAudioClip(self);
     }
 }

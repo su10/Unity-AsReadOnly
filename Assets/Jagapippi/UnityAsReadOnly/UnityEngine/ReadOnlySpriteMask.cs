@@ -41,6 +41,6 @@ namespace Jagapippi.UnityAsReadOnly
 
     public static class SpriteMaskExtensions
     {
-        public static ReadOnlySpriteMask AsReadOnly(this SpriteMask self) => new ReadOnlySpriteMask(self);
+        public static ReadOnlySpriteMask AsReadOnly(this SpriteMask self) => self.IsTrulyNull() ? null : new ReadOnlySpriteMask(self);
     }
 }

@@ -154,6 +154,6 @@ namespace Jagapippi.UnityAsReadOnly
 
     public static class RigidbodyExtensions
     {
-        public static ReadOnlyRigidbody AsReadOnly(this Rigidbody self) => new ReadOnlyRigidbody(self);
+        public static ReadOnlyRigidbody AsReadOnly(this Rigidbody self) => self.IsTrulyNull() ? null : new ReadOnlyRigidbody(self);
     }
 }

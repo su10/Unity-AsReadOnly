@@ -81,6 +81,6 @@ namespace Jagapippi.UnityAsReadOnly
 
     public static class TrailRendererExtensions
     {
-        public static ReadOnlyTrailRenderer AsReadOnly(this TrailRenderer self) => new ReadOnlyTrailRenderer(self);
+        public static ReadOnlyTrailRenderer AsReadOnly(this TrailRenderer self) => self.IsTrulyNull() ? null : new ReadOnlyTrailRenderer(self);
     }
 }

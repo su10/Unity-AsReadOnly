@@ -65,7 +65,7 @@ namespace Jagapippi.UnityAsReadOnly
 
     public static class AnimationCurveExtensions
     {
-        public static ReadOnlyAnimationCurve AsReadOnly(this AnimationCurve self) => new ReadOnlyAnimationCurve(self);
+        public static ReadOnlyAnimationCurve AsReadOnly(this AnimationCurve self) => self.IsTrulyNull() ? null : new ReadOnlyAnimationCurve(self);
         internal static bool IsTrulyNull(this AnimationCurve self) => ReferenceEquals(self, null);
     }
 }

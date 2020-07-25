@@ -41,6 +41,6 @@ namespace Jagapippi.UnityAsReadOnly
 
     public static class PhysicMaterialExtensions
     {
-        public static ReadOnlyPhysicMaterial AsReadOnly(this PhysicMaterial self) => new ReadOnlyPhysicMaterial(self);
+        public static ReadOnlyPhysicMaterial AsReadOnly(this PhysicMaterial self) => self.IsTrulyNull() ? null : new ReadOnlyPhysicMaterial(self);
     }
 }

@@ -22,7 +22,7 @@ namespace Jagapippi.UnityAsReadOnly
         #region Properties
 
         public Rect canvasRect => _obj.canvasRect;
-        public ReadOnlyRectTransform rectTransform => _obj.rectTransform.IsTrulyNull() ? null : _obj.rectTransform.AsReadOnly();
+        public ReadOnlyRectTransform rectTransform => _obj.rectTransform.AsReadOnly();
         IReadOnlyRectTransform IReadOnlyRectMask2D.rectTransform => this.rectTransform;
 
         #endregion
@@ -46,6 +46,6 @@ namespace Jagapippi.UnityAsReadOnly
 
     public static class RectMask2DExtensions
     {
-        public static ReadOnlyRectMask2D AsReadOnly(this RectMask2D self) => new ReadOnlyRectMask2D(self);
+        public static ReadOnlyRectMask2D AsReadOnly(this RectMask2D self) => self.IsTrulyNull() ? null : new ReadOnlyRectMask2D(self);
     }
 }

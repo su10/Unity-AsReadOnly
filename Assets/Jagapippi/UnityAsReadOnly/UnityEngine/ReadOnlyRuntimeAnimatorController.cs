@@ -35,6 +35,6 @@ namespace Jagapippi.UnityAsReadOnly
 
     public static class RuntimeAnimatorControllerExtensions
     {
-        public static ReadOnlyRuntimeAnimatorController AsReadOnly(this RuntimeAnimatorController self) => new ReadOnlyRuntimeAnimatorController(self);
+        public static ReadOnlyRuntimeAnimatorController AsReadOnly(this RuntimeAnimatorController self) => self.IsTrulyNull() ? null : new ReadOnlyRuntimeAnimatorController(self);
     }
 }
