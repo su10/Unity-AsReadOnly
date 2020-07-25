@@ -33,15 +33,15 @@ namespace Jagapippi.UnityAsReadOnly
         #region Properties
 
         public int anisoLevel => _obj.anisoLevel;
-        public TextureDimension dimension => _obj.dimension;
+        public virtual TextureDimension dimension => _obj.dimension;
         public FilterMode filterMode => _obj.filterMode;
-        public int height => _obj.height;
+        public virtual int height => _obj.height;
         public Hash128 imageContentsHash => _obj.imageContentsHash;
         public virtual bool isReadable => _obj.isReadable;
         public float mipMapBias => _obj.mipMapBias;
         public Vector2 texelSize => _obj.texelSize;
         public uint updateCount => _obj.updateCount;
-        public int width => _obj.width;
+        public virtual int width => _obj.width;
         public TextureWrapMode wrapMode => _obj.wrapMode;
         public TextureWrapMode wrapModeU => _obj.wrapModeU;
         public TextureWrapMode wrapModeV => _obj.wrapModeV;
