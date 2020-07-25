@@ -5,7 +5,7 @@ namespace Jagapippi.UnityAsReadOnly
 {
     public interface IReadOnlyCamera
     {
-        RenderTexture activeTexture { get; }
+        IReadOnlyRenderTexture activeTexture { get; }
         RenderingPath actualRenderingPath { get; }
         bool allowDynamicResolution { get; }
         bool allowHDR { get; }
@@ -53,7 +53,7 @@ namespace Jagapippi.UnityAsReadOnly
         float stereoSeparation { get; }
         StereoTargetEyeMask stereoTargetEye { get; }
         int targetDisplay { get; }
-        RenderTexture targetTexture { get; }
+        IReadOnlyRenderTexture targetTexture { get; }
         Vector3 transparencySortAxis { get; }
         TransparencySortMode transparencySortMode { get; }
         bool useJitteredProjectionMatrixForTransparentRendering { get; }
@@ -120,7 +120,8 @@ namespace Jagapippi.UnityAsReadOnly
 
         #region Properties
 
-        public RenderTexture activeTexture => _obj.activeTexture;
+        public ReadOnlyRenderTexture activeTexture => _obj.activeTexture.AsReadOnly();
+        IReadOnlyRenderTexture IReadOnlyCamera.activeTexture => _obj.activeTexture.AsReadOnly();
         public RenderingPath actualRenderingPath => _obj.actualRenderingPath;
         public bool allowDynamicResolution => _obj.allowDynamicResolution;
         public bool allowHDR => _obj.allowHDR;
@@ -168,7 +169,8 @@ namespace Jagapippi.UnityAsReadOnly
         public float stereoSeparation => _obj.stereoSeparation;
         public StereoTargetEyeMask stereoTargetEye => _obj.stereoTargetEye;
         public int targetDisplay => _obj.targetDisplay;
-        public RenderTexture targetTexture => _obj.targetTexture;
+        public ReadOnlyRenderTexture targetTexture => _obj.targetTexture.AsReadOnly();
+        IReadOnlyRenderTexture IReadOnlyCamera.targetTexture => this.targetTexture;
         public Vector3 transparencySortAxis => _obj.transparencySortAxis;
         public TransparencySortMode transparencySortMode => _obj.transparencySortMode;
         public bool useJitteredProjectionMatrixForTransparentRendering => _obj.useJitteredProjectionMatrixForTransparentRendering;
