@@ -5,7 +5,9 @@ namespace Jagapippi.UnityAsReadOnly
 {
     public interface IReadOnlyTexture2D
     {
+#if UNITY_EDITOR
         bool alphaIsTransparency { get; }
+#endif
         int desiredMipmapLevel { get; }
         TextureFormat format { get; }
         bool isReadable { get; }
@@ -61,7 +63,9 @@ namespace Jagapippi.UnityAsReadOnly
 
         #region Properties
 
+#if UNITY_EDITOR
         public bool alphaIsTransparency => _obj.alphaIsTransparency;
+#endif
         public int desiredMipmapLevel => _obj.desiredMipmapLevel;
         public TextureFormat format => _obj.format;
         public override bool isReadable => _obj.isReadable;
