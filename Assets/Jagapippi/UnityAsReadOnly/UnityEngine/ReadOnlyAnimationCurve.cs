@@ -20,11 +20,11 @@ namespace Jagapippi.UnityAsReadOnly
         // void SmoothTangents(int index, float weight);
     }
 
-    public class ReadOnlyAnimationCurve<T> : IReadOnlyAnimationCurve, IEquatable<AnimationCurve>, IEquatable<ReadOnlyAnimationCurve> where T : AnimationCurve
+    public abstract class ReadOnlyAnimationCurve<T> : IReadOnlyAnimationCurve, IEquatable<AnimationCurve>, IEquatable<ReadOnlyAnimationCurve> where T : AnimationCurve
     {
         protected internal readonly T _obj;
 
-        public ReadOnlyAnimationCurve(T obj)
+        protected ReadOnlyAnimationCurve(T obj)
         {
             if (obj.IsTrulyNull()) throw new ArgumentNullException(nameof(obj));
 

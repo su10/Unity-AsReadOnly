@@ -44,7 +44,7 @@ namespace Jagapippi.UnityAsReadOnly
         // void SetPropertyBlock(MaterialPropertyBlock properties, int materialIndex);
     }
 
-    public class ReadOnlyRenderer<T> : ReadOnlyComponent<T>, IReadOnlyRenderer where T : Renderer
+    public abstract class ReadOnlyRenderer<T> : ReadOnlyComponent<T>, IReadOnlyRenderer where T : Renderer
     {
         protected ReadOnlyRenderer(T obj) : base(obj)
         {

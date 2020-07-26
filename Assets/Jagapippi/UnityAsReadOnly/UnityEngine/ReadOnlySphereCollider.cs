@@ -8,7 +8,7 @@ namespace Jagapippi.UnityAsReadOnly
         float radius { get; }
     }
 
-    public class ReadOnlySphereCollider<T> : ReadOnlyCollider<T>, IReadOnlySphereCollider where T : SphereCollider
+    public abstract class ReadOnlySphereCollider<T> : ReadOnlyCollider<T>, IReadOnlySphereCollider where T : SphereCollider
     {
         protected ReadOnlySphereCollider(T obj) : base(obj)
         {

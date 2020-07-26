@@ -103,7 +103,7 @@ namespace Jagapippi.UnityAsReadOnly
         // void SetVectorArray(int nameID, Vector4[] values);
     }
 
-    public class ReadOnlyMaterial<T> : ReadOnlyObject<T>, IReadOnlyMaterial where T : Material
+    public abstract class ReadOnlyMaterial<T> : ReadOnlyObject<T>, IReadOnlyMaterial where T : Material
     {
         protected ReadOnlyMaterial(T obj) : base(obj)
         {

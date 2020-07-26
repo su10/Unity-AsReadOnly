@@ -27,7 +27,7 @@ namespace Jagapippi.UnityAsReadOnly
         // void SetDirection(Scrollbar.Direction direction, bool includeRectLayouts);
     }
 
-    public class ReadOnlyScrollbar<T> : ReadOnlySelectable<T>, IReadOnlyScrollbar where T : Scrollbar
+    public abstract class ReadOnlyScrollbar<T> : ReadOnlySelectable<T>, IReadOnlyScrollbar where T : Scrollbar
     {
         protected ReadOnlyScrollbar(T obj) : base(obj)
         {

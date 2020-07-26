@@ -16,7 +16,7 @@ namespace Jagapippi.UnityAsReadOnly
         // void UnregisterToggle(Toggle toggle);
     }
 
-    public class ReadOnlyToggleGroup<T> : ReadOnlyUIBehaviour<T>, IReadOnlyToggleGroup where T : ToggleGroup
+    public abstract class ReadOnlyToggleGroup<T> : ReadOnlyUIBehaviour<T>, IReadOnlyToggleGroup where T : ToggleGroup
     {
         protected ReadOnlyToggleGroup(T obj) : base(obj)
         {

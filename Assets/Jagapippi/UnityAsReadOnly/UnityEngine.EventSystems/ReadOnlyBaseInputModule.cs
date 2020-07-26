@@ -16,7 +16,7 @@ namespace Jagapippi.UnityAsReadOnly
         // void UpdateModule();
     }
 
-    public class ReadOnlyBaseInputModule<T> : ReadOnlyUIBehaviour<T>, IReadOnlyBaseInputModule where T : BaseInputModule
+    public abstract class ReadOnlyBaseInputModule<T> : ReadOnlyUIBehaviour<T>, IReadOnlyBaseInputModule where T : BaseInputModule
     {
         protected ReadOnlyBaseInputModule(T obj) : base(obj)
         {

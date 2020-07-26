@@ -21,7 +21,7 @@ namespace Jagapippi.UnityAsReadOnly
         Vector3 WorldToLocal(Vector3 worldPosition);
     }
 
-    public class ReadOnlyGridLayout<T> : ReadOnlyBehaviour<T>, IReadOnlyGridLayout where T : GridLayout
+    public abstract class ReadOnlyGridLayout<T> : ReadOnlyBehaviour<T>, IReadOnlyGridLayout where T : GridLayout
     {
         protected ReadOnlyGridLayout(T obj) : base(obj)
         {

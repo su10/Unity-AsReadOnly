@@ -9,7 +9,7 @@ namespace Jagapippi.UnityAsReadOnly
         bool IsDestroyed();
     }
 
-    public class ReadOnlyUIBehaviour<T> : ReadOnlyMonoBehaviour<T>, IReadOnlyUIBehaviour where T : UIBehaviour
+    public abstract class ReadOnlyUIBehaviour<T> : ReadOnlyMonoBehaviour<T>, IReadOnlyUIBehaviour where T : UIBehaviour
     {
         protected ReadOnlyUIBehaviour(T obj) : base(obj)
         {

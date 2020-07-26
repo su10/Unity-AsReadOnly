@@ -41,7 +41,7 @@ namespace Jagapippi.UnityAsReadOnly
         // void UnregisterDirtyVerticesCallback(UnityAction action);
     }
 
-    public class ReadOnlyGraphic<T> : ReadOnlyUIBehaviour<T>, IReadOnlyGraphic where T : Graphic
+    public abstract class ReadOnlyGraphic<T> : ReadOnlyUIBehaviour<T>, IReadOnlyGraphic where T : Graphic
     {
         protected ReadOnlyGraphic(T obj) : base(obj)
         {

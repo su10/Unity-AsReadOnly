@@ -15,7 +15,7 @@ namespace Jagapippi.UnityAsReadOnly
         // void SetClipRect(Rect clipRect, bool validRect);
     }
 
-    public class ReadOnlyMaskableGraphic<T> : ReadOnlyGraphic<T>, IReadOnlyMaskableGraphic where T : MaskableGraphic
+    public abstract class ReadOnlyMaskableGraphic<T> : ReadOnlyGraphic<T>, IReadOnlyMaskableGraphic where T : MaskableGraphic
     {
         protected ReadOnlyMaskableGraphic(T obj) : base(obj)
         {

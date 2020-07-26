@@ -10,7 +10,7 @@ namespace Jagapippi.UnityAsReadOnly
         float radius { get; }
     }
 
-    public class ReadOnlyCapsuleCollider<T> : ReadOnlyCollider<T>, IReadOnlyCapsuleCollider where T : CapsuleCollider
+    public abstract class ReadOnlyCapsuleCollider<T> : ReadOnlyCollider<T>, IReadOnlyCapsuleCollider where T : CapsuleCollider
     {
         protected ReadOnlyCapsuleCollider(T obj) : base(obj)
         {

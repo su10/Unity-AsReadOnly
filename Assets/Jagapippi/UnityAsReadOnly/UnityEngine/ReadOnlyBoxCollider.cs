@@ -8,7 +8,7 @@ namespace Jagapippi.UnityAsReadOnly
         Vector3 size { get; }
     }
 
-    public class ReadOnlyBoxCollider<T> : ReadOnlyCollider<T>, IReadOnlyBoxCollider where T : BoxCollider
+    public abstract class ReadOnlyBoxCollider<T> : ReadOnlyCollider<T>, IReadOnlyBoxCollider where T : BoxCollider
     {
         protected ReadOnlyBoxCollider(T obj) : base(obj)
         {

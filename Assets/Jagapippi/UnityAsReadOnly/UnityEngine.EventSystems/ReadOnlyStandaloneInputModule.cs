@@ -20,7 +20,7 @@ namespace Jagapippi.UnityAsReadOnly
         // void UpdateModule();
     }
 
-    public class ReadOnlyStandaloneInputModule<T> : ReadOnlyPointerInputModule<T>, IReadOnlyStandaloneInputModule where T : StandaloneInputModule
+    public abstract class ReadOnlyStandaloneInputModule<T> : ReadOnlyPointerInputModule<T>, IReadOnlyStandaloneInputModule where T : StandaloneInputModule
     {
         protected ReadOnlyStandaloneInputModule(T obj) : base(obj)
         {

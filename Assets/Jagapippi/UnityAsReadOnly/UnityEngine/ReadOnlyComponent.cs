@@ -46,7 +46,7 @@ namespace Jagapippi.UnityAsReadOnly
         // void SendMessageUpwards(string methodName, SendMessageOptions options);
     }
 
-    public class ReadOnlyComponent<T> : ReadOnlyObject<T>, IReadOnlyComponent where T : Component
+    public abstract class ReadOnlyComponent<T> : ReadOnlyObject<T>, IReadOnlyComponent where T : Component
     {
         protected ReadOnlyComponent(T obj) : base(obj)
         {

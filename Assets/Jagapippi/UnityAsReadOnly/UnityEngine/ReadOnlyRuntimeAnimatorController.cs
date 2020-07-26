@@ -8,7 +8,7 @@ namespace Jagapippi.UnityAsReadOnly
         IReadOnlyAnimationClip[] animationClips { get; }
     }
 
-    public class ReadOnlyRuntimeAnimatorController<T> : ReadOnlyObject<T>, IReadOnlyRuntimeAnimatorController where T : RuntimeAnimatorController
+    public abstract class ReadOnlyRuntimeAnimatorController<T> : ReadOnlyObject<T>, IReadOnlyRuntimeAnimatorController where T : RuntimeAnimatorController
     {
         protected ReadOnlyRuntimeAnimatorController(T obj) : base(obj)
         {

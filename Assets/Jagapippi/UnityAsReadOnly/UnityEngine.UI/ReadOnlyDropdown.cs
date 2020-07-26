@@ -27,7 +27,7 @@ namespace Jagapippi.UnityAsReadOnly
         // void Show();
     }
 
-    public class ReadOnlyDropdown<T> : ReadOnlySelectable<T>, IReadOnlyDropdown where T : Dropdown
+    public abstract class ReadOnlyDropdown<T> : ReadOnlySelectable<T>, IReadOnlyDropdown where T : Dropdown
     {
         protected ReadOnlyDropdown(T obj) : base(obj)
         {

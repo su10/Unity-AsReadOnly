@@ -7,7 +7,7 @@ namespace Jagapippi.UnityAsReadOnly
         IReadOnlyTerrainData terrainData { get; }
     }
 
-    public class ReadOnlyTerrainCollider<T> : ReadOnlyCollider<T>, IReadOnlyTerrainCollider where T : TerrainCollider
+    public abstract class ReadOnlyTerrainCollider<T> : ReadOnlyCollider<T>, IReadOnlyTerrainCollider where T : TerrainCollider
     {
         protected ReadOnlyTerrainCollider(T obj) : base(obj)
         {

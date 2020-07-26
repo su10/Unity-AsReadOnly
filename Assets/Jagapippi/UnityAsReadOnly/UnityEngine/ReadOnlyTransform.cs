@@ -69,7 +69,7 @@ namespace Jagapippi.UnityAsReadOnly
         // void Translate(float x, float y, float z, Transform relativeTo);
     }
 
-    public class ReadOnlyTransform<T> : ReadOnlyComponent<T>, IReadOnlyTransform, IEnumerable<ReadOnlyTransform> where T : Transform
+    public abstract class ReadOnlyTransform<T> : ReadOnlyComponent<T>, IReadOnlyTransform, IEnumerable<ReadOnlyTransform> where T : Transform
     {
         protected ReadOnlyTransform(T obj) : base(obj)
         {

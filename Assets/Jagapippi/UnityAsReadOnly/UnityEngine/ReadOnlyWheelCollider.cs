@@ -24,7 +24,7 @@ namespace Jagapippi.UnityAsReadOnly
         void GetWorldPose(out Vector3 pos, out Quaternion quat);
     }
 
-    public class ReadOnlyWheelCollider<T> : ReadOnlyCollider<T>, IReadOnlyWheelCollider where T : WheelCollider
+    public abstract class ReadOnlyWheelCollider<T> : ReadOnlyCollider<T>, IReadOnlyWheelCollider where T : WheelCollider
     {
         protected ReadOnlyWheelCollider(T obj) : base(obj)
         {

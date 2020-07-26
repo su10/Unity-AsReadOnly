@@ -118,7 +118,7 @@ namespace {Namespace}
     {{
 {Interface}    }}
 
-    public class ReadOnly{ClassName}<T> : ReadOnly{BaseClassName}<T>, IReadOnly{ClassName} where T : {ClassName}
+    public abstract class ReadOnly{ClassName}<T> : ReadOnly{BaseClassName}<T>, IReadOnly{ClassName} where T : {ClassName}
     {{
         protected ReadOnly{ClassName}(T obj) : base(obj)
         {{

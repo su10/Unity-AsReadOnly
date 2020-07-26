@@ -19,11 +19,11 @@ namespace Jagapippi.UnityAsReadOnly
 #endif
     }
 
-    public class ReadOnlyTouchScreenKeyboard<T> : IReadOnlyTouchScreenKeyboard where T : TouchScreenKeyboard
+    public abstract class ReadOnlyTouchScreenKeyboard<T> : IReadOnlyTouchScreenKeyboard where T : TouchScreenKeyboard
     {
         protected internal readonly TouchScreenKeyboard _obj;
 
-        public ReadOnlyTouchScreenKeyboard(T obj)
+        protected ReadOnlyTouchScreenKeyboard(T obj)
         {
             _obj = obj;
         }

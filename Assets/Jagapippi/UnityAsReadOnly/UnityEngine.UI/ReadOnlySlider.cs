@@ -28,7 +28,7 @@ namespace Jagapippi.UnityAsReadOnly
         // void SetDirection(Slider.Direction direction, bool includeRectLayouts);
     }
 
-    public class ReadOnlySlider<T> : ReadOnlySelectable<T>, IReadOnlySlider where T : Slider
+    public abstract class ReadOnlySlider<T> : ReadOnlySelectable<T>, IReadOnlySlider where T : Slider
     {
         protected ReadOnlySlider(T obj) : base(obj)
         {

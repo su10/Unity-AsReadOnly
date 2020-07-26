@@ -18,7 +18,7 @@ namespace Jagapippi.UnityAsReadOnly
         CanvasScaler.ScaleMode uiScaleMode { get; }
     }
 
-    public class ReadOnlyCanvasScaler<T> : ReadOnlyUIBehaviour<T>, IReadOnlyCanvasScaler where T : CanvasScaler
+    public abstract class ReadOnlyCanvasScaler<T> : ReadOnlyUIBehaviour<T>, IReadOnlyCanvasScaler where T : CanvasScaler
     {
         protected ReadOnlyCanvasScaler(T obj) : base(obj)
         {

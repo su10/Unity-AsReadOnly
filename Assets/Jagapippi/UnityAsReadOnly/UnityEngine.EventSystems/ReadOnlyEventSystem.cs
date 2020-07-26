@@ -22,7 +22,7 @@ namespace Jagapippi.UnityAsReadOnly
         // void UpdateModules();
     }
 
-    public class ReadOnlyEventSystem<T> : ReadOnlyUIBehaviour<T>, IReadOnlyEventSystem where T : EventSystem
+    public abstract class ReadOnlyEventSystem<T> : ReadOnlyUIBehaviour<T>, IReadOnlyEventSystem where T : EventSystem
     {
         protected ReadOnlyEventSystem(T obj) : base(obj)
         {

@@ -23,7 +23,7 @@ namespace Jagapippi.UnityAsReadOnly
         // void StopCoroutine(string methodName);
     }
 
-    public class ReadOnlyMonoBehaviour<T> : ReadOnlyBehaviour<T>, IReadOnlyMonoBehaviour where T : MonoBehaviour
+    public abstract class ReadOnlyMonoBehaviour<T> : ReadOnlyBehaviour<T>, IReadOnlyMonoBehaviour where T : MonoBehaviour
     {
         protected ReadOnlyMonoBehaviour(T obj) : base(obj)
         {

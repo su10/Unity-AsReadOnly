@@ -152,7 +152,7 @@ namespace Jagapippi.UnityAsReadOnly
         // void WriteDefaultValues();
     }
 
-    public class ReadOnlyAnimator<T> : ReadOnlyBehaviour<T>, IReadOnlyAnimator where T : Animator
+    public abstract class ReadOnlyAnimator<T> : ReadOnlyBehaviour<T>, IReadOnlyAnimator where T : Animator
     {
         protected ReadOnlyAnimator(T obj) : base(obj)
         {

@@ -10,7 +10,7 @@ namespace Jagapippi.UnityAsReadOnly
         // void OnSubmit(BaseEventData eventData);
     }
 
-    public class ReadOnlyButton<T> : ReadOnlySelectable<T>, IReadOnlyButton where T : Button
+    public abstract class ReadOnlyButton<T> : ReadOnlySelectable<T>, IReadOnlyButton where T : Button
     {
         protected ReadOnlyButton(T obj) : base(obj)
         {

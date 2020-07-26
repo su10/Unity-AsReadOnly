@@ -8,7 +8,7 @@ namespace Jagapippi.UnityAsReadOnly
         bool isActiveAndEnabled { get; }
     }
 
-    public class ReadOnlyBehaviour<T> : ReadOnlyComponent<T>, IReadOnlyBehaviour where T : Behaviour
+    public abstract class ReadOnlyBehaviour<T> : ReadOnlyComponent<T>, IReadOnlyBehaviour where T : Behaviour
     {
         protected ReadOnlyBehaviour(T obj) : base(obj)
         {

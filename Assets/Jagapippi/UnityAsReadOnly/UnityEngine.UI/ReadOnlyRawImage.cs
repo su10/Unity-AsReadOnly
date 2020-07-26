@@ -12,7 +12,7 @@ namespace Jagapippi.UnityAsReadOnly
         // void SetNativeSize();
     }
 
-    public class ReadOnlyRawImage<T> : ReadOnlyMaskableGraphic<T>, IReadOnlyRawImage where T : RawImage
+    public abstract class ReadOnlyRawImage<T> : ReadOnlyMaskableGraphic<T>, IReadOnlyRawImage where T : RawImage
     {
         protected ReadOnlyRawImage(T obj) : base(obj)
         {

@@ -15,7 +15,7 @@ namespace Jagapippi.UnityAsReadOnly
         // void TransitionToSnapshots(AudioMixerSnapshot[] snapshots, float[] weights, float timeToReach);
     }
 
-    public class ReadOnlyAudioMixer<T> : ReadOnlyObject<T>, IReadOnlyAudioMixer where T : AudioMixer
+    public abstract class ReadOnlyAudioMixer<T> : ReadOnlyObject<T>, IReadOnlyAudioMixer where T : AudioMixer
     {
         protected ReadOnlyAudioMixer(T obj) : base(obj)
         {

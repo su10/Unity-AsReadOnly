@@ -28,9 +28,9 @@ namespace Jagapippi.UnityAsReadOnly
         // bool PopulateWithErrors(string str, TextGenerationSettings settings, GameObject context);
     }
 
-    public class ReadOnlyTextGenerator : IReadOnlyTextGenerator
+    public sealed class ReadOnlyTextGenerator : IReadOnlyTextGenerator
     {
-        protected internal readonly TextGenerator _obj;
+        internal readonly TextGenerator _obj;
 
         public ReadOnlyTextGenerator(TextGenerator obj)
         {

@@ -37,7 +37,7 @@ namespace Jagapippi.UnityAsReadOnly
         // void OnRebuildRequested();
     }
 
-    public class ReadOnlyText<T> : ReadOnlyMaskableGraphic<T>, IReadOnlyText where T : Text
+    public abstract class ReadOnlyText<T> : ReadOnlyMaskableGraphic<T>, IReadOnlyText where T : Text
     {
         protected ReadOnlyText(T obj) : base(obj)
         {

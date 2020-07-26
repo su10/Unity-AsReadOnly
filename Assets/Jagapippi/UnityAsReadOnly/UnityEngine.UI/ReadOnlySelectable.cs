@@ -31,7 +31,7 @@ namespace Jagapippi.UnityAsReadOnly
         // void Select();
     }
 
-    public class ReadOnlySelectable<T> : ReadOnlyUIBehaviour<T>, IReadOnlySelectable where T : Selectable
+    public abstract class ReadOnlySelectable<T> : ReadOnlyUIBehaviour<T>, IReadOnlySelectable where T : Selectable
     {
         protected ReadOnlySelectable(T obj) : base(obj)
         {

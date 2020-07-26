@@ -15,7 +15,7 @@ namespace Jagapippi.UnityAsReadOnly
         // void SetKeys(GradientColorKey[] colorKeys, GradientAlphaKey[] alphaKeys);
     }
 
-    public class ReadOnlyGradient<T> : IReadOnlyGradient, IEquatable<Gradient>, IEquatable<ReadOnlyGradient> where T : Gradient
+    public abstract class ReadOnlyGradient<T> : IReadOnlyGradient, IEquatable<Gradient>, IEquatable<ReadOnlyGradient> where T : Gradient
     {
         protected internal readonly T _obj;
 

@@ -26,7 +26,7 @@ namespace Jagapippi.UnityAsReadOnly
         // void IncrementUpdateCount();
     }
 
-    public class ReadOnlyTexture<T> : ReadOnlyObject<T>, IReadOnlyTexture where T : Texture
+    public abstract class ReadOnlyTexture<T> : ReadOnlyObject<T>, IReadOnlyTexture where T : Texture
     {
         protected ReadOnlyTexture(T obj) : base(obj)
         {

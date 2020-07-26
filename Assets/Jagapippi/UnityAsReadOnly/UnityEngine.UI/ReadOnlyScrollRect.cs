@@ -49,7 +49,7 @@ namespace Jagapippi.UnityAsReadOnly
         // void StopMovement();
     }
 
-    public class ReadOnlyScrollRect<T> : ReadOnlyUIBehaviour<T>, IReadOnlyScrollRect where T : ScrollRect
+    public abstract class ReadOnlyScrollRect<T> : ReadOnlyUIBehaviour<T>, IReadOnlyScrollRect where T : ScrollRect
     {
         protected ReadOnlyScrollRect(T obj) : base(obj)
         {

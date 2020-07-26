@@ -9,7 +9,7 @@ namespace Jagapippi.UnityAsReadOnly
         string ToString();
     }
 
-    public class ReadOnlyPointerInputModule<T> : ReadOnlyBaseInputModule<T>, IReadOnlyPointerInputModule where T : PointerInputModule
+    public abstract class ReadOnlyPointerInputModule<T> : ReadOnlyBaseInputModule<T>, IReadOnlyPointerInputModule where T : PointerInputModule
     {
         protected ReadOnlyPointerInputModule(T obj) : base(obj)
         {

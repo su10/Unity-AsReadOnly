@@ -62,7 +62,7 @@ namespace Jagapippi.UnityAsReadOnly
         // void Rebuild(CanvasUpdate update);
     }
 
-    public class ReadOnlyInputField<T> : ReadOnlySelectable<T>, IReadOnlyInputField where T : InputField
+    public abstract class ReadOnlyInputField<T> : ReadOnlySelectable<T>, IReadOnlyInputField where T : InputField
     {
         protected ReadOnlyInputField(T obj) : base(obj)
         {

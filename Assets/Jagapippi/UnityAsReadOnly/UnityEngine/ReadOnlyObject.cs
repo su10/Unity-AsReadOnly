@@ -12,7 +12,7 @@ namespace Jagapippi.UnityAsReadOnly
         string ToString();
     }
 
-    public class ReadOnlyObject<T> : IReadOnlyObject where T : Object
+    public abstract class ReadOnlyObject<T> : IReadOnlyObject where T : Object
     {
         protected internal readonly T _obj;
 

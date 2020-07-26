@@ -13,7 +13,7 @@ namespace Jagapippi.UnityAsReadOnly
         bool legacy { get; }
     }
 
-    public class ReadOnlyMotion<T> : ReadOnlyObject<T>, IReadOnlyMotion where T : Motion
+    public abstract class ReadOnlyMotion<T> : ReadOnlyObject<T>, IReadOnlyMotion where T : Motion
     {
         protected ReadOnlyMotion(T obj) : base(obj)
         {

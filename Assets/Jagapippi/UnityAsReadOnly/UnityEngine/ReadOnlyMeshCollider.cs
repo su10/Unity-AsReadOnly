@@ -9,7 +9,7 @@ namespace Jagapippi.UnityAsReadOnly
         IReadOnlyMesh sharedMesh { get; }
     }
 
-    public class ReadOnlyMeshCollider<T> : ReadOnlyCollider<T>, IReadOnlyMeshCollider where T : MeshCollider
+    public abstract class ReadOnlyMeshCollider<T> : ReadOnlyCollider<T>, IReadOnlyMeshCollider where T : MeshCollider
     {
         protected ReadOnlyMeshCollider(T obj) : base(obj)
         {

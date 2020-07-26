@@ -46,7 +46,7 @@ namespace Jagapippi.UnityAsReadOnly
         // int Raycast(Vector2 direction, ContactFilter2D contactFilter, RaycastHit2D[] results, float distance);
     }
 
-    public class ReadOnlyCollider2D<T> : ReadOnlyBehaviour<T>, IReadOnlyCollider2D where T : Collider2D
+    public abstract class ReadOnlyCollider2D<T> : ReadOnlyBehaviour<T>, IReadOnlyCollider2D where T : Collider2D
     {
         protected ReadOnlyCollider2D(T obj) : base(obj)
         {

@@ -14,7 +14,7 @@ namespace Jagapippi.UnityAsReadOnly
         // void Rebuild(CanvasUpdate executing);
     }
 
-    public class ReadOnlyToggle<T> : ReadOnlySelectable<T>, IReadOnlyToggle where T : Toggle
+    public abstract class ReadOnlyToggle<T> : ReadOnlySelectable<T>, IReadOnlyToggle where T : Toggle
     {
         protected ReadOnlyToggle(T obj) : base(obj)
         {

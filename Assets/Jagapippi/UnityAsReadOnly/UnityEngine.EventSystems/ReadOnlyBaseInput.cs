@@ -22,7 +22,7 @@ namespace Jagapippi.UnityAsReadOnly
         Touch GetTouch(int index);
     }
 
-    public class ReadOnlyBaseInput<T> : ReadOnlyUIBehaviour<T>, IReadOnlyBaseInput where T : BaseInput
+    public abstract class ReadOnlyBaseInput<T> : ReadOnlyUIBehaviour<T>, IReadOnlyBaseInput where T : BaseInput
     {
         protected ReadOnlyBaseInput(T obj) : base(obj)
         {

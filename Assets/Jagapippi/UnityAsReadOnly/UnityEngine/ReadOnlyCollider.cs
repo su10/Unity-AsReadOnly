@@ -16,7 +16,7 @@ namespace Jagapippi.UnityAsReadOnly
         bool Raycast(Ray ray, out RaycastHit hitInfo, float maxDistance);
     }
 
-    public class ReadOnlyCollider<T> : ReadOnlyComponent<T>, IReadOnlyCollider where T : Collider
+    public abstract class ReadOnlyCollider<T> : ReadOnlyComponent<T>, IReadOnlyCollider where T : Collider
     {
         protected ReadOnlyCollider(T obj) : base(obj)
         {

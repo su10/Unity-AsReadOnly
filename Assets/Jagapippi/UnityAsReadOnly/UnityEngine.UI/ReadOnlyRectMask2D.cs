@@ -15,7 +15,7 @@ namespace Jagapippi.UnityAsReadOnly
         // void RemoveClippable(IClippable clippable);
     }
 
-    public class ReadOnlyRectMask2D<T> : ReadOnlyUIBehaviour<T>, IReadOnlyRectMask2D where T : RectMask2D
+    public abstract class ReadOnlyRectMask2D<T> : ReadOnlyUIBehaviour<T>, IReadOnlyRectMask2D where T : RectMask2D
     {
         protected ReadOnlyRectMask2D(T obj) : base(obj)
         {

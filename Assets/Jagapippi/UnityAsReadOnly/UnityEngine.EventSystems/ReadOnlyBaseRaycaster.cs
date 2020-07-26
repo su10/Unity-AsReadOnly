@@ -13,7 +13,7 @@ namespace Jagapippi.UnityAsReadOnly
         string ToString();
     }
 
-    public class ReadOnlyBaseRaycaster<T> : ReadOnlyUIBehaviour<T>, IReadOnlyBaseRaycaster where T : BaseRaycaster
+    public abstract class ReadOnlyBaseRaycaster<T> : ReadOnlyUIBehaviour<T>, IReadOnlyBaseRaycaster where T : BaseRaycaster
     {
         protected ReadOnlyBaseRaycaster(T obj) : base(obj)
         {

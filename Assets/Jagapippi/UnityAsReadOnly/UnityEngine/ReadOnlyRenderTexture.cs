@@ -39,7 +39,7 @@ namespace Jagapippi.UnityAsReadOnly
         // void SetGlobalShaderProperty(string propertyName);
     }
 
-    public class ReadOnlyRenderTexture<T> : ReadOnlyTexture<T>, IReadOnlyRenderTexture where T : RenderTexture
+    public abstract class ReadOnlyRenderTexture<T> : ReadOnlyTexture<T>, IReadOnlyRenderTexture where T : RenderTexture
     {
         protected ReadOnlyRenderTexture(T obj) : base(obj)
         {

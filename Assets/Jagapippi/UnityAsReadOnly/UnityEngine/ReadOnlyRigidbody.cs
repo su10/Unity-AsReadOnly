@@ -67,7 +67,7 @@ namespace Jagapippi.UnityAsReadOnly
         // void WakeUp();
     }
 
-    public class ReadOnlyRigidbody<T> : ReadOnlyComponent<T>, IReadOnlyRigidbody where T : Rigidbody
+    public abstract class ReadOnlyRigidbody<T> : ReadOnlyComponent<T>, IReadOnlyRigidbody where T : Rigidbody
     {
         protected ReadOnlyRigidbody(T obj) : base(obj)
         {

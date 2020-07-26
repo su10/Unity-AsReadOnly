@@ -15,7 +15,7 @@ namespace Jagapippi.UnityAsReadOnly
         bool MaskEnabled();
     }
 
-    public class ReadOnlyMask<T> : ReadOnlyUIBehaviour<T>, IReadOnlyMask where T : Mask
+    public abstract class ReadOnlyMask<T> : ReadOnlyUIBehaviour<T>, IReadOnlyMask where T : Mask
     {
         protected ReadOnlyMask(T obj) : base(obj)
         {
