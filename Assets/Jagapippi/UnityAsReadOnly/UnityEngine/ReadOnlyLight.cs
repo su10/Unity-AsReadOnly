@@ -5,7 +5,9 @@ namespace Jagapippi.UnityAsReadOnly
 {
     public interface IReadOnlyLight
     {
+#if UNITY_EDITOR
         Vector2 areaSize { get; }
+#endif
         LightBakingOutput bakingOutput { get; }
         float bounceIntensity { get; }
         Color color { get; }
@@ -17,16 +19,22 @@ namespace Jagapippi.UnityAsReadOnly
         Flare flare { get; }
         float intensity { get; }
         float[] layerShadowCullDistances { get; }
+#if UNITY_EDITOR
         LightmapBakeType lightmapBakeType { get; }
+#endif
         LightShadowCasterMode lightShadowCasterMode { get; }
         float range { get; }
         LightRenderMode renderMode { get; }
+#if UNITY_EDITOR
         float shadowAngle { get; }
+#endif
         float shadowBias { get; }
         int shadowCustomResolution { get; }
         float shadowNearPlane { get; }
         float shadowNormalBias { get; }
+#if UNITY_EDITOR
         float shadowRadius { get; }
+#endif
         LightShadowResolution shadowResolution { get; }
         LightShadows shadows { get; }
         float shadowStrength { get; }
@@ -52,7 +60,9 @@ namespace Jagapippi.UnityAsReadOnly
 
         #region Properties
 
+#if UNITY_EDITOR
         public Vector2 areaSize => _obj.areaSize;
+#endif
         public LightBakingOutput bakingOutput => _obj.bakingOutput;
         public float bounceIntensity => _obj.bounceIntensity;
         public Color color => _obj.color;
@@ -65,16 +75,22 @@ namespace Jagapippi.UnityAsReadOnly
         public Flare flare => _obj.flare;
         public float intensity => _obj.intensity;
         public float[] layerShadowCullDistances => _obj.layerShadowCullDistances;
+#if UNITY_EDITOR
         public LightmapBakeType lightmapBakeType => _obj.lightmapBakeType;
+#endif
         public LightShadowCasterMode lightShadowCasterMode => _obj.lightShadowCasterMode;
         public float range => _obj.range;
         public LightRenderMode renderMode => _obj.renderMode;
+#if UNITY_EDITOR
         public float shadowAngle => _obj.shadowAngle;
+#endif
         public float shadowBias => _obj.shadowBias;
         public int shadowCustomResolution => _obj.shadowCustomResolution;
         public float shadowNearPlane => _obj.shadowNearPlane;
         public float shadowNormalBias => _obj.shadowNormalBias;
+#if UNITY_EDITOR
         public float shadowRadius => _obj.shadowRadius;
+#endif
         public LightShadowResolution shadowResolution => _obj.shadowResolution;
         public LightShadows shadows => _obj.shadows;
         public float shadowStrength => _obj.shadowStrength;
