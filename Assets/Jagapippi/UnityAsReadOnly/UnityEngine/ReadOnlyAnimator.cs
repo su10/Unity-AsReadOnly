@@ -75,7 +75,7 @@ namespace Jagapippi.UnityAsReadOnly
         bool GetBool(string name);
         bool GetBool(int id);
         ReadOnlyAnimatorClipInfo[] GetCurrentAnimatorClipInfo(int layerIndex);
-        void GetCurrentAnimatorClipInfo(int layerIndex, List<ReadOnlyAnimatorClipInfo> clips);
+        // void GetCurrentAnimatorClipInfo(int layerIndex, List<AnimatorClipInfo> clips);
         int GetCurrentAnimatorClipInfoCount(int layerIndex);
         AnimatorStateInfo GetCurrentAnimatorStateInfo(int layerIndex);
         float GetFloat(string name);
@@ -92,7 +92,7 @@ namespace Jagapippi.UnityAsReadOnly
         string GetLayerName(int layerIndex);
         float GetLayerWeight(int layerIndex);
         ReadOnlyAnimatorClipInfo[] GetNextAnimatorClipInfo(int layerIndex);
-        void GetNextAnimatorClipInfo(int layerIndex, List<ReadOnlyAnimatorClipInfo> clips);
+        // void GetNextAnimatorClipInfo(int layerIndex, List<AnimatorClipInfo> clips);
         int GetNextAnimatorClipInfoCount(int layerIndex);
         AnimatorStateInfo GetNextAnimatorStateInfo(int layerIndex);
         AnimatorControllerParameter GetParameter(int index);
@@ -235,15 +235,7 @@ namespace Jagapippi.UnityAsReadOnly
         public bool GetBool(string name) => _obj.GetBool(name);
         public bool GetBool(int id) => _obj.GetBool(id);
         public ReadOnlyAnimatorClipInfo[] GetCurrentAnimatorClipInfo(int layerIndex) => _obj.GetCurrentAnimatorClipInfo(layerIndex)?.Select(c => c.AsReadOnly()).ToArray();
-
-        // TODO: Check API
-        public void GetCurrentAnimatorClipInfo(int layerIndex, List<ReadOnlyAnimatorClipInfo> clips)
-        {
-            var list = new List<AnimatorClipInfo>();
-            _obj.GetCurrentAnimatorClipInfo(layerIndex, list);
-            clips.AddRange(list.Select(clip => clip.AsReadOnly()));
-        }
-
+        // public void GetCurrentAnimatorClipInfo(int layerIndex, List<AnimatorClipInfo> clips) => _obj.GetCurrentAnimatorClipInfo(layerIndex, clips);
         public int GetCurrentAnimatorClipInfoCount(int layerIndex) => _obj.GetCurrentAnimatorClipInfoCount(layerIndex);
         public AnimatorStateInfo GetCurrentAnimatorStateInfo(int layerIndex) => _obj.GetCurrentAnimatorStateInfo(layerIndex);
         public float GetFloat(string name) => _obj.GetFloat(name);
@@ -260,15 +252,7 @@ namespace Jagapippi.UnityAsReadOnly
         public string GetLayerName(int layerIndex) => _obj.GetLayerName(layerIndex);
         public float GetLayerWeight(int layerIndex) => _obj.GetLayerWeight(layerIndex);
         public ReadOnlyAnimatorClipInfo[] GetNextAnimatorClipInfo(int layerIndex) => _obj.GetNextAnimatorClipInfo(layerIndex)?.Select(c => c.AsReadOnly()).ToArray();
-
-        // TODO: Check API
-        public void GetNextAnimatorClipInfo(int layerIndex, List<ReadOnlyAnimatorClipInfo> clips)
-        {
-            var list = new List<AnimatorClipInfo>();
-            _obj.GetNextAnimatorClipInfo(layerIndex, list);
-            clips.AddRange(list.Select(clip => clip.AsReadOnly()));
-        }
-
+        // public void GetNextAnimatorClipInfo(int layerIndex, List<AnimatorClipInfo> clips) => _obj.GetNextAnimatorClipInfo(layerIndex, clips);
         public int GetNextAnimatorClipInfoCount(int layerIndex) => _obj.GetNextAnimatorClipInfoCount(layerIndex);
         public AnimatorStateInfo GetNextAnimatorStateInfo(int layerIndex) => _obj.GetNextAnimatorStateInfo(layerIndex);
         public AnimatorControllerParameter GetParameter(int index) => _obj.GetParameter(index);

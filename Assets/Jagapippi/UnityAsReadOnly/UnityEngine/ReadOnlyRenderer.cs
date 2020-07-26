@@ -35,10 +35,10 @@ namespace Jagapippi.UnityAsReadOnly
         int sortingOrder { get; }
         Matrix4x4 worldToLocalMatrix { get; }
         void GetClosestReflectionProbes(List<ReflectionProbeBlendInfo> result);
-        void GetMaterials(List<IReadOnlyMaterial> m);
+        // void GetMaterials(List<Material> m);
         void GetPropertyBlock(MaterialPropertyBlock properties);
         void GetPropertyBlock(MaterialPropertyBlock properties, int materialIndex);
-        void GetSharedMaterials(List<IReadOnlyMaterial> m);
+        // void GetSharedMaterials(List<Material> m);
         bool HasPropertyBlock();
         // void SetPropertyBlock(MaterialPropertyBlock properties);
         // void SetPropertyBlock(MaterialPropertyBlock properties, int materialIndex);
@@ -91,38 +91,10 @@ namespace Jagapippi.UnityAsReadOnly
         #region Public Methods
 
         public void GetClosestReflectionProbes(List<ReflectionProbeBlendInfo> result) => _obj.GetClosestReflectionProbes(result);
-
-        public void GetMaterials(List<ReadOnlyMaterial> m)
-        {
-            var materials = new List<Material>();
-            _obj.GetMaterials(materials);
-            m.AddRange(materials.Select(material => material.AsReadOnly()));
-        }
-
-        void IReadOnlyRenderer.GetMaterials(List<IReadOnlyMaterial> m)
-        {
-            var materials = new List<Material>();
-            _obj.GetMaterials(materials);
-            m.AddRange(materials.Select(material => material.AsReadOnly()));
-        }
-
+        // public void GetMaterials(List<Material> m) => _obj.GetMaterials(m);
         public void GetPropertyBlock(MaterialPropertyBlock properties) => _obj.GetPropertyBlock(properties);
         public void GetPropertyBlock(MaterialPropertyBlock properties, int materialIndex) => _obj.GetPropertyBlock(properties, materialIndex);
-
-        public void GetSharedMaterials(List<ReadOnlyMaterial> m)
-        {
-            var materials = new List<Material>();
-            _obj.GetSharedMaterials(materials);
-            m.AddRange(materials.Select(material => material.AsReadOnly()));
-        }
-
-        void IReadOnlyRenderer.GetSharedMaterials(List<IReadOnlyMaterial> m)
-        {
-            var materials = new List<Material>();
-            _obj.GetSharedMaterials(materials);
-            m.AddRange(materials.Select(material => material.AsReadOnly()));
-        }
-
+        // public void GetSharedMaterials(List<Material> m) => _obj.GetSharedMaterials(m);
         public bool HasPropertyBlock() => _obj.HasPropertyBlock();
         // public void SetPropertyBlock(MaterialPropertyBlock properties) => _obj.SetPropertyBlock(properties);
         // public void SetPropertyBlock(MaterialPropertyBlock properties, int materialIndex) => _obj.SetPropertyBlock(properties, materialIndex);
