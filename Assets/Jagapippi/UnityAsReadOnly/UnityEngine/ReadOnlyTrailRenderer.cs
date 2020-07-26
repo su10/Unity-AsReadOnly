@@ -26,6 +26,7 @@ namespace Jagapippi.UnityAsReadOnly
         // void AddPositions(Vector3[] positions);
         void BakeMesh(Mesh mesh, bool useTransform);
         void BakeMesh(Mesh mesh, Camera camera, bool useTransform);
+        void BakeMesh(Mesh mesh, ReadOnlyCamera camera, bool useTransform);
         // void Clear();
         Vector3 GetPosition(int index);
         int GetPositions(Vector3[] positions);
@@ -70,6 +71,7 @@ namespace Jagapippi.UnityAsReadOnly
         // public void AddPositions(Vector3[] positions) => _obj.AddPositions(positions);
         public void BakeMesh(Mesh mesh, bool useTransform) => _obj.BakeMesh(mesh, useTransform);
         public void BakeMesh(Mesh mesh, Camera camera, bool useTransform) => _obj.BakeMesh(mesh, camera, useTransform);
+        public void BakeMesh(Mesh mesh, ReadOnlyCamera camera, bool useTransform) => _obj.BakeMesh(mesh, camera._obj, useTransform);
         // public void Clear() => _obj.Clear();
         public Vector3 GetPosition(int index) => _obj.GetPosition(index);
         public int GetPositions(Vector3[] positions) => _obj.GetPositions(positions);
