@@ -10,7 +10,9 @@ namespace Jagapippi.UnityAsReadOnly
         TextureDimension dimension { get; }
         FilterMode filterMode { get; }
         int height { get; }
+#if UNITY_EDITOR
         Hash128 imageContentsHash { get; }
+#endif
         bool isReadable { get; }
         float mipMapBias { get; }
         Vector2 texelSize { get; }
@@ -36,7 +38,9 @@ namespace Jagapippi.UnityAsReadOnly
         public virtual TextureDimension dimension => _obj.dimension;
         public FilterMode filterMode => _obj.filterMode;
         public virtual int height => _obj.height;
+#if UNITY_EDITOR
         public Hash128 imageContentsHash => _obj.imageContentsHash;
+#endif
         public virtual bool isReadable => _obj.isReadable;
         public float mipMapBias => _obj.mipMapBias;
         public Vector2 texelSize => _obj.texelSize;
