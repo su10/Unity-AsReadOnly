@@ -64,15 +64,14 @@ namespace Jagapippi.UnityAsReadOnly
         public static ReadOnlyVector3 operator /(ReadOnlyVector3 a, float d) => (a._vector3 / d).AsReadOnly();
         public static bool operator ==(ReadOnlyVector3 lhs, Vector3 rhs) => (lhs._vector3 == rhs);
         public static bool operator !=(ReadOnlyVector3 lhs, Vector3 rhs) => !(lhs == rhs);
-
-        #endregion
-
         public static implicit operator ReadOnlyVector3(Vector3 v) => new ReadOnlyVector3(v);
         public static implicit operator Vector3(ReadOnlyVector3 v) => v._vector3;
         public static implicit operator ReadOnlyVector3(Vector2 v) => new ReadOnlyVector3(v);
         public static implicit operator Vector2(ReadOnlyVector3 v) => v._vector3;
         public static implicit operator ReadOnlyVector3(ReadOnlyVector2 v) => new ReadOnlyVector3(v);
         public static implicit operator ReadOnlyVector2(ReadOnlyVector3 v) => new ReadOnlyVector2(v);
+
+        #endregion
     }
 
     public static class Vector3Extensions

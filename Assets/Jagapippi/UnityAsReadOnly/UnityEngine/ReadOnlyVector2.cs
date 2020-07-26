@@ -51,11 +51,10 @@ namespace Jagapippi.UnityAsReadOnly
         public static ReadOnlyVector2 operator /(ReadOnlyVector2 a, float d) => (a._vector2 / d).AsReadOnly();
         public static bool operator ==(ReadOnlyVector2 lhs, Vector2 rhs) => (lhs._vector2 == rhs);
         public static bool operator !=(ReadOnlyVector2 lhs, Vector2 rhs) => !(lhs == rhs);
-
-        #endregion
-
         public static implicit operator ReadOnlyVector2(Vector2 v) => new ReadOnlyVector2(v);
         public static implicit operator Vector2(ReadOnlyVector2 v) => v._vector2;
+
+        #endregion
     }
 
     public static class Vector2Extensions
