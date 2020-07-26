@@ -72,14 +72,22 @@ namespace Jagapippi.UnityAsReadOnly
 
         #region Operators
 
+        public static ReadOnlyVector4 operator +(ReadOnlyVector4 a, ReadOnlyVector4 b) => (a._vector4 + b._vector4).AsReadOnly();
         public static ReadOnlyVector4 operator +(ReadOnlyVector4 a, Vector4 b) => (a._vector4 + b).AsReadOnly();
+        public static ReadOnlyVector4 operator +(Vector4 a, ReadOnlyVector4 b) => (a + b._vector4).AsReadOnly();
+        public static ReadOnlyVector4 operator -(ReadOnlyVector4 a, ReadOnlyVector4 b) => (a._vector4 - b._vector4).AsReadOnly();
         public static ReadOnlyVector4 operator -(ReadOnlyVector4 a, Vector4 b) => (a._vector4 - b).AsReadOnly();
+        public static ReadOnlyVector4 operator -(Vector4 a, ReadOnlyVector4 b) => (a - b._vector4).AsReadOnly();
         public static ReadOnlyVector4 operator -(ReadOnlyVector4 a) => (-a._vector4).AsReadOnly();
         public static ReadOnlyVector4 operator *(ReadOnlyVector4 a, float d) => (a._vector4 * d).AsReadOnly();
         public static ReadOnlyVector4 operator *(float d, ReadOnlyVector4 a) => (d * a._vector4).AsReadOnly();
         public static ReadOnlyVector4 operator /(ReadOnlyVector4 a, float d) => (a._vector4 / d).AsReadOnly();
+        public static bool operator ==(ReadOnlyVector4 lhs, ReadOnlyVector4 rhs) => (lhs._vector4 == rhs._vector4);
+        public static bool operator !=(ReadOnlyVector4 lhs, ReadOnlyVector4 rhs) => !(lhs == rhs);
         public static bool operator ==(ReadOnlyVector4 lhs, Vector4 rhs) => (lhs._vector4 == rhs);
         public static bool operator !=(ReadOnlyVector4 lhs, Vector4 rhs) => !(lhs == rhs);
+        public static bool operator ==(Vector4 lhs, ReadOnlyVector4 rhs) => (lhs == rhs._vector4);
+        public static bool operator !=(Vector4 lhs, ReadOnlyVector4 rhs) => !(lhs == rhs);
         public static implicit operator ReadOnlyVector4(Vector4 v) => new ReadOnlyVector4(v);
         public static implicit operator Vector4(ReadOnlyVector4 v) => v._vector4;
         public static implicit operator ReadOnlyVector4(Vector3 v) => new ReadOnlyVector4(v);

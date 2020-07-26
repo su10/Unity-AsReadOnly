@@ -41,16 +41,28 @@ namespace Jagapippi.UnityAsReadOnly
 
         #region Operators
 
+        public static ReadOnlyVector2 operator +(ReadOnlyVector2 a, ReadOnlyVector2 b) => (a._vector2 + b._vector2).AsReadOnly();
         public static ReadOnlyVector2 operator +(ReadOnlyVector2 a, Vector2 b) => (a._vector2 + b).AsReadOnly();
+        public static ReadOnlyVector2 operator +(Vector2 a, ReadOnlyVector2 b) => (a + b._vector2).AsReadOnly();
+        public static ReadOnlyVector2 operator -(ReadOnlyVector2 a, ReadOnlyVector2 b) => (a._vector2 - b._vector2).AsReadOnly();
         public static ReadOnlyVector2 operator -(ReadOnlyVector2 a, Vector2 b) => (a._vector2 - b).AsReadOnly();
+        public static ReadOnlyVector2 operator -(Vector2 a, ReadOnlyVector2 b) => (a - b._vector2).AsReadOnly();
+        public static ReadOnlyVector2 operator *(ReadOnlyVector2 a, ReadOnlyVector2 b) => (a._vector2 * b._vector2).AsReadOnly();
         public static ReadOnlyVector2 operator *(ReadOnlyVector2 a, Vector2 b) => (a._vector2 * b).AsReadOnly();
+        public static ReadOnlyVector2 operator *(Vector2 a, ReadOnlyVector2 b) => (a * b._vector2).AsReadOnly();
+        public static ReadOnlyVector2 operator /(ReadOnlyVector2 a, ReadOnlyVector2 b) => (a._vector2 / b._vector2).AsReadOnly();
         public static ReadOnlyVector2 operator /(ReadOnlyVector2 a, Vector2 b) => (a._vector2 / b).AsReadOnly();
+        public static ReadOnlyVector2 operator /(Vector2 a, ReadOnlyVector2 b) => (a / b._vector2).AsReadOnly();
         public static ReadOnlyVector2 operator -(ReadOnlyVector2 a) => (-a._vector2).AsReadOnly();
         public static ReadOnlyVector2 operator *(ReadOnlyVector2 a, float d) => (a._vector2 * d).AsReadOnly();
         public static ReadOnlyVector2 operator *(float d, ReadOnlyVector2 a) => (d * a._vector2).AsReadOnly();
         public static ReadOnlyVector2 operator /(ReadOnlyVector2 a, float d) => (a._vector2 / d).AsReadOnly();
+        public static bool operator ==(ReadOnlyVector2 lhs, ReadOnlyVector2 rhs) => (lhs._vector2 == rhs._vector2);
+        public static bool operator !=(ReadOnlyVector2 lhs, ReadOnlyVector2 rhs) => !(lhs == rhs);
         public static bool operator ==(ReadOnlyVector2 lhs, Vector2 rhs) => (lhs._vector2 == rhs);
         public static bool operator !=(ReadOnlyVector2 lhs, Vector2 rhs) => !(lhs == rhs);
+        public static bool operator ==(Vector2 lhs, ReadOnlyVector2 rhs) => (lhs == rhs._vector2);
+        public static bool operator !=(Vector2 lhs, ReadOnlyVector2 rhs) => !(lhs == rhs);
         public static implicit operator ReadOnlyVector2(Vector2 v) => new ReadOnlyVector2(v);
         public static implicit operator Vector2(ReadOnlyVector2 v) => v._vector2;
 
