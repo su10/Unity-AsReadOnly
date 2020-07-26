@@ -56,14 +56,24 @@ namespace Jagapippi.UnityAsReadOnly
 
         #region Operators
 
-        public static Color operator +(ReadOnlyColor a, Color b) => (a._color + b);
-        public static Color operator -(ReadOnlyColor a, Color b) => (a._color - b);
-        public static Color operator *(ReadOnlyColor a, Color b) => (a._color * b);
-        public static Color operator *(ReadOnlyColor a, float b) => (a._color * b);
-        public static Color operator *(float b, ReadOnlyColor a) => (b * a._color);
-        public static Color operator /(ReadOnlyColor a, float b) => (a._color / b);
+        public static ReadOnlyColor operator +(ReadOnlyColor a, ReadOnlyColor b) => (a._color + b._color).AsReadOnly();
+        public static ReadOnlyColor operator +(ReadOnlyColor a, Color b) => (a._color + b).AsReadOnly();
+        public static ReadOnlyColor operator +(Color a, ReadOnlyColor b) => (a + b._color).AsReadOnly();
+        public static ReadOnlyColor operator -(ReadOnlyColor a, ReadOnlyColor b) => (a._color - b._color).AsReadOnly();
+        public static ReadOnlyColor operator -(ReadOnlyColor a, Color b) => (a._color - b).AsReadOnly();
+        public static ReadOnlyColor operator -(Color a, ReadOnlyColor b) => (a - b._color).AsReadOnly();
+        public static ReadOnlyColor operator *(ReadOnlyColor a, ReadOnlyColor b) => (a._color * b._color).AsReadOnly();
+        public static ReadOnlyColor operator *(ReadOnlyColor a, Color b) => (a._color * b).AsReadOnly();
+        public static ReadOnlyColor operator *(Color a, ReadOnlyColor b) => (a * b._color).AsReadOnly();
+        public static ReadOnlyColor operator *(ReadOnlyColor a, float b) => (a._color * b).AsReadOnly();
+        public static ReadOnlyColor operator *(float b, ReadOnlyColor a) => (b * a._color).AsReadOnly();
+        public static ReadOnlyColor operator /(ReadOnlyColor a, float b) => (a._color / b).AsReadOnly();
+        public static bool operator ==(ReadOnlyColor lhs, ReadOnlyColor rhs) => (lhs._color == rhs._color);
+        public static bool operator !=(ReadOnlyColor lhs, ReadOnlyColor rhs) => !(lhs == rhs);
         public static bool operator ==(ReadOnlyColor lhs, Color rhs) => (lhs._color == rhs);
         public static bool operator !=(ReadOnlyColor lhs, Color rhs) => !(lhs == rhs);
+        public static bool operator ==(Color lhs, ReadOnlyColor rhs) => (lhs == rhs._color);
+        public static bool operator !=(Color lhs, ReadOnlyColor rhs) => !(lhs == rhs);
 
         #endregion
 
