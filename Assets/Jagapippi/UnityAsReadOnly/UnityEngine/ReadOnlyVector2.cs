@@ -5,7 +5,7 @@ namespace Jagapippi.UnityAsReadOnly
 {
     public readonly struct ReadOnlyVector2 : IEquatable<Vector2>
     {
-        private readonly Vector2 _vector2;
+        internal readonly Vector2 _vector2;
 
         public ReadOnlyVector2(float x, float y)
         {
