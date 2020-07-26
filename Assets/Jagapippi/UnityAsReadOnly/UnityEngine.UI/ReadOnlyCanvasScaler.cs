@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿#if !UNITY_WSA
+using UnityEngine;
 using UnityEngine.UI;
 
 namespace Jagapippi.UnityAsReadOnly
@@ -55,3 +56,4 @@ namespace Jagapippi.UnityAsReadOnly
         public static ReadOnlyCanvasScaler AsReadOnly(this CanvasScaler self) => self.IsTrulyNull() ? null : new ReadOnlyCanvasScaler(self);
     }
 }
+#endif

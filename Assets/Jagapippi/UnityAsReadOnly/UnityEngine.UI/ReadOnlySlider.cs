@@ -1,4 +1,5 @@
-﻿using UnityEngine.UI;
+﻿#if !UNITY_WSA
+using UnityEngine.UI;
 
 namespace Jagapippi.UnityAsReadOnly
 {
@@ -83,3 +84,4 @@ namespace Jagapippi.UnityAsReadOnly
         public static ReadOnlySlider AsReadOnly(this Slider self) => self.IsTrulyNull() ? null : new ReadOnlySlider(self);
     }
 }
+#endif

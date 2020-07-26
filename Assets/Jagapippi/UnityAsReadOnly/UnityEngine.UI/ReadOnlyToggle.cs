@@ -1,4 +1,5 @@
-﻿using UnityEngine.UI;
+﻿#if !UNITY_WSA
+using UnityEngine.UI;
 
 namespace Jagapippi.UnityAsReadOnly
 {
@@ -50,3 +51,4 @@ namespace Jagapippi.UnityAsReadOnly
         public static ReadOnlyToggle AsReadOnly(this Toggle self) => self.IsTrulyNull() ? null : new ReadOnlyToggle(self);
     }
 }
+#endif

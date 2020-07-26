@@ -1,4 +1,5 @@
-﻿using UnityEngine.UI;
+﻿#if !UNITY_WSA
+using UnityEngine.UI;
 
 namespace Jagapippi.UnityAsReadOnly
 {
@@ -41,3 +42,4 @@ namespace Jagapippi.UnityAsReadOnly
         public static ReadOnlyButton AsReadOnly(this Button self) => self.IsTrulyNull() ? null : new ReadOnlyButton(self);
     }
 }
+#endif

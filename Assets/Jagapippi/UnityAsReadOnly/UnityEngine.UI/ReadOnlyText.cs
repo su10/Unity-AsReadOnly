@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿#if !UNITY_WSA
+using UnityEngine;
 using UnityEngine.UI;
 
 namespace Jagapippi.UnityAsReadOnly
@@ -98,3 +99,4 @@ namespace Jagapippi.UnityAsReadOnly
         public static ReadOnlyText AsReadOnly(this Text self) => self.IsTrulyNull() ? null : new ReadOnlyText(self);
     }
 }
+#endif

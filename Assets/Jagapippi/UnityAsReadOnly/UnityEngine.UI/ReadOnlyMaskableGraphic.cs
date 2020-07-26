@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿#if !UNITY_WSA
+using UnityEngine;
 using UnityEngine.UI;
 
 namespace Jagapippi.UnityAsReadOnly
@@ -51,3 +52,4 @@ namespace Jagapippi.UnityAsReadOnly
         public static ReadOnlyMaskableGraphic AsReadOnly(this MaskableGraphic self) => self.IsTrulyNull() ? null : new ReadOnlyMaskableGraphic(self);
     }
 }
+#endif

@@ -1,4 +1,5 @@
-﻿using UnityEngine.EventSystems;
+﻿#if !UNITY_WSA
+using UnityEngine.EventSystems;
 
 namespace Jagapippi.UnityAsReadOnly
 {
@@ -55,3 +56,4 @@ namespace Jagapippi.UnityAsReadOnly
         public static ReadOnlyBaseInputModule AsReadOnly(this BaseInputModule self) => self.IsTrulyNull() ? null : new ReadOnlyBaseInputModule(self);
     }
 }
+#endif

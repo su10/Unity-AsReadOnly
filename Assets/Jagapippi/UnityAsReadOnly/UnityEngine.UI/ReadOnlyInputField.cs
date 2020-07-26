@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿#if !UNITY_WSA
+using UnityEngine;
 using UnityEngine.UI;
 
 namespace Jagapippi.UnityAsReadOnly
@@ -147,3 +148,4 @@ namespace Jagapippi.UnityAsReadOnly
         public static ReadOnlyInputField AsReadOnly(this InputField self) => self.IsTrulyNull() ? null : new ReadOnlyInputField(self);
     }
 }
+#endif

@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿#if !UNITY_WSA
+using UnityEngine;
 using UnityEngine.UI;
 
 namespace Jagapippi.UnityAsReadOnly
@@ -122,3 +123,4 @@ namespace Jagapippi.UnityAsReadOnly
         public static ReadOnlyScrollRect AsReadOnly(this ScrollRect self) => self.IsTrulyNull() ? null : new ReadOnlyScrollRect(self);
     }
 }
+#endif

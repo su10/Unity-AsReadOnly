@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿#if !UNITY_WSA
+using System.Collections.Generic;
 using UnityEngine.EventSystems;
 
 namespace Jagapippi.UnityAsReadOnly
@@ -67,3 +68,4 @@ namespace Jagapippi.UnityAsReadOnly
         public static ReadOnlyEventSystem AsReadOnly(this EventSystem self) => self.IsTrulyNull() ? null : new ReadOnlyEventSystem(self);
     }
 }
+#endif

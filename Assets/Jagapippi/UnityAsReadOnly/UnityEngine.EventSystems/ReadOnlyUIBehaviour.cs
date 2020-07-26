@@ -1,4 +1,5 @@
-﻿using UnityEngine.EventSystems;
+﻿#if !UNITY_WSA
+using UnityEngine.EventSystems;
 
 namespace Jagapippi.UnityAsReadOnly
 {
@@ -38,3 +39,4 @@ namespace Jagapippi.UnityAsReadOnly
         public static ReadOnlyUIBehaviour AsReadOnly(this UIBehaviour self) => self.IsTrulyNull() ? null : new ReadOnlyUIBehaviour(self);
     }
 }
+#endif

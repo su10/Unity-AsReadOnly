@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿#if !UNITY_WSA
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine.UI;
 
@@ -92,3 +93,4 @@ namespace Jagapippi.UnityAsReadOnly
         public static ReadOnlyDropdown.OptionData AsReadOnly(this Dropdown.OptionData self) => (self == null) ? null : new ReadOnlyDropdown.OptionData(self);
     }
 }
+#endif

@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿#if !UNITY_WSA
+using UnityEngine;
 using UnityEngine.UI;
 
 namespace Jagapippi.UnityAsReadOnly
@@ -51,3 +52,4 @@ namespace Jagapippi.UnityAsReadOnly
         public static ReadOnlyRectMask2D AsReadOnly(this RectMask2D self) => self.IsTrulyNull() ? null : new ReadOnlyRectMask2D(self);
     }
 }
+#endif

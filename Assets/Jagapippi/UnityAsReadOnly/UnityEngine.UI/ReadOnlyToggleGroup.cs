@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿#if !UNITY_WSA
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine.UI;
 
@@ -52,3 +53,4 @@ namespace Jagapippi.UnityAsReadOnly
         public static ReadOnlyToggleGroup AsReadOnly(this ToggleGroup self) => self.IsTrulyNull() ? null : new ReadOnlyToggleGroup(self);
     }
 }
+#endif

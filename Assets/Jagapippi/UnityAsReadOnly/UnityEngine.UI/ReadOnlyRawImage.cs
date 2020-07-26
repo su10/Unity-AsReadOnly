@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿#if !UNITY_WSA
+using UnityEngine;
 using UnityEngine.UI;
 
 namespace Jagapippi.UnityAsReadOnly
@@ -46,3 +47,4 @@ namespace Jagapippi.UnityAsReadOnly
         public static ReadOnlyRawImage AsReadOnly(this RawImage self) => self.IsTrulyNull() ? null : new ReadOnlyRawImage(self);
     }
 }
+#endif

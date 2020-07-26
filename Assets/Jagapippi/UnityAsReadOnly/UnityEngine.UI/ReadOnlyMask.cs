@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿#if !UNITY_WSA
+using UnityEngine;
 using UnityEngine.UI;
 
 namespace Jagapippi.UnityAsReadOnly
@@ -53,3 +54,4 @@ namespace Jagapippi.UnityAsReadOnly
         public static ReadOnlyMask AsReadOnly(this Mask self) => self.IsTrulyNull() ? null : new ReadOnlyMask(self);
     }
 }
+#endif

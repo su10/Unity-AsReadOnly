@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿#if !UNITY_WSA
+using UnityEngine;
 using UnityEngine.UI;
 
 namespace Jagapippi.UnityAsReadOnly
@@ -109,3 +110,4 @@ namespace Jagapippi.UnityAsReadOnly
         public static ReadOnlyGraphic AsReadOnly(this Graphic self) => self.IsTrulyNull() ? null : new ReadOnlyGraphic(self);
     }
 }
+#endif

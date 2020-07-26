@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿#if !UNITY_WSA
+using System.Collections.Generic;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
@@ -50,3 +51,4 @@ namespace Jagapippi.UnityAsReadOnly
         public static ReadOnlyGraphicRaycaster AsReadOnly(this GraphicRaycaster self) => self.IsTrulyNull() ? null : new ReadOnlyGraphicRaycaster(self);
     }
 }
+#endif
