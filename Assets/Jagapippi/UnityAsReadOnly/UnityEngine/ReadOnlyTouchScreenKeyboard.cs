@@ -10,9 +10,13 @@ namespace Jagapippi.UnityAsReadOnly
         int characterLimit { get; }
         RangeInt selection { get; }
         TouchScreenKeyboard.Status status { get; }
+#if UNITY_IOS
         int targetDisplay { get; }
+#endif
         string text { get; }
+#if UNITY_IOS
         TouchScreenKeyboardType type { get; }
+#endif
     }
 
     public class ReadOnlyTouchScreenKeyboard<T> : IReadOnlyTouchScreenKeyboard where T : TouchScreenKeyboard
@@ -32,9 +36,13 @@ namespace Jagapippi.UnityAsReadOnly
         public int characterLimit => _obj.characterLimit;
         public RangeInt selection => _obj.selection;
         public TouchScreenKeyboard.Status status => _obj.status;
+#if UNITY_IOS
         public int targetDisplay => _obj.targetDisplay;
+#endif
         public string text => _obj.text;
+#if UNITY_IOS
         public TouchScreenKeyboardType type => _obj.type;
+#endif
 
         #endregion
 
